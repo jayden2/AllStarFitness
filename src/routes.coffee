@@ -1,5 +1,6 @@
 user = require './models/user'
 workout = require './models/workout'
+doc = require './models/document'
 
 module.exports = configure: (app, router) ->
 
@@ -75,7 +76,37 @@ module.exports = configure: (app, router) ->
 	router.delete '/workouts/:id/', (req, res) ->
 		workout.deleteWorkout req.params.id, res
 
+	##-----------------##
+	##-DOCUMENT ROUTES-##
+	##-----------------##
+
+	#create document
+	router.post '/documents/', (req, res) ->
+		doc.createDocument req.body, res
+
+	#get all document
+	router.get '/documents/', (req, res) ->
+		doc.getAllDocuments res
 	
+	#get 1 document
+	router.get '/documents/:id/', (req, res) ->
+		doc.getSingleDocument req.params.id, res
+
+	#get 1 document --SHORT
+	router.get '/documents/:id/short', (req, res) ->
+		doc.getSingleDocumentShort req.params.id, res
+	
+	#update document
+	router.put '/documents/:id/', (req, res) ->
+		doc.updateDocument req.body, req.params.id, res
+
+	#update document -- TEMPLATE
+	router.put '/documents/:id/template', (req, res) ->
+		doc.updateDocumentTemplate req.body, req.params.id, res
+	
+	#delete document
+	router.delete '/documents/:id/', (req, res) ->
+		doc.deleteDocument req.params.id, res
 
 
 	##GLOBAL ROUTE##
