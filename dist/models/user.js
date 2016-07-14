@@ -15,7 +15,7 @@ module.exports = User = (function() {
 
   User.getAllUsers = function(res) {
     connection.acquire(function(err, con) {
-      con.query('SELECT id, username, email FROM users', function(err, result) {
+      con.query('SELECT id, first_name, last_name, email, user_type, gender, age, date_created, date_updated FROM users', function(err, result) {
         con.release();
         res.send(result);
       });
@@ -24,7 +24,7 @@ module.exports = User = (function() {
 
   User.getSingleUser = function(id, res) {
     connection.acquire(function(err, con) {
-      con.query('SELECT id, username, email FROM users WHERE id = ?', [id], function(err, result) {
+      con.query('SELECT id, first_name, last_name, email, user_type, gender, age, date_created, date_updated FROM users WHERE id = ?', [id], function(err, result) {
         con.release();
         res.send(result);
       });
@@ -42,7 +42,7 @@ module.exports = User = (function() {
 
   User.checkValidUser = function(app, user, res) {
     connection.acquire(function(err, con) {
-      con.query('SELECT *, COUNT(id) as user_count FROM users WHERE email = ?', [user.email], function(err, result) {
+      con.query('SELECT *, COUNT(id) AS user_count FROM users WHERE email = ?', [user.email], function(err, result) {
         var token;
         con.release();
         if (result[0].user_count !== 1) {
@@ -102,7 +102,7 @@ module.exports = User = (function() {
     var pwd;
     pwd = hashPassword(user.password);
     connection.acquire(function(err, con) {
-      con.query('INSERT INTO users (username, email, password) VALUES (?, ?, ?)', [user.username, user.email, pwd], function(err, result) {
+      con.query('INSERT INTO users (first_name, last_name, email, user_type, password, gender, age, date_created) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [user.first_name, user.last_name, user.email, user.user_type, pwd, user.gender, user.age, user.date_created], function(err, result) {
         con.release();
         if (err) {
           return res.status(403).send({
@@ -123,7 +123,7 @@ module.exports = User = (function() {
     var pwd;
     pwd = hashPassword(user.password);
     connection.acquire(function(err, con) {
-      con.query('UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?', [user.username, user.email, pwd, id], function(err, result) {
+      con.query('UPDATE users SET first_name = ?, last_name = ?, email = ?, user_type = ?, password = ?, gender = ?, age = ? WHERE id = ?', [user.first_name, user.last_name, user.email, user.user_type, pwd, user.gender, user.age, id], function(err, result) {
         con.release();
         if (err) {
           return res.status(403).send({

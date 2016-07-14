@@ -8,7 +8,7 @@ module.exports = class User
 	#do connection, select all from users
 	@getAllUsers = (res) ->
 		connection.acquire (err, con) ->
-			con.query 'SELECT id, username, email FROM users', (err, result) ->
+			con.query 'SELECT id, first_name, last_name, email, user_type, gender, age, date_created, date_updated FROM users', (err, result) ->
 				con.release()
 				res.send result
 				return
@@ -18,7 +18,7 @@ module.exports = class User
 	#do connection, select one user from database
 	@getSingleUser = (id, res) ->
 		connection.acquire (err, con) ->
-			con.query 'SELECT id, username, email FROM users WHERE id = ?', [id], (err, result) ->
+			con.query 'SELECT id, first_name, last_name, email, user_type, gender, age, date_created, date_updated FROM users WHERE id = ?', [id], (err, result) ->
 				con.release()
 				res.send result
 				return
@@ -38,7 +38,7 @@ module.exports = class User
 	#do connection, count if user exists
 	@checkValidUser = (app, user, res) ->
 		connection.acquire (err, con) ->
-			con.query 'SELECT *, COUNT(id) as user_count FROM users WHERE email = ?', [user.email], (err, result) ->
+			con.query 'SELECT *, COUNT(id) AS user_count FROM users WHERE email = ?', [user.email], (err, result) ->
 				con.release()
 				#if username doesnt exist, dont auth
 				if result[0].user_count != 1
@@ -93,7 +93,8 @@ module.exports = class User
 	@createUser = (user, res) ->
 		pwd = hashPassword(user.password)
 		connection.acquire (err, con) ->
-			con.query 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)', [user.username, user.email, pwd], (err, result) ->
+			con.query 'INSERT INTO users (first_name, last_name, email, user_type, password, gender, age, date_created) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+			[user.first_name, user.last_name, user.email, user.user_type, pwd, user.gender, user.age, user.date_created], (err, result) ->
 				con.release()
 				#error check if succesful query or not
 				if err
@@ -113,7 +114,8 @@ module.exports = class User
 	@updateUser = (user, id, res) ->
 		pwd = hashPassword(user.password)
 		connection.acquire (err, con) ->
-			con.query 'UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?', [user.username, user.email, pwd, id], (err, result) ->
+			con.query 'UPDATE users SET first_name = ?, last_name = ?, email = ?, user_type = ?, password = ?, gender = ?, age = ? WHERE id = ?',
+			[user.first_name, user.last_name, user.email, user.user_type, pwd, user.gender, user.age, id], (err, result) ->
 				con.release()
 				#error check if successful query or not
 				if err
