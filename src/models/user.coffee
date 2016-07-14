@@ -1,7 +1,7 @@
 jwt = require 'jsonwebtoken'
 bcrypt = require 'bcrypt-nodejs'
 connection = require '../config/connection'
-secretPassword = 'superSpecialSecretPasswordThatNooneWouldEverGuess123'
+secretPassword = 'superSpecialSecretPasswordThatNooneWouldEverGuess123@#$%^&^$'
 
 module.exports = class User
 		#get all users
