@@ -4,7 +4,7 @@ connection = require '../config/connection'
 secretPassword = 'superSpecialSecretPasswordThatNooneWouldEverGuess123@#$%^&^$'
 
 module.exports = class User
-		#get all users
+	#get all users
 	#do connection, select all from users
 	@getAllUsers = (res) ->
 		connection.acquire (err, con) ->
