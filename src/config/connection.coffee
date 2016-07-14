@@ -9,8 +9,8 @@ module.exports = class Connection
 			connectionLimit: 10
 			host: 'localhost'
 			port: '3306'
-			user: 'adminl8yAzvl'
-			password: 'ewI3RaVui6Ml'
+			user: 'admindEJ2fyi'
+			password: 'NeduHQFdnB6k'
 			database: 'allstarfitness')
 	#connect and get callback
 	@acquire: (callback) ->

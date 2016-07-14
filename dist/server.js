@@ -1,4 +1,4 @@
-var app, bodyparser, connection, express, morgan, port, router, routes, server;
+var app, bodyparser, connection, express, morgan, port, router, routes, server, server_ip_address, server_port;
 
 express = require('express');
 
@@ -18,7 +18,11 @@ app.use(bodyparser.urlencoded({
 
 app.use(bodyparser.json());
 
-port = process.env.PORT || 1199;
+port = process.env.PORT || 8080;
+
+server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+
+server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -35,6 +39,6 @@ connection.init();
 
 routes.configure(app, router);
 
-server = app.listen(port);
+server = app.listen(server_port, server_ip_address);
 
-console.log('Server started on port ' + port);
+console.log("Listening on " + server_ip_address + ", server_port " + port);
