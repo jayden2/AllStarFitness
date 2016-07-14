@@ -10,7 +10,8 @@ module.exports = Connection = (function() {
   Connection.init = function() {
     return this.pool = mysql.createPool({
       connectionLimit: 10,
-      host: 'allstarfitness-parallaxis.rhcloud.com',
+      host: 'localhost',
+      port: '3306',
       user: 'adminl8yAzvl',
       password: 'ewI3RaVui6Ml',
       database: 'allstarfitness'
