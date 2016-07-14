@@ -1,6 +1,8 @@
-var user;
+var user, workout;
 
 user = require('./models/user');
+
+workout = require('./models/workout');
 
 module.exports = {
   configure: function(app, router) {
@@ -32,6 +34,27 @@ module.exports = {
     });
     router["delete"]('/users/:id/', function(req, res) {
       return user.deleteUser(req.params.id, res);
+    });
+    router.post('/workouts/', function(req, res) {
+      return workout.createWorkout(req.body, res);
+    });
+    router.get('/workouts/', function(req, res) {
+      return workout.getAllWorkouts(res);
+    });
+    router.get('/workouts/:id/', function(req, res) {
+      return workout.getSingleWorkout(req.params.id, res);
+    });
+    router.get('/workouts/:id/short', function(req, res) {
+      return workout.getSingleWorkoutShort(req.params.id, res);
+    });
+    router.put('/workouts/:id/', function(req, res) {
+      return workout.updateWorkout(req.body, req.params.id, res);
+    });
+    router.put('/workouts/:id/favourite', function(req, res) {
+      return workout.updateWorkoutFavourite(req.body, req.params.id, res);
+    });
+    router["delete"]('/workouts/:id/', function(req, res) {
+      return workout.deleteWorkout(req.params.id, res);
     });
     return app.use('/api', router);
   }
