@@ -8,77 +8,81 @@ doc = require('./models/document');
 
 module.exports = {
   configure: function(app, router) {
-    router.get('/', function(req, res) {
+    router.get('/api', function(req, res) {
       return res.json({
         message: 'AllStarFitness API up and running! What would you like sir?'
       });
     });
-    router.post('/authenticate/', function(req, res) {
+    router.post('/api/authenticate/', function(req, res) {
       return user.checkValidUser(app, req.body, res);
     });
-    router.get('/users/:email/check/', function(req, res) {
+    router.get('/api/users/:email/check/', function(req, res) {
       return user.checkValidEmail(req.params.email, res);
+    });
+    router.get('/health', function(req, res) {
+      res.writeHead(200);
+      return res.end();
     });
     router.use(function(req, res, next) {
       return user.verifyUser(req, res, next);
     });
-    router.post('/users/', function(req, res) {
+    router.post('/api/users/', function(req, res) {
       return user.createUser(req.body, res);
     });
-    router.get('/users/', function(req, res) {
+    router.get('/api/users/', function(req, res) {
       return user.getAllUsers(res);
     });
-    router.get('/users/:id/', function(req, res) {
+    router.get('/api/users/:id/', function(req, res) {
       return user.getSingleUser(req.params.id, res);
     });
-    router.put('/users/:id/', function(req, res) {
+    router.put('/api/users/:id/', function(req, res) {
       return user.updateUser(req.body, req.params.id, res);
     });
-    router["delete"]('/users/:id/', function(req, res) {
+    router["delete"]('/api/users/:id/', function(req, res) {
       return user.deleteUser(req.params.id, res);
     });
-    router.post('/workouts/', function(req, res) {
+    router.post('/api/workouts/', function(req, res) {
       return workout.createWorkout(req.body, res);
     });
-    router.get('/workouts/', function(req, res) {
+    router.get('/api/workouts/', function(req, res) {
       return workout.getAllWorkouts(res);
     });
-    router.get('/workouts/:id/', function(req, res) {
+    router.get('/api/workouts/:id/', function(req, res) {
       return workout.getSingleWorkout(req.params.id, res);
     });
-    router.get('/workouts/:id/short', function(req, res) {
+    router.get('/api/workouts/:id/short', function(req, res) {
       return workout.getSingleWorkoutShort(req.params.id, res);
     });
-    router.put('/workouts/:id/', function(req, res) {
+    router.put('/api/workouts/:id/', function(req, res) {
       return workout.updateWorkout(req.body, req.params.id, res);
     });
-    router.put('/workouts/:id/favourite', function(req, res) {
+    router.put('/api/workouts/:id/favourite', function(req, res) {
       return workout.updateWorkoutFavourite(req.body, req.params.id, res);
     });
-    router["delete"]('/workouts/:id/', function(req, res) {
+    router["delete"]('/api/workouts/:id/', function(req, res) {
       return workout.deleteWorkout(req.params.id, res);
     });
-    router.post('/documents/', function(req, res) {
+    router.post('/api/documents/', function(req, res) {
       return doc.createDocument(req.body, res);
     });
-    router.get('/documents/', function(req, res) {
+    router.get('/api/documents/', function(req, res) {
       return doc.getAllDocuments(res);
     });
-    router.get('/documents/:id/', function(req, res) {
+    router.get('/api/documents/:id/', function(req, res) {
       return doc.getSingleDocument(req.params.id, res);
     });
-    router.get('/documents/:id/short', function(req, res) {
+    router.get('/api/documents/:id/short', function(req, res) {
       return doc.getSingleDocumentShort(req.params.id, res);
     });
-    router.put('/documents/:id/', function(req, res) {
+    router.put('/api/documents/:id/', function(req, res) {
       return doc.updateDocument(req.body, req.params.id, res);
     });
-    router.put('/documents/:id/template', function(req, res) {
+    router.put('/api/documents/:id/template', function(req, res) {
       return doc.updateDocumentTemplate(req.body, req.params.id, res);
     });
-    router["delete"]('/documents/:id/', function(req, res) {
+    router["delete"]('/api/documents/:id/', function(req, res) {
       return doc.deleteDocument(req.params.id, res);
     });
-    return app.use('/api', router);
+    return app.use(router);
   }
 };
