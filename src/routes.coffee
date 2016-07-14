@@ -10,10 +10,6 @@ module.exports = configure: (app, router) ->
 	router.post '/authenticate/', (req, res) ->
 		user.checkValidUser app, req.body, res
 
-	#create user
-	router.post '/users/', (req, res) ->
-		user.createUser req.body, res
-
 	#checkValidEmail
 	router.get '/users/:email/check/', (req, res) ->
 		user.checkValidEmail req.params.email, res
@@ -26,6 +22,10 @@ module.exports = configure: (app, router) ->
 	##--USER ROUTES---##
 	##----------------##
 	
+	#create user
+	router.post '/users/', (req, res) ->
+		user.createUser req.body, res
+
 	#get all users
 	router.get '/users/', (req, res) ->
 		user.getAllUsers res
