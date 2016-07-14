@@ -1,6 +1,4 @@
-#base api
-Web Service API for my android application:
-https://github.com/jayden2/MovieBase
+#All Star Fitness api
 created with NodeJS with Express
 
 #####Using Packages:
@@ -10,6 +8,3 @@ created with NodeJS with Express
 - [express](https://github.com/expressjs/express)
 - [body-parser](https://github.com/expressjs/body-parser)
 - [gulp](https://github.com/gulpjs/gulp)
-
-API on Heroku here:
-http://moviebaseapi.herokuapp.com/api
