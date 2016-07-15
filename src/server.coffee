@@ -2,8 +2,7 @@
 express = require 'express'
 bodyparser = require 'body-parser'
 morgan = require 'morgan'
-connection = require './config/connection'
-routes = require './routes'
+connection = require './server/config/connection'
 
 #configure app and get data from post
 app = express()
@@ -29,7 +28,8 @@ app.use morgan 'dev'
 #set  and routes routes
 router = express.Router()
 connection.init()
-routes.configure(app, router)
+app.use(express["static"](__dirname + '/client'));
+require('./routes')(app);
 
 #start server
 server = app.listen(server_port, server_ip_address)

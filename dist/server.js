@@ -1,4 +1,4 @@
-var app, bodyparser, connection, express, morgan, port, router, routes, server, server_ip_address, server_port;
+var app, bodyparser, connection, express, morgan, port, router, server, server_ip_address, server_port;
 
 express = require('express');
 
@@ -6,9 +6,7 @@ bodyparser = require('body-parser');
 
 morgan = require('morgan');
 
-connection = require('./config/connection');
-
-routes = require('./routes');
+connection = require('./server/config/connection');
 
 app = express();
 
@@ -37,7 +35,9 @@ router = express.Router();
 
 connection.init();
 
-routes.configure(app, router);
+app.use(express["static"](__dirname + '/client'));
+
+require('./routes')(app);
 
 server = app.listen(server_port, server_ip_address);
 

@@ -1,8 +1,8 @@
-user = require './models/user'
-workout = require './models/workout'
-doc = require './models/document'
+user = require './server/models/user'
+workout = require './server/models/workout'
+doc = require './server/models/document'
 
-module.exports = configure: (app, router) ->
+module.exports = (router) ->
 
 	#api
 	router.get '/api', (req, res) ->
@@ -113,5 +113,7 @@ module.exports = configure: (app, router) ->
 	router.delete '/api/documents/:id/', (req, res) ->
 		doc.deleteDocument req.params.id, res
 
-	##GLOBAL ROUTE##
-	app.use router
+	##--ANGULAR ROUTES--##
+	router.get '*', (req, res) ->
+		#load public/index.html
+		res.sendFile __dirname + '/client/index.html'
