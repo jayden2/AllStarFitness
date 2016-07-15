@@ -1,1 +1,9 @@
 node_modules/
+bower_libs
+dist
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+.AppleDouble
+.LSOverride
