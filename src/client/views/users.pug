@@ -1,0 +1,22 @@
+div(ng-controller="DashboardController")
+	//user management list
+	div(class="row")
+		div(class="col-lg-6")
+			rd-widget
+				rd-widget-header(icon="fa-users" title="Users")
+					input(type="text" placeholder="Search" class="form-control input-sm")
+				rd-widget-body(classes="medium no-padding")
+					div(class="table-responsive")
+						table(class="table")
+							thead
+								tr
+									th(class="text-center") ID
+									th Username
+									th Role
+									th Website
+							tbody
+								tr
+									td(class="text-center") 1
+									td Joey
+									td Admin
+									td AASDSA

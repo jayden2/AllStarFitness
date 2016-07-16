@@ -1,0 +1,22 @@
+div(id="sidebar-wrapper" ng-show="sidebar")
+	ul(class="sidebar")
+		li(class="sidebar-main")
+			a(ng-click="toggleSidebar()") All Star Fitness
+				span(class="menu-icon glyphicon glyphicon-transfer")
+		li(class="sidebar-title")
+			span NAVIGATION
+		li(class="sidebar-list")
+			a(href="/dashboard") Dashboard
+				span(class="menu-icon fa fa-tachometer")
+		li(class="sidebar-list")
+			a(href="/") Tables
+				span(class="menu-icon fa fa-table")
+		li(class="sidebar-list")
+			a(href="/dashboard/users") Users
+				span(class="menu-icon fa fa-users")
+		li(class="sidebar-list")
+			a(href="/test") Test
+				span(class="menu-icon fa fa-cubes")
+		div(class="sidebar-footer")
+			div(class="col-xs-12")
+				a(href="/" target="_blank")

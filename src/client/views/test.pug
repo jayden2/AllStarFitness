@@ -1,0 +1,106 @@
+div(ng-controller="DashboardController")
+	//alerts
+	div(class="row alerts-container" ng-controller="AlertsController" ng-show="alerts.length")
+		div(class="col-xs-12")
+			uib-alert(ng-repeat="alert in alerts" type="{{ alert.type }}" close="closeAlert($index)") {{ alert.message }}
+
+	//Stat bars
+	div(class="row")
+		//users
+		div(class="col-lg-3 col-md-6 col-xs-12")
+			rd-widget
+				rd-widget-body
+					div(class="widget-icon green pull-left")
+						i(class="fa fa-users")
+					div(class="title") 556
+					div(class="comment") Users
+		//servers
+		div(class="col-lg-3 col-md-6 col-xs-12")
+			rd-widget
+				rd-widget-body
+					div(class="widget-icon red pull-left")
+						i(class="fa fa-tasks")
+					div(class="title") 22
+					div(class="comment") Servers
+		//documents
+		div(class="col-lg-3 col-md-6 col-xs-12")
+				rd-widget
+					rd-widget-body
+						div(class="widget-icon orange pull-left")
+							i(class="fa fa-sitemap")
+						div(class="title") 5000
+						div(class="comment") Documents
+		//tickets
+		div(class="col-lg-3 col-md-6 col-xs-12")
+				rd-widget
+					rd-widget-body
+						div(class="widget-icon blue pull-left")
+							i(class="fa fa-support")
+						div(class="title") 56
+						div(class="comment") Tickets
+
+	//management lists
+	div(class="row")
+		//servers
+		div(class="col-lg-6")
+			rd-widget
+				rd-widget-header(icon="fa-tasks" title="Servers")
+					a(href="#") Manage
+				rd-widget-body(classes="medium no-padding")
+					div(class="table-responsive")
+						table(class="table")
+							tbody
+								tr
+									td FHSDFSDF
+									td 237.103.133.36
+									td
+										span(class="text-success")
+											i(class="fa fa-check")
+								tr
+									td FHSDFSDF
+									td 237.103.133.36
+									td
+										span(class="text-success")
+											i(class="fa fa-check")
+		//users
+		div(class="col-lg-6")
+			rd-widget
+				rd-widget-header(icon="fa-users" title="Users")
+					input(type="text" placeholder="Search" class="form-control input-sm")
+				rd-widget-body(classes="medium no-padding")
+					div(class="table-responsive")
+						table(class="table")
+							thead
+								tr
+									th(class="text-center") ID
+									th Username
+									th Role
+									th Website
+							tbody
+								tr
+									td(class="text-center") 1
+									td Joey
+									td Admin
+									td AASDSA
+
+	//notification table
+	div(class="row")
+		div(class="col-lg-6")
+			rd-widget
+				rd-widget-header(icon="fa-plus" title="Notifications")
+					button(class="btn btn-sm btn-info") Button
+				rd-widget-body
+					div(class="message").
+						Notification 1
+					hr
+					div(class="message").
+						Notification 2
+
+
+		//loading widget
+		div(class="col-lg-6")
+			rd-widget
+				rd-widget-header(icon="fa-cog fa-spin" title="Loading Directive")
+					a(href="http://tobiasahlin.com/spinkit/" target="_blank") Spinkit
+				rd-widget-body
+					rd-loading
