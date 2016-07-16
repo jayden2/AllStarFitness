@@ -1,0 +1,1 @@
+angular.module('AllStarFitness', ['ui.bootstrap', 'ngRoute', 'ngCookies'])
