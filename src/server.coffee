@@ -8,6 +8,7 @@ connection = require './server/config/connection'
 app = express()
 app.use bodyparser.urlencoded(extended: true)
 app.use bodyparser.json()
+app.use express['static'](__dirname + '/client')
 
 #set port
 port = process.env.PORT || 8080
@@ -28,7 +29,6 @@ app.use morgan 'dev'
 #set  and routes routes
 router = express.Router()
 connection.init()
-app.use(express["static"](__dirname + '/client'));
 require('./routes')(app);
 
 #start server

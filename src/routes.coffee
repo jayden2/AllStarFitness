@@ -22,7 +22,7 @@ module.exports = (router) ->
 		res.end()
 
 	#api middleware for all requests
-	router.use (req, res, next) ->
+	router.use '/api/', (req, res, next) ->
 		user.verifyUser req, res, next
 
 	##----------------##
