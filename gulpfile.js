@@ -1,10 +1,12 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
+var concat = require('gulp-concat');
 var del = require('del');
 var runSequence = require('run-sequence');
 var sass = require('gulp-sass');
 var coffee = require('gulp-coffee');
 var pug = require('gulp-pug');
+var minifyJs = require('gulp-uglify')
 var imagemin = require('gulp-imagemin');
 var htmlmin = require('gulp-htmlmin');
 var nodemon = require('gulp-nodemon');
@@ -17,18 +19,21 @@ var browserSync = require('browser-sync').create();
 gulp.task('coffee:server', function() {
 	gulp.src('./src/*.coffee')
 		.pipe(coffee({bare: true}).on('error', gutil.log))
+		.pipe(minifyJs())
 		.pipe(gulp.dest('./dist/'))
 });
 //coffee -- routes
 gulp.task('coffee:config', function() {
 	gulp.src('./src/server/config/*.coffee')
 		.pipe(coffee({bare: true}).on('error', gutil.log))
+		.pipe(minifyJs())
 		.pipe(gulp.dest('./dist/server/config/'))
 });
 //coffee -- models
 gulp.task('coffee:models', function() {
 	gulp.src('./src/server/models/*.coffee')
 		.pipe(coffee({bare: true}).on('error', gutil.log))
+		.pipe(minifyJs())
 		.pipe(gulp.dest('./dist/server/models/'))
 });
 
@@ -44,7 +49,18 @@ gulp.task('sass', function() {
 			stream: true
 		}))
 });
+gulp.task('coffee:ng-app', function() {
+	return gulp.src('./src/client/js/**/*.coffee')
+		.pipe(coffee({bare: true}).on('error', gutil.log))
+		.pipe(minifyJs())
+		.pipe(concat('app.min.js'))
+		.pipe(gulp.dest('dist/client/js'))
+		.pipe(browserSync.reload({
+			stream: true
+		}))
+});
 
+/*
 //coffee -- angular app
 gulp.task('coffee:ng-app', function() {
 	gulp.src('./src/client/app.coffee')
@@ -84,7 +100,7 @@ gulp.task('coffee:ng-directives', function() {
 			stream: true
 		}))
 });
-
+*/
 //pug -- angular index view
 gulp.task('pug:ng-index', function buildHTML() {
 	return gulp.src('./src/client/*.pug')
@@ -107,9 +123,9 @@ gulp.task('pug:ng-views', function buildHTML() {
 
 //pug -- angular directive pug
 gulp.task('pug:ng-directives', function buildHTML() {
-	return gulp.src('./src/client/directives/*.pug')
+	return gulp.src('./src/client/js/directives/*.pug')
 		.pipe(pug({}))
-		.pipe(gulp.dest('./dist/client/directives/'))
+		.pipe(gulp.dest('./dist/client/js/directives/'))
 		.pipe(browserSync.reload({
 			stream: true
 		}))
@@ -142,16 +158,12 @@ gulp.task('clean', function() {
 gulp.task('watch', ['browserSync', 'build'], function() {
 	gulp.watch('./src/client/assets/styles/*.sass', ['sass']);
 	gulp.watch('./src/client/assets/styles/partials/*.sass', ['sass']);
-	gulp.watch('./src/client/app.coffee', ['coffee:ng-app']);
-	gulp.watch('./src/client/controllers/*.coffee', ['coffee:ng-controllers']);
-	gulp.watch('./src/client/services/*.coffee', ['coffee:ng-services']);
-	gulp.watch('./src/client/directives/*.coffee', ['coffee:ng-directives']);
+	gulp.watch('./src/client/js/**/*.coffee', ['coffee:ng-app']);
 	gulp.watch('./src/server/*.coffee', ['coffee:server']);
 	gulp.watch('./src/client/*.pug', ['pug:ng-index']);
 	gulp.watch('./src/client/views/*.pug', ['pug:ng-views']);
 	gulp.watch('./src/client/views/partials/*.pug', ['pug:ng-views']);
-	gulp.watch('./src/client/directives/*.pug', ['pug:ng-directives']);
-	gulp.watch('./src/client/assets/images/*', ['copy:images']);
+	gulp.watch('./src/client/js/directives/*.pug', ['pug:ng-directives']);
 });
 
 //----------
@@ -213,9 +225,6 @@ gulp.task('build', function (callback) {
 	runSequence('clean', [
 		'sass',
 		'coffee:ng-app',
-		'coffee:ng-controllers',
-		'coffee:ng-services',
-		'coffee:ng-directives',
 		'coffee:server',
 		'coffee:models',
 		'coffee:config',
@@ -234,9 +243,6 @@ gulp.task('serve', function (callback) {
 	runSequence('clean', [
 		'sass',
 		'coffee:ng-app',
-		'coffee:ng-controllers',
-		'coffee:ng-services',
-		'coffee:ng-directives',
 		'coffee:server',
 		'coffee:models',
 		'coffee:config',
