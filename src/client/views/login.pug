@@ -1,0 +1,9 @@
+div(class="wrapper login-page" ng-controller="LoginController")
+	div(class="login-container")
+		h1 Login to Your Account
+		form
+			input(type="text" name="username" placeholder="Username" ng-model="user.username")
+			input(type="password" name="password" placeholder="Password" ng-model="user.password")
+			input(type="submit" name="login" class="login login-submit" value="Login" ng-click="login()")
+		div(class="login-help")
+			a(href="#") Forgot Password
