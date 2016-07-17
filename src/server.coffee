@@ -6,8 +6,8 @@ connection = require './server/config/connection'
 
 #configure app and get data from post
 app = express()
-app.use bodyparser.urlencoded(extended: true)
 app.use bodyparser.json()
+app.use bodyparser.urlencoded(extended: true)
 app.use express['static'](__dirname + '/client')
 
 #set port
@@ -29,7 +29,7 @@ app.use morgan 'dev'
 #set  and routes routes
 router = express.Router()
 connection.init()
-require('./routes')(app);
+require('./routes')(app)
 
 #start server
 server = app.listen(server_port, server_ip_address)

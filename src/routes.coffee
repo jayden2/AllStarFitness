@@ -10,7 +10,7 @@ module.exports = (router) ->
 
 	#authenticate user!
 	router.post '/api/authenticate/', (req, res) ->
-		user.checkValidUser app, req.body, res
+		user.checkValidUser req.body, res
 
 	#checkValidEmail
 	router.get '/api/users/:email/check/', (req, res) ->
