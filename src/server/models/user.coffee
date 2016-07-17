@@ -36,7 +36,7 @@ module.exports = class User
 		return
 	#check if user exists when a user tries to login
 	#do connection, count if user exists
-	@checkValidUser = (app, user, res) ->
+	@checkValidUser = (user, res) ->
 		connection.acquire (err, con) ->
 			con.query 'SELECT *, COUNT(id) AS user_count FROM users WHERE email = ?', [user.email], (err, result) ->
 				con.release()
@@ -60,7 +60,8 @@ module.exports = class User
 							message: 'Token Get!',
 							id: result[0].id,
 							email: result[0].email,
-							username: result[0].username,
+							first_name: result[0].first_name,
+							last_name: result[0].last_name,
 							token: token
 				return
 			return
