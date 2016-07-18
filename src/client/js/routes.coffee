@@ -36,6 +36,11 @@ angular.module('AllStarFitness').config [
 				templateUrl: 'views/users.html'
 				auth: true
 				)
+			.when('/test',
+				controller: 'MasterController'
+				templateUrl: 'views/test.html'
+				auth: true
+				)
 			.otherwise redirectTo: '/'
 		
 		#this is to remove the hash(#) using the history api

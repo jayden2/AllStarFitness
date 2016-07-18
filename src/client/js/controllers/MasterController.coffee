@@ -29,6 +29,8 @@ MasterController = ($scope, $cookieStore, $location) ->
 		switch $location.url()
 			when '/dashboard' then $scope.sidebar = true
 			when '/dashboard/users' then $scope.sidebar = true
+			when '/dashboard/workouts' then $scope.sidebar = true
+			when '/dashboard/documents' then $scope.sidebar = true
 			when '/test' then $scope.sidebar = true
 			when '/' then $scope.sidebar = true
 			else

@@ -3,9 +3,8 @@ LoginService = ($http, $rootScope, $q, $window, $httpParamSerializerJQLike) ->
 	login: (user) ->
 		deferred = $q.defer()
 		console.log user
-		$http(
+		$http.POST(
 			url: '/api/authenticate/'
-			method: 'POST'
 			data: user
 			headers: 'Content-Type': 'application/x-www-form-urlencoded').success ((result) ->
 			$rootScope.user =
