@@ -7,6 +7,7 @@ LoginController = ($scope, $rootScope, $location, LoginService) ->
 	$scope.login = ->
 		LoginService.login($scope.user).then ((result) ->
 			$scope.user = result
+			#check if not correct and display user not found and password not correct :)
 			if ($scope.user.token)
 				$location.path '/dashboard'
 			else
