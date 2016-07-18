@@ -14,17 +14,21 @@ angular.module('AllStarFitness').config [
 			.when('/dashboard',
 				controller: 'DashboardController'
 				templateUrl: 'views/dashboard.html'
+				###
 				resolve: auth: [
 					'$rootScope'
 					'$q'
 					'LoginService'
+					
 					($rootScope, $q, LoginService) ->
 						LoginService.login()
-						if $rootScope.user
-							$q.when $rootScope.user
+						if $rootScope.userSave
+							$q.when $rootScope.userSave
 						else
 							$q.reject authenticated: false
+					
 				]
+				###
 				)
 			.when('/test',
 				controller: 'DashboardController'

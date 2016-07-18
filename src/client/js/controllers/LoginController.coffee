@@ -5,15 +5,17 @@ LoginController = ($scope, $rootScope, $location, LoginService) ->
 
 	#login button
 	$scope.login = ->
-		$rootScope.user = {}
-		console.log $scope.user.email
-		console.log $scope.user.password
-		console.log LoginService
-		LoginService.login($scope.user)
-		if ($rootScope.user.token)
-			$location.path '/dashboard'
-		else
-			console.log 'error'
+		LoginService.login($scope.user).then ((result) ->
+			$scope.user = result
+			if ($scope.user.token)
+				$location.path '/dashboard'
+			else
+				console.log 'error'
+		), (error) ->
+			$window.alert 'Invalid credentials'
+			console.log error
+			return
+		return
 
 	return
 

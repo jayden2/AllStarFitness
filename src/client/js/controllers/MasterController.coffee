@@ -26,13 +26,21 @@ MasterController = ($scope, $cookieStore, $location) ->
 		return
 
 	$scope.$on '$routeChangeStart', (next, current) ->
+		console.log $location.url() + " call"
+		$('#page-wrapper').css('padding-left', '-150px')
 		switch $location.url()
-			when '/dashboard' then $scope.sidebar = true
-			when '/dashboard/users' then $scope.sidebar = true
-			when '/dashboard/workouts' then $scope.sidebar = true
-			when '/dashboard/documents' then $scope.sidebar = true
-			when '/test' then $scope.sidebar = true
-			when '/' then $scope.sidebar = true
+			when '/dashboard'
+				$scope.sidebar = true
+			when '/dashboard/users'
+				$scope.sidebar = true
+			when '/dashboard/workouts'
+				$scope.sidebar = true
+			when '/dashboard/documents'
+				$scope.sidebar = true
+			when '/test'
+				$scope.sidebar = true
+			when '/'
+				$scope.sidebar = true
 			else
 				$scope.sidebar = false
 				$('#page-wrapper').css('padding-left', '0px')
