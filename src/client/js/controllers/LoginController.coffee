@@ -19,10 +19,17 @@ LoginController = ($scope, $rootScope, $location, LoginService) ->
 				$scope.error = $scope.user.message
 				console.log 'error'
 				console.log $scope.error
+				errorLogin()
 		), (error) ->
 			$window.alert 'Invalid credentials'
-			#console.log error
+			console.log error
 			return
+		return
+
+	#push error to form if wrong password or email
+	errorLogin = ->
+		error_message = "<div class='alert alert-danger alert-dismissible' role='alert'>" + $scope.error + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>"
+		$('form').prepend(error_message)
 		return
 
 	return
