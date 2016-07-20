@@ -11,8 +11,8 @@ app.use bodyparser.urlencoded(extended: true)
 app.use express['static'](__dirname + '/client')
 
 #set port
-port = process.env.PORT || 8080
-server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
+port = process.env.PORT || 9000
+server_port = process.env.OPENSHIFT_NODEJS_PORT || 9000
 #set ip
 server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
 
