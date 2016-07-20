@@ -36,6 +36,7 @@ LoginController = ($scope, $rootScope, $location, LoginService) ->
 			$('.login-submit').prop('disabled', true)
 			$('.login-submit').val("")
 		else
+			$('.fa-cog').remove()
 			$('.login-submit').prop('disabled', false)
 			$('.login-submit').val("Login")
 		return
