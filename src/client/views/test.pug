@@ -1,4 +1,9 @@
-div(ng-controller="DashboardController")
+div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardController" ng-cloak)
+	//sidebar
+	include ./partials/sidebar.pug
+	//dashboard header
+	include ./partials/dashboard-header.pug
+	//main content
 	//alerts
 	div(class="row alerts-container" ng-controller="AlertsController" ng-show="alerts.length")
 		div(class="col-xs-12")

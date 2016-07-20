@@ -2,6 +2,8 @@ LoginController = ($scope, $rootScope, $location, LoginService) ->
 
 	#user define
 	$scope.user = {}
+	#error define
+	$scope.error = "test"
 
 	#login button
 	$scope.login = ->
@@ -9,12 +11,17 @@ LoginController = ($scope, $rootScope, $location, LoginService) ->
 			$scope.user = result
 			#check if not correct and display user not found and password not correct :)
 			if ($scope.user.token)
+				#insert user as global
+				$rootScope.user = result
+				#goto dashboard
 				$location.path '/dashboard'
 			else
+				$scope.error = $scope.user.message
 				console.log 'error'
+				console.log $scope.error
 		), (error) ->
 			$window.alert 'Invalid credentials'
-			console.log error
+			#console.log error
 			return
 		return
 

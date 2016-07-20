@@ -18,13 +18,7 @@ html(lang="en")
 		script(src="assets/libs/bootstrap.min.js")
 		meta(name="viewport" content="width=device-width, initial-scale=1")
 	body(ng-app="AllStarFitness" ng-controller="MasterController")
-		div(id="page-wrapper" ng-class="{'open': toggle}" ng-cloak)
-			//sidebar
-			include ./views/partials/sidebar.pug
-			//dashboard header
-			include ./views/partials/dashboard-header.pug
-			//main content
-			div(ng-view)
+		div(ng-view)
 
 		//Angular JS
 		script(src="js/app.min.js")
