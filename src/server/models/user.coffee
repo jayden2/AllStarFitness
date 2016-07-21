@@ -78,7 +78,7 @@ module.exports = class User
 					#if token password is out of date or is incorrect then send authentication failure
 					return res.status(403).send(
 						success: false
-						message: 'Failed to authenticate token.')
+						message: 'Session Expired. Please Login Again!')
 				else
 					#if token verified save to request for use in other routes
 					req.decode = decode
