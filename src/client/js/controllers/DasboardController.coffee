@@ -2,6 +2,8 @@ DashboardController = ($scope, $cookieStore, $location, LoginService) ->
 	## Sidebar
 	## Cookie control
 	mobileView = 992
+	#user from routes
+	$scope.user = LoginService.getUserInfo()
 
 	$scope.getWidth = ->
 		return window.innerWidth
@@ -26,13 +28,9 @@ DashboardController = ($scope, $cookieStore, $location, LoginService) ->
 		return
 
 	$scope.logout = ->
-		LoginService.logout().then ((result) ->
-			$scope.user = null
-			$location.path '/login'
-			return
-		), (error) ->
-			console.log error
-			return
+		LoginService.logout()
+		$scope.user = null
+		$location.path '/login'
 		return
 	return
 

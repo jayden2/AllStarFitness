@@ -8,28 +8,26 @@ angular.module('AllStarFitness').config [
 				templateUrl: 'views/home.html'
 				)
 			.when('/login',
-				controller: 'DashboardController'
+				controller: 'LoginController'
 				templateUrl: 'views/login.html'
 				)
 			.when('/dashboard',
 				controller: 'DashboardController'
 				templateUrl: 'views/dashboard.html'
-				###
 				resolve: auth: [
-					'$rootScope'
 					'$q'
+					'$location'
 					'LoginService'
 					
-					($rootScope, $q, LoginService) ->
-						LoginService.login()
-						if $rootScope.userSave
-							$q.when $rootScope.userSave
+					($q, $location, LoginService) ->
+						#get user details!
+						userAuth = LoginService.getUserInfo()
+						if userAuth
+							$q.when userAuth
 						else
 							$q.reject authenticated: false
-					
-				]
-				###
-				)
+							$location.path '/login'
+				])
 			.when('/test',
 				controller: 'DashboardController'
 				templateUrl: 'views/test.html'

@@ -1,6 +1,8 @@
 LoginService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 	login = (user) ->
 		deferred = $q.defer()
+		userSave = {}
+
 		$http.post('/api/authenticate',
 			email: user.email
 			password: user.password).success ((result) ->
@@ -20,7 +22,7 @@ LoginService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 				userSave =
 					success: result.success
 					message: result.message
-				deferred.resolve userSave
+				deferred.resolve user
 				return
 		), (error) ->
 			console.log error
@@ -29,25 +31,16 @@ LoginService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 		deferred.promise
 
 	logout = ->
-		deferred = $q.defer()
-		$http(
-			url: '/api/logout'
-			method: 'POST').then ((result) ->
-			userSave = null
-			$window.sessionStorage['userSave'] = null
-			deferred.resolve result
-			return
-		), (error) ->
-			deferred.reject error
-			return
-		deferred.promise
+		userSave = null
+		$window.sessionStorage['userSave'] = null
+		return
 
 	getUserInfo = ->
-		userSave
+		userSave = JSON.parse($window.sessionStorage['userSave'])
 
 	init = ->
 		if $window.sessionStorage['userSave']
-			userSave = JSON.parse($window.sessionStorage['userSave'])
+			user = JSON.parse($window.sessionStorage['userSave'])
 		return
 
 	init()
