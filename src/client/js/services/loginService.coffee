@@ -1,4 +1,4 @@
-LoginService = ($http, $rootScope, $q, $window, $httpParamSerializerJQLike) ->
+LoginService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 	login = (user) ->
 		deferred = $q.defer()
 		$http.post('/api/authenticate',
@@ -60,7 +60,6 @@ LoginService = ($http, $rootScope, $q, $window, $httpParamSerializerJQLike) ->
 angular.module('AllStarFitness')
 	.factory 'LoginService', [
 		'$http'
-		'$rootScope'
 		'$q'
 		'$window'
 		'$httpParamSerializerJQLike'
