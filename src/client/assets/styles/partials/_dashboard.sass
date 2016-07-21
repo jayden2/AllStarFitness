@@ -1,5 +1,5 @@
 .fa-cog
-	color: white
+	color: $white
 
 .login-button
 	margin-top: 6px
@@ -10,7 +10,7 @@
 	text-align: center
 	white-space: nowrap
 	text-decoration: none !important
-	color: #fff
+	color: $white
 	border: 0 none
 	border-radius: 4px
 	font-size: 14px
@@ -21,4 +21,16 @@
 	appearance: none
 	justify-content: center
 	flex: 0 0 160px
-	background: #ff7473
+	background: $primary-colour
+
+.widget .widget-body.large
+	height: 500px
+
+.btn-info
+	border: 0px
+	background: $primary-colour
+.btn-info:hover
+	background: darken($primary-colour, 3%)
+.btn-info:active,
+.btn-info:visited
+	background: desaturate($primary-colour, 5%) !important
