@@ -11,17 +11,21 @@ div(id="content-wrapper")
 						a(href="#" class="dropdown-toggle" uib-dropdown-toggle)
 							img(src="assets/images/yeoman.png")
 						ul(class="dropdown-menu dropdown-menu-right")
-							li(class="dropdown-header") User Name
+							li(class="dropdown-header") {{ user.first_name }} {{ user.last_name }}
 							li(class="divider")
 							li(class="link")
-								a(href="/login") New Product
+								a(href="/dashboard") New User
+							li(class="link")
+								a(href="/dashboard") New Workout
+							li(class="link")
+								a(href="/dashboard") New Document
 							li(class="link")
 								a(href="/login") Profile
 							li(class="divider")
 							li(class="link")
 								a(ng-click="logout()") Logout
 
-					//notifications dropdown
+				//notifications dropdown
 					div(class="item dropdown" uib-dropdown)
 						a(href="#", class="dropdown-toggle" uib-dropdown-toggle)
 							i(class="fa fa-bell-o")
@@ -31,5 +35,5 @@ div(id="content-wrapper")
 							li
 								a(href="#") Server Down!
 				div(class="meta")
-					div(class="page") Dashboard
-					div(class="breadcrumb-links") Home / Dashboard
+					div(class="page") {{ dashboard_location }}
+					div(class="breadcrumb-links") {{ dashboard_location_sub }}

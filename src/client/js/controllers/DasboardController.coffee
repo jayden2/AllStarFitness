@@ -32,6 +32,18 @@ DashboardController = ($scope, $cookieStore, $location, LoginService) ->
 		$scope.user = null
 		$location.path '/login'
 		return
+
+	#dashboard location of path
+	$scope.getLocation = ->
+		dash_loc = $location.path().substring(1).replace('dashboard/', '').trim()
+		dash_sub = $location.path().substring(1).replace('/', ' / ').trim()
+
+		$scope.dashboard_location = dash_loc.charAt(0).toUpperCase() + dash_loc.slice(1)
+		$scope.dashboard_location_sub = dash_sub.charAt(0).toUpperCase() + dash_sub.slice(1)
+		return
+
+	$scope.getLocation()
+	
 	return
 
 angular.module('AllStarFitness')

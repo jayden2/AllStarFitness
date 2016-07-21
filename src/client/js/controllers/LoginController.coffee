@@ -32,7 +32,7 @@ LoginController = ($scope, $location, LoginService) ->
 		return
 
 	loadingLogin = (isLoading) ->
-		loading_circle = "<i class='fa fa-cog fa-spin fa-2x fa-fw'></i>"
+		loading_circle = "<i class='fa fa-cog fa-spin fa-lg'></i>"
 		loading_text = "loading"
 		if isLoading
 			$('.login-button').text("")
