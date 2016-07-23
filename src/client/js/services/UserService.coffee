@@ -1,5 +1,4 @@
 UserService = ($http, $q, $window, $httpParamSerializerJQLike) ->
-	
 	##CREATE USER
 	createUser = (user, token) ->
 		deferred = $q.defer()
@@ -22,7 +21,7 @@ UserService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 			deferred.reject error
 			return
 		deferred.promise
-
+	
 	##GET ALL USERS
 	getAllUsers = (token) ->
 		deferred = $q.defer()
@@ -30,16 +29,7 @@ UserService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 		#push into object array
 		$http.get('/api/users/' + '?token=' + token).success ((result) ->
 			if result
-				userSave =
-					id: result.id
-					first_name: result.first_name
-					last_name: result.last_name
-					email: result.email
-					user_type: result.user_type
-					gender: result.gender
-					age: result.gender
-					date_created: result.date_created
-					date_updated: result.date_updated
+				userSave = result
 				deferred.resolve userSave
 				return
 			else
@@ -121,6 +111,14 @@ UserService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 			deferred.reject error
 			return
 		deferred.promise
+
+	{
+		createUser: createUser
+		getAllUsers: getAllUsers
+		getOneUser: getOneUser
+		updateUser: updateUser
+		deleteUser: deleteUser
+	}
 
 angular.module('AllStarFitness')
 	.factory 'UserService', [
