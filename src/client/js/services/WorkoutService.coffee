@@ -31,17 +31,7 @@ WorkoutService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 		#push into object array
 		$http.get('/api/workouts/' + '?token=' + token).success ((result) ->
 			if result
-				workoutSave =
-					id: result.id
-					title: result.title
-					description: result.description
-					image: result.image
-					def_set_start: result.def_set_start
-					def_set_end: result.def_set_end
-					def_rep_start: result.def_rep_start
-					def_rep_end: result.def_rep_end
-					date_created: result.date_created
-					favourite: result.favourite
+				workoutSave = result
 				deferred.resolve workoutSave
 				return
 			else
@@ -125,6 +115,15 @@ WorkoutService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 				deferred.reject error
 				return
 			deferred.promise
+		
+
+	{
+		createWorkout: createWorkout
+		getAllWorkouts: getAllWorkouts
+		getOneWorkout: getOneWorkout
+		updateWorkout: updateWorkout
+		deleteWorkout: deleteWorkout
+	}
 
 angular.module('AllStarFitness')
 	.factory 'WorkoutService', [

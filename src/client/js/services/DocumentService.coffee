@@ -24,17 +24,9 @@ DocumentService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 	getAllDocuments = (token) ->
 		deferred = $q.defer()
 		documentSave = {}
-		#push into object array
 		$http.get('/api/documents/' + '?token=' + token).success ((result) ->
 			if result
-				documentSave =
-					id: result.id
-					title: result.title
-					collection: result.collection
-					user_id: result.user_id
-					template: result.template
-					date_created: result.date_created
-					date_updated: result.date_updated
+				documentSave = result
 				deferred.resolve documentSave
 				return
 			else
@@ -110,6 +102,15 @@ DocumentService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 				deferred.reject error
 				return
 			deferred.promise
+		
+
+	{
+		createDocument: createDocument
+		getAllDocuments: getAllDocuments
+		getOneDocument: getOneDocument
+		updateDocument: updateDocument
+		deleteDocument: deleteDocument
+	}
 
 angular.module('AllStarFitness')
 	.factory 'DocumentService', [

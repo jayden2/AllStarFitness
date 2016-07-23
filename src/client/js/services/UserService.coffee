@@ -26,7 +26,6 @@ UserService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 	getAllUsers = (token) ->
 		deferred = $q.defer()
 		userSave = {}
-		#push into object array
 		$http.get('/api/users/' + '?token=' + token).success ((result) ->
 			if result
 				userSave = result
