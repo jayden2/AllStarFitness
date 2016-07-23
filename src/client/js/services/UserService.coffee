@@ -88,7 +88,7 @@ UserService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 	##UPDATE USER
 	updateUser = (user, id, token) ->
 		deferred = $q.defer()
-		$http.post('/api/users/' + id + '?token=' + token,
+		$http.put('/api/users/' + id + '?token=' + token,
 			first_name: user.first_name
 			last_name: user.last_name
 			email: user.email
@@ -110,7 +110,7 @@ UserService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 	##DELETE USER
 	deleteUser = (id, token) ->
 		deferred = $q.defer()
-		$http.post('/api/users/' + id + '?token=' + token).success ((result) ->
+		$http.delete('/api/users/' + id + '?token=' + token).success ((result) ->
 			if result.success == true
 				userSave =
 					success: result.success

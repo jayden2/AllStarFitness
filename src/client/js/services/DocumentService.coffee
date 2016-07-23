@@ -80,7 +80,7 @@ DocumentService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 	##UPDATE DOCUMENTS
 	updateDocument = (doc, id, token) ->
 		deferred = $q.defer()
-		$http.post('/api/documents/' + id + '?token=' + token,
+		$http.put('/api/documents/' + id + '?token=' + token,
 			title: doc.title
 			collection: doc.collection
 			user_id: doc.user_id
@@ -99,7 +99,7 @@ DocumentService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 		##DELETE DOCUMENT
 		deleteDocument = (id, token) ->
 			deferred = $q.defer()
-			$http.post('/api/documents/' + id + '?token=' + token).success ((result) ->
+			$http.delete('/api/documents/' + id + '?token=' + token).success ((result) ->
 				if result.success == true
 					documentSave =
 						success: result.success
