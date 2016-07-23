@@ -57,8 +57,8 @@ module.exports = class Doc
 	#do connection, update document data item with id
 	@updateDocument = (doc, id, res) ->
 		connection.acquire (err, con) ->
-			con.query 'UPDATE documents SET title = ?, collection = ?, user_id = ?, template = ?, date_created = ? WHERE id = ?',
-			[doc.title, doc.collection, doc.user_id, doc.template, doc.date_created, id], (err, result) ->
+			con.query 'UPDATE documents SET title = ?, collection = ?, user_id = ?, template = ? WHERE id = ?',
+			[doc.title, doc.collection, doc.user_id, doc.template, id], (err, result) ->
 				con.release()
 				#error check if successful query or not
 				if err

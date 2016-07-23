@@ -24,7 +24,7 @@ UserService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 		deferred.promise
 
 	##GET ALL USERS
-	getAllUsers = (user, token) ->
+	getAllUsers = (token) ->
 		deferred = $q.defer()
 		userSave = {}
 		#push into object array
@@ -95,14 +95,13 @@ UserService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 			user_type: 'none'
 			password: 'none'
 			gender: user.gender
-			age: user.age
-			date_created: user.date_created).success ((result) ->
-			if result.success == true
-				userSave =
-					success: result.success
-					message: result.message
-				deferred.resolve userSave
-				return
+			age: user.age).success ((result) ->
+				if result.success == true
+					userSave =
+						success: result.success
+						message: result.message
+					deferred.resolve userSave
+					return
 		), (error) ->
 			deferred.reject error
 			return
