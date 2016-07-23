@@ -22,7 +22,7 @@ LoginService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 				userSave =
 					success: result.success
 					message: result.message
-				deferred.resolve user
+				deferred.resolve userSave
 				return
 		), (error) ->
 			console.log error
