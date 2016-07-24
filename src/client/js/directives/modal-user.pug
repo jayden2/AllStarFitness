@@ -1,0 +1,9 @@
+div(class="modal-header")
+	h3(class="modal-title") {{ title }}
+div(class="modal-body")
+	ul
+		li {{ type }}
+div(class="modal-footer")
+	//add ng-click
+	button(class="btn btn-primary" type="button" ng-click="confirm()") OK
+	button(class="btn btn-warning" type="button" ng-click="cancel()") Cancel
