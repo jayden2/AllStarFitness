@@ -26,11 +26,67 @@
 .widget .widget-body.large
 	height: 500px
 
+.create-button
+	position: absolute
+	margin-left: -130px
+
+//modal
+.modal-header
+	color:#fff
+	padding: 9px 15px
+	border-bottom: 1px solid #eee
+	background-color: $user-modal-colour
+	-webkit-border-top-left-radius: 5px
+	-webkit-border-top-right-radius: 5px
+	-moz-border-radius-topleft: 5px
+	-moz-border-radius-topright: 5px
+	border-top-left-radius: 5px
+	border-top-right-radius: 5px
+
+//modal delete button
+.button-delete
+	float: left
+
+
+//button colouring
 .btn-info
 	border: 0px
 	background: $primary-colour
 .btn-info:hover
 	background: darken($primary-colour, 3%)
+	border: 0px
 .btn-info:active,
-.btn-info:visited
+.btn-info:visited,
+.btn-info:active:focus,
+.btn-info.focus,
+.btn-info:focus
+	border: 0px
 	background: desaturate($primary-colour, 5%) !important
+
+.btn-cancel
+	border: 0px
+	background: $cancel-colour
+.btn-cancel:hover
+	background: darken($cancel-colour, 3%)
+	border: 0px
+.btn-cancel:active,
+.btn-cancel:visited,
+.btn-cancel:active:focus,
+.btn-cancel.focus,
+.btn-cancel:focus
+	border: 0px
+	background: desaturate($cancel-colour, 5%) !important
+
+.btn-confirm
+	border: 0px
+	background: $confirm-colour
+.btn-confirm:hover
+	background: darken($confirm-colour, 3%)
+	border: 0px
+.btn-confirm:active,
+.btn-confirm:visited,
+.btn-confirm:active:focus,
+.btn-confirm.focus,
+.btn-confirm:focus
+	border: 0px
+	background: desaturate($confirm-colour, 5%) !important
