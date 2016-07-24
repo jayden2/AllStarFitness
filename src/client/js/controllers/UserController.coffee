@@ -1,4 +1,4 @@
-UserController = ($scope, $filter, LoginService, UserService) ->
+UserController = ($scope, $filter, $uibModal, LoginService, UserService) ->
 
 	#define users
 	$scope.loading = false
@@ -6,8 +6,10 @@ UserController = ($scope, $filter, LoginService, UserService) ->
 	$scope.search = { }
 	currentUser = LoginService.getUserInfo()
 	$scope.users = {}
+	$scope.modalTitle = "Edit a User"
+	$scope.modalType = "user edit"
 
-	#get all users
+	#get all users from service to fill table
 	$scope.getUsers = ->
 		if $scope.loading == false
 			$scope.loading = true
@@ -20,6 +22,7 @@ UserController = ($scope, $filter, LoginService, UserService) ->
 				return
 		return
 
+	#search and filter users from search
 	$scope.filteredUsers = ->
 		$scope.resultAmount = false
 		array = []
@@ -29,6 +32,21 @@ UserController = ($scope, $filter, LoginService, UserService) ->
 			array.push $scope.users[key]
 		return $filter('filter') array, $scope.search.query
 
+	$scope.openModal = ->
+		console.log $scope.modalType
+		modalInstance = $uibModal.open(
+			animation: true
+			size: 'lg'
+			templateUrl: '/js/directives/modal-user.html'
+			controller: 'UserModalController'
+			resolve:
+				title: ->
+					$scope.modalTitle
+				type: ->
+					$scope.modalType
+		)
+
+
 	$scope.getUsers()
 
 	return
@@ -37,6 +55,7 @@ angular.module('AllStarFitness')
 	.controller 'UserController', [
 		'$scope'
 		'$filter'
+		'$uibModal'
 		'LoginService'
 		'UserService'
 		UserController
