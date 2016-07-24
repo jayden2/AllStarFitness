@@ -33,7 +33,6 @@ UserController = ($scope, $filter, $uibModal, LoginService, UserService) ->
 	$scope.openModal = (typeModal, user) ->
 		modalInstance = $uibModal.open(
 			animation: true
-			size: 'lg'
 			templateUrl: '/js/directives/modal-user.html'
 			controller: 'UserModalController'
 			resolve:
