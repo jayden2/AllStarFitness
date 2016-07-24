@@ -1,15 +1,31 @@
-UserModalController = ($scope, $uibModalInstance, UserService, title, type) ->
+UserModalController = ($scope, $uibModalInstance, UserService, type, user) ->
 	
 	#ititialise variables
-	$scope.title = title
 	$scope.type = type
+
+	#title of modal
+	chooseModalType = ->
+		if type == "create"
+			$scope.title = "Create User"
+			$scope.buttonSave = "Create User"
+			$scope.buttonDelete = false
+		else
+			$scope.title = "Edit User"
+			$scope.buttonSave = "Save User"
+			$scope.buttonDelete = true
 
 	#close modal confirm (save)
 	$scope.confirm = ->
 		$uibModalInstance.close()
+	#close modal delete
+	$scope.delete = ->
+		$uibModalInstance.close()
 	#close modal cancel
 	$scope.cancel = ->
 		$uibModalInstance.dismiss('cancel')
+
+	chooseModalType()
+
 	return
 
 angular.module('AllStarFitness')
@@ -17,7 +33,7 @@ angular.module('AllStarFitness')
 		'$scope'
 		'$uibModalInstance'
 		'UserService'
-		'title'
+		'user'
 		'type'
 		UserModalController
 	]
