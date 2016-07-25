@@ -51,11 +51,12 @@ UserController = ($scope, $filter, $uibModal, LoginService, UserService) ->
 				user: ->
 					user
 		)
-		modalInstance.result.finally ->
-			$scope.getUsers()
+		modalInstance.result.then ((formData) ->
+			if formData == 'postupdel'
+				$scope.getUsers()
+		)
 
 	$scope.getUsers()
-
 	return
 
 angular.module('AllStarFitness')

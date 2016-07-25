@@ -39,12 +39,13 @@ UserModalController = ($scope, $uibModalInstance, UserService, LoginService, typ
 			$scope.postUser()
 		else
 			$scope.updateUser()
-		$uibModalInstance.close()
+		$uibModalInstance.close('postupdel')
+		
 
 	#close modal delete
 	$scope.delete = ->
 		$scope.deleteUser()
-		$uibModalInstance.close()
+		$uibModalInstance.close('postupdel')
 		
 	#close modal cancel
 	$scope.cancel = ->
@@ -105,7 +106,6 @@ UserModalController = ($scope, $uibModalInstance, UserService, LoginService, typ
 
 	#post user
 	$scope.postUser = ->
-		console.log $scope.user
 		if $scope.loading == false
 			$scope.loading = true
 			loadingCall(true)
