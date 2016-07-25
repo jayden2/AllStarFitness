@@ -38,7 +38,7 @@ module.exports = class User
 	#do connection, count if user exists
 	@checkValidUser = (user, res) ->
 		connection.acquire (err, con) ->
-			con.query 'SELECT *, COUNT(id) AS user_count FROM users WHERE email = ?', [user.email], (err, result) ->
+			con.query 'SELECT *, COUNT(id) AS user_count FROM users WHERE email = ? AND user_type = ?', [user.email, 'admin'], (err, result) ->
 				con.release()
 				#if username doesnt exist, dont auth
 				if result[0].user_count != 1

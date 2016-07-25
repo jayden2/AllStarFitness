@@ -30,6 +30,16 @@ UserController = ($scope, $filter, $uibModal, LoginService, UserService) ->
 			array.push $scope.users[key]
 		return $filter('filter') array, $scope.search.query
 
+	#calculate age
+	$scope.getAge = (age) ->
+		today = new Date()
+		birthDate = new Date(age)
+		age = today.getFullYear() - birthDate.getFullYear()
+		m = today.getMonth() - birthDate.getMonth()
+		if (m < 0 || (m == 0 && today.getDate() < birthDate.getDate()))
+			age--
+		return age
+
 	$scope.openModal = (typeModal, user) ->
 		modalInstance = $uibModal.open(
 			animation: true

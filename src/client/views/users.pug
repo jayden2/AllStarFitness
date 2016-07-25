@@ -30,7 +30,7 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 									td {{ user.first_name }} {{ user.last_name }}
 									td {{ user.email }}
 									td(class="text-center") {{ user.gender | lowercase }}
-									td(class="text-center") {{ user.age }}
+									td(class="text-center" ng-bind="getAge(user.age)")
 									td(class="text-center")
 										button(type="button" class="btn btn-info btn-sm" ng-click="openModal('edit', user)") EDIT 
 											i(class="fa fa-pencil-square-o fa-fw" aria-hidden="true")
