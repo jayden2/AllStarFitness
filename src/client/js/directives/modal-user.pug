@@ -5,16 +5,15 @@ div(class="modal-body")
 		div(class="form-group")
 			//firstname
 			label(class= "control-label" for="first_name") First Name*
-			input(type="text" class="form-control" id="first_name2" aria-describedby="basic-addon3" ng-model="user.first_name" placeholder="Enter users first name..." required)
+			input(type="text" class="form-control" id="first_name2" aria-describedby="basic-addon3" ng-model="user.first_name" placeholder="Enter users first name..." ng-required="true" required)
 			
 			//lastname
 			label(class= "control-label" for="last_name") Surname*
-			input(type="text" class="form-control" id="last_name2" aria-describedby="basic-addon3" ng-model="user.last_name" placeholder="Enter users surname..." required)
+			input(type="text" class="form-control" id="last_name2" aria-describedby="basic-addon3" ng-model="user.last_name" placeholder="Enter users surname..." ng-required="true" required)
 			
 			//email
 			label(class= "control-label" for="email") Email
-			input(type="email" class="form-control" id="email2" aria-describedby="basic-addon3" ng-model="user.email" placeholder="Enter users email...")
-
+			input(type="email" class="form-control" id="email2" aria-describedby="basic-addon3" ng-model="user.email" placeholder="Enter users email..." ng-required="true")
 			//gender
 			label(class= "control-label" for="gender") Gender*
 			div(class="form-group")
@@ -32,5 +31,5 @@ div(class="modal-body")
 
 div(class="modal-footer")
 	button(class="btn btn-danger button-delete" type="button" ng-click="delete()" ng-show="buttonDelete") Delete
-	button(class="btn btn-primary btn-confirm" type="button" ng-click="confirm()") {{ buttonSave }}
+	button(class="btn btn-primary btn-confirm" type="submit" ng-click="confirm()") {{ buttonSave }}
 	button(class="btn btn-warning btn-cancel" type="button" ng-click="cancel()") Cancel

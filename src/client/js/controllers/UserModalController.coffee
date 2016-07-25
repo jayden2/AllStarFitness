@@ -20,6 +20,17 @@ UserModalController = ($scope, $uibModalInstance, UserService, LoginService, typ
 
 	#close modal confirm (save)
 	$scope.confirm = ->
+		if isNullOrEmptyOrUndefined($scope.user.first_name)
+			formError("First name is empty")
+			return
+		if isNullOrEmptyOrUndefined($scope.user.last_name)
+			formError("Surname is empty")
+			return
+		if isNullOrEmptyOrUndefined($scope.user.email)
+			formError("Email is empty")
+			return
+		$scope.genderToChar()
+		$scope.user.age = $scope.dt
 		if type == "create"
 			$scope.postUser()
 		else
@@ -91,6 +102,7 @@ UserModalController = ($scope, $uibModalInstance, UserService, LoginService, typ
 
 	#post user
 	$scope.postUser = ->
+		console.log $scope.user
 		if $scope.loading == false
 			$scope.loading = true
 			loadingCall(true)
@@ -136,6 +148,14 @@ UserModalController = ($scope, $uibModalInstance, UserService, LoginService, typ
 				loadingCall(false)
 				return
 		return
+
+	formError = (errorText) ->
+		$('.alert').remove()
+		error_message = "<div class='alert alert-danger alert-dismissible' role='alert'>" + errorText + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>"
+		$('form').prepend(error_message)
+
+	isNullOrEmptyOrUndefined = (value) ->
+		!value
 
 	chooseModalType()
 	$scope.today()
