@@ -6,6 +6,7 @@ UserModalController = ($scope, $uibModalInstance, UserService, LoginService, typ
 	$scope.user = user
 	$scope.loading = false
 	currentUser = LoginService.getUserInfo()
+	$scope.altInputFormats = ['M!/d!/yyyy']
 
 	#title of modal
 	chooseModalType = ->
@@ -27,7 +28,10 @@ UserModalController = ($scope, $uibModalInstance, UserService, LoginService, typ
 			formError("Surname is empty")
 			return
 		if isNullOrEmptyOrUndefined($scope.user.email)
-			formError("Email is empty")
+			formError("Email is not valid")
+			return
+		if isValidDate()
+			formError("Incorrect date format")
 			return
 		$scope.genderToChar()
 		$scope.user.age = $scope.dt
@@ -57,12 +61,14 @@ UserModalController = ($scope, $uibModalInstance, UserService, LoginService, typ
 		else
 			$scope.dt = new Date(user.age)
 
+	#caleder open/close
 	$scope.open1 = ->
 		$scope.popup1.opened = true
-
+	#caleder open/close
 	$scope.popup1 =
 		opened: false
 
+	#loading spinner if posts or not...
 	loadingCall = (isLoading) ->
 		loading_circle = "<i class='fa fa-cog fa-spin fa-lg'></i>"
 		loading_text = "loading"
@@ -71,10 +77,6 @@ UserModalController = ($scope, $uibModalInstance, UserService, LoginService, typ
 			$('.login-button').append(loading_circle)
 		else
 			$('.fa-cog').remove()
-			# if type == "create"
-			# 	$scope.buttonSave = "Create User"
-			# else
-			# 	$scope.buttonSave = "Edit User"
 
 	#calculate age
 	$scope.getAge = ->
@@ -94,6 +96,7 @@ UserModalController = ($scope, $uibModalInstance, UserService, LoginService, typ
 		else
 			$scope.gender = "female"
 
+	#turn selection choice from word to char
 	$scope.genderToChar = ->
 		if $scope.gender == "male"
 			$scope.user.gender = "m"
@@ -149,13 +152,23 @@ UserModalController = ($scope, $uibModalInstance, UserService, LoginService, typ
 				return
 		return
 
+	#display error on form if there is an error
 	formError = (errorText) ->
 		$('.alert').remove()
 		error_message = "<div class='alert alert-danger alert-dismissible' role='alert'>" + errorText + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>"
 		$('form').prepend(error_message)
 
+	#validate form
 	isNullOrEmptyOrUndefined = (value) ->
 		!value
+
+	isValidDate = ->
+		test = $scope.dt
+		valid = Date.parse(test)
+		if isNullOrEmptyOrUndefined(valid)
+			return true
+		else
+			return false
 
 	chooseModalType()
 	$scope.today()

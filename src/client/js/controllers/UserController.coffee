@@ -51,7 +51,8 @@ UserController = ($scope, $filter, $uibModal, LoginService, UserService) ->
 				user: ->
 					user
 		)
-
+		modalInstance.result.finally ->
+			$scope.getUsers()
 
 	$scope.getUsers()
 
