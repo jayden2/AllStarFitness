@@ -1,14 +1,14 @@
 WorkoutService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 	
 	##CREATE WORKOUTS
-	createWorkout = (doc, token) ->
+	createWorkout = (workout, token) ->
 		deferred = $q.defer()
 		$http.post('/api/workouts/' + '?token=' + token,
-			title: doc.title
-			collection: doc.collection
-			user_id: doc.user_id
-			template: doc.template
-			date_created: doc.date_created).success ((result) ->
+			title: workout.title
+			collection: workout.collection
+			user_id: workout.user_id
+			template: workout.template
+			date_created: workout.date_created).success ((result) ->
 			if result.success == true
 				workoutSave =
 					success: result.success
@@ -70,13 +70,13 @@ WorkoutService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 		deferred.promise
 
 	##UPDATE WORKOUTS
-	updateWorkout = (doc, id, token) ->
+	updateWorkout = (workout, id, token) ->
 		deferred = $q.defer()
 		$http.put('/api/workouts/' + id + '?token=' + token,
-			title: doc.title
-			collection: doc.collection
-			user_id: doc.user_id
-			template: doc.template).success ((result) ->
+			title: workout.title
+			collection: workout.collection
+			user_id: workout.user_id
+			template: workout.template).success ((result) ->
 				if result.success == true
 					workoutSave =
 						success: result.success

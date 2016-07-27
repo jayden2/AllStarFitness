@@ -17,5 +17,5 @@ angular.module('AllStarFitness')
 		'LoginService'
 		'type'
 		'workout'
-		UserModalController
+		WorkoutModalController
 	]
