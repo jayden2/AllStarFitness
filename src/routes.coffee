@@ -1,6 +1,6 @@
 user = require './server/models/user'
+exercise = require './server/models/exercise'
 workout = require './server/models/workout'
-doc = require './server/models/document'
 
 module.exports = (router) ->
 
@@ -49,6 +49,38 @@ module.exports = (router) ->
 	router.delete '/api/users/:id/', (req, res) ->
 		user.deleteUser req.params.id, res
 
+	##-----------------##
+	##-EXERCISE ROUTES-##
+	##-----------------##
+
+	#create exercise
+	router.post '/api/exercises/', (req, res) ->
+		exercise.createExercise req.body, res
+
+	#get all exercises
+	router.get '/api/exercises/', (req, res) ->
+		exercise.getAllExercises res
+	
+	#get 1 exercise
+	router.get '/api/exercises/:id/', (req, res) ->
+		exercise.getSingleExercise req.params.id, res
+
+	#get 1 exercise --SHORT
+	router.get '/api/exercises/:id/short', (req, res) ->
+		exercise.getSingleExerciseShort req.params.id, res
+	
+	#update exercise
+	router.put '/api/exercises/:id/', (req, res) ->
+		exercise.updateExercise req.body, req.params.id, res
+
+	#update exercise -- FAVOURITE
+	router.put '/api/exercises/:id/favourite', (req, res) ->
+		exercise.updateExerciseFavourite req.body, req.params.id, res
+	
+	#delete exercise
+	router.delete '/api/exercises/:id/', (req, res) ->
+		exercise.deleteExercise req.params.id, res
+
 	##----------------##
 	##-WORKOUT ROUTES-##
 	##----------------##
@@ -57,7 +89,7 @@ module.exports = (router) ->
 	router.post '/api/workouts/', (req, res) ->
 		workout.createWorkout req.body, res
 
-	#get all workouts
+	#get all workout
 	router.get '/api/workouts/', (req, res) ->
 		workout.getAllWorkouts res
 	
@@ -73,45 +105,13 @@ module.exports = (router) ->
 	router.put '/api/workouts/:id/', (req, res) ->
 		workout.updateWorkout req.body, req.params.id, res
 
-	#update workout -- FAVOURITE
-	router.put '/api/workouts/:id/favourite', (req, res) ->
-		workout.updateWorkoutFavourite req.body, req.params.id, res
+	#update workout -- TEMPLATE
+	router.put '/api/workouts/:id/template', (req, res) ->
+		workout.updateWorkoutTemplate req.body, req.params.id, res
 	
 	#delete workout
 	router.delete '/api/workouts/:id/', (req, res) ->
 		workout.deleteWorkout req.params.id, res
-
-	##-----------------##
-	##-DOCUMENT ROUTES-##
-	##-----------------##
-
-	#create document
-	router.post '/api/documents/', (req, res) ->
-		doc.createDocument req.body, res
-
-	#get all document
-	router.get '/api/documents/', (req, res) ->
-		doc.getAllDocuments res
-	
-	#get 1 document
-	router.get '/api/documents/:id/', (req, res) ->
-		doc.getSingleDocument req.params.id, res
-
-	#get 1 document --SHORT
-	router.get '/api/documents/:id/short', (req, res) ->
-		doc.getSingleDocumentShort req.params.id, res
-	
-	#update document
-	router.put '/api/documents/:id/', (req, res) ->
-		doc.updateDocument req.body, req.params.id, res
-
-	#update document -- TEMPLATE
-	router.put '/api/documents/:id/template', (req, res) ->
-		doc.updateDocumentTemplate req.body, req.params.id, res
-	
-	#delete document
-	router.delete '/api/documents/:id/', (req, res) ->
-		doc.deleteDocument req.params.id, res
 
 	##--ANGULAR ROUTES--##
 	router.get '*', (req, res) ->

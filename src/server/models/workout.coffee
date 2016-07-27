@@ -27,7 +27,7 @@ module.exports = class Workout
 	#do connection, select one workout from database
 	@getSingleWorkoutShort = (id, res) ->
 		connection.acquire (err, con) ->
-			con.query 'SELECT id, title, favourite FROM workouts WHERE id = ?', [id], (err, result) ->
+			con.query 'SELECT id, title, collection, template FROM workouts WHERE id = ?', [id], (err, result) ->
 				con.release()
 				res.send result
 				return
@@ -37,8 +37,8 @@ module.exports = class Workout
 	#do connection, insert workout data into database
 	@createWorkout = (workout, res) ->
 		connection.acquire (err, con) ->
-			con.query 'INSERT INTO workouts (title, description, image, def_set_start, def_set_end, def_rep_start, def_rep_end, date_created, favourite) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-			[workout.title, workout.description, workout.image, workout.def_set_start, workout.def_set_end, workout.def_rep_start, workout.def_rep_end, workout.date_created, workout.favourite], (err, result) ->
+			con.query 'INSERT INTO workouts (title, collection, user_id, template, date_created) VALUES (?, ?, ?, ?, ?)',
+			[workout.title, workout.collection, workout.user_id, workout.template, workout.date_created], (err, result) ->
 				con.release()
 				#error check if succesful query or not
 				if err
@@ -57,8 +57,8 @@ module.exports = class Workout
 	#do connection, update workout data item with id
 	@updateWorkout = (workout, id, res) ->
 		connection.acquire (err, con) ->
-			con.query 'UPDATE workouts SET title = ?, description = ?, image = ?, def_set_start = ?, def_set_end = ?, def_rep_start = ?, def_rep_end = ?, favourite = ? WHERE id = ?',
-			[workout.title, workout.description, workout.image, workout.def_set_start, workout.def_set_end, workout.def_rep_start, workout.def_rep_end, workout.favourite, id], (err, result) ->
+			con.query 'UPDATE workouts SET title = ?, collection = ?, user_id = ?, template = ? WHERE id = ?',
+			[workout.title, workout.collection, workout.user_id, workout.template, id], (err, result) ->
 				con.release()
 				#error check if successful query or not
 				if err
@@ -75,10 +75,10 @@ module.exports = class Workout
 
 	#update
 	#do connection, update workout data item with id
-	@updateWorkoutFavourite = (workout, id, res) ->
+	@updateWorkoutTemplate = (workout, id, res) ->
 		connection.acquire (err, con) ->
-			con.query 'UPDATE workouts SET favourite = ? WHERE id = ?',
-			[workout.favourite, id], (err, result) ->
+			con.query 'UPDATE workouts SET template = ? WHERE id = ?',
+			[workout.template, id], (err, result) ->
 				con.release()
 				#error check if successful query or not
 				if err

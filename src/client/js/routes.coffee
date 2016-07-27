@@ -56,9 +56,9 @@ angular.module('AllStarFitness').config [
 							$location.path '/login'
 				])
 			##DASH WORKOUTS
-			.when('/dashboard/workouts',
-				controller: 'WorkoutController'
-				templateUrl: 'views/workouts.html'
+			.when('/dashboard/exercises',
+				controller: 'ExercisesController'
+				templateUrl: 'views/exercises.html'
 				resolve: auth: [
 					'$q'
 					'$location'
@@ -73,10 +73,10 @@ angular.module('AllStarFitness').config [
 							$q.reject authenticated: false
 							$location.path '/login'
 				])
-			##DASH DOCUMENTS
-			.when('/dashboard/documents',
-				controller: 'DocumentController'
-				templateUrl: 'views/documents.html'
+			##DASH WORKOUTS
+			.when('/dashboard/workouts',
+				controller: 'WorkoutsController'
+				templateUrl: 'views/workouts.html'
 				resolve: auth: [
 					'$q'
 					'$location'

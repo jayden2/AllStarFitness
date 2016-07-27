@@ -7,7 +7,7 @@ module.exports = class Connection
 	@init: ->
 		@pool = mysql.createPool(
 			connectionLimit: 10
-			host: 'localhost'
+			host: '127.3.143.130'
 			port: '3306'
 			user: 'admindEJ2fyi'
 			password: 'NeduHQFdnB6k'
