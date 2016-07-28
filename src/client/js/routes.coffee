@@ -57,7 +57,7 @@ angular.module('AllStarFitness').config [
 				])
 			##DASH WORKOUTS
 			.when('/dashboard/exercises',
-				controller: 'ExercisesController'
+				controller: 'ExerciseController'
 				templateUrl: 'views/exercises.html'
 				resolve: auth: [
 					'$q'
@@ -75,7 +75,7 @@ angular.module('AllStarFitness').config [
 				])
 			##DASH WORKOUTS
 			.when('/dashboard/workouts',
-				controller: 'WorkoutsController'
+				controller: 'WorkoutController'
 				templateUrl: 'views/workouts.html'
 				resolve: auth: [
 					'$q'
