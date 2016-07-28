@@ -101,20 +101,20 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 			return
 		deferred.promise
 
-		##DELETE EXERCISE
-		deleteExercise = (id, token) ->
-			deferred = $q.defer()
-			$http.delete('/api/exercises/' + id + '?token=' + token).success ((result) ->
-				if result.success == true
-					exerciseSave =
-						success: result.success
-						message: result.message
-					deferred.resolve exerciseSave
-					return
-			), (error) ->
-				deferred.reject error
+	##DELETE EXERCISE
+	deleteExercise = (id, token) ->
+		deferred = $q.defer()
+		$http.delete('/api/exercises/' + id + '?token=' + token).success ((result) ->
+			if result.success == true
+				exerciseSave =
+					success: result.success
+					message: result.message
+				deferred.resolve exerciseSave
 				return
-			deferred.promise
+		), (error) ->
+			deferred.reject error
+			return
+		deferred.promise
 		
 
 	{
