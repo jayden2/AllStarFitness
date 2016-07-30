@@ -13,7 +13,8 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 						i(class="fa fa-plus fa-1x" aria-hidden="true")
 					input(type="text" placeholder="Search Exercise..." class="form-control input-sm" ng-model="search.query")
 				rd-widget-body(classes="large no-padding")
-					div(class="table-responsive")
+					rd-loading(ng-show="loading")
+					div(class="table-responsive" ng-hide="loading")
 						table(class="table table-striped table-hover")
 							thead
 								tr
@@ -30,7 +31,8 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 									td {{ exercise.description }}
 									td(class="text-center") {{ exercise.date_updated | date:'dd/MM/yyyy' }}
 									td(class="text-center")
-										i(class="fa fa-star" aria-hidden="true")
+										a(ng-click="favourite(exercise.id, exercise.favourite)")
+											i(class="fa fa-star" aria-hidden="true")
 										span {{ exercise.favourite }}
 									td(class="text-center")
 										button(type="button" class="btn btn-info btn-sm" ng-click="openModal('edit', user)") EDIT 

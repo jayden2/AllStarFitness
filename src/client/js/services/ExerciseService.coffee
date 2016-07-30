@@ -115,6 +115,22 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 			deferred.reject error
 			return
 		deferred.promise
+
+	##FAVOURITE EXERCISE
+	favouriteExercise = (id, favourite, token) ->
+		deferred = $q.defer()
+		$http.put('/api/exercises/' + id + '/favourite/?token=' + token,
+			favourite: favourite).success ((result) ->
+			if result.success == true
+				exerciseSave =
+					success: result.success
+					message: result.message
+				deferred.resolve exerciseSave
+				return
+		), (error) ->
+			deferred.reject error
+			return
+		deferred.promise
 		
 
 	{

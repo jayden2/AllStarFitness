@@ -30,6 +30,21 @@ ExerciseController = ($scope, $filter, $uibModal, LoginService, ExerciseService)
 			array.push $scope.exercises[key]
 		return $filter('filter') array, $scope.search.query
 
+	$scope.favourite = (id, fav) ->
+		if fav == 1
+			console.log fav
+			toFav = 0
+		else
+			console.log fav
+			toFav = 1
+		ExerciseService.favouriteExercise(id, toFav, currentUser.token).then ((result) ->
+				$scope.exercises = result
+				$scope.loading = false
+			), (error) ->
+				console.log error
+				$scope.loading = false
+				return
+
 	$scope.getExercises()
 	return
 

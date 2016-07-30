@@ -84,11 +84,11 @@ module.exports = class Exercise
 				if err
 					return res.status(403).send(
 						success: false
-						message: 'exercise update failed')
+						message: 'exercise favourite update failed')
 				else
 					res.send
 						success: true
-						message: 'exercise updated successfully'
+						message: 'exercise favourite updated successfully'
 				return
 			return
 		return

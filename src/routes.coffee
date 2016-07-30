@@ -66,7 +66,7 @@ module.exports = (router) ->
 		exercise.getSingleExercise req.params.id, res
 
 	#get 1 exercise --SHORT
-	router.get '/api/exercises/:id/short', (req, res) ->
+	router.get '/api/exercises/:id/short/', (req, res) ->
 		exercise.getSingleExerciseShort req.params.id, res
 	
 	#update exercise
@@ -74,7 +74,7 @@ module.exports = (router) ->
 		exercise.updateExercise req.body, req.params.id, res
 
 	#update exercise -- FAVOURITE
-	router.put '/api/exercises/:id/favourite', (req, res) ->
+	router.put '/api/exercises/:id/favourite/', (req, res) ->
 		exercise.updateExerciseFavourite req.body, req.params.id, res
 	
 	#delete exercise
@@ -106,7 +106,7 @@ module.exports = (router) ->
 		workout.updateWorkout req.body, req.params.id, res
 
 	#update workout -- TEMPLATE
-	router.put '/api/workouts/:id/template', (req, res) ->
+	router.put '/api/workouts/:id/template/', (req, res) ->
 		workout.updateWorkoutTemplate req.body, req.params.id, res
 	
 	#delete workout
