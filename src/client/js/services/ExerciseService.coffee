@@ -133,13 +133,13 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 		deferred.promise
 
 	##UPLOAD IMAGE
-	uploadImage = (path, token) ->
-		console.log path
+	uploadImage = (file, token) ->
+		console.log file
 		deferred = $q.defer()
 		$http.post('http://localhost:3000/api/exercises/image/' + '?token=' + token,
-			image: path
-			'Content-Type': undefined,
-			'X-Requested-With': 'XMLHttpRequest').success ((result) ->
+			file: file,
+			transformRequest: angular.identity
+			headers: 'Content-Type': undefined).success ((result) ->
 				console.log result
 				deferred.resolve result
 				return

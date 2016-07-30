@@ -6,6 +6,7 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 	$scope.exercise = exercise
 	$scope.loading = false
 	currentUser = LoginService.getUserInfo()
+	$.cloudinary.config({ cloud_name: "jayden159", api_key: '733379363423251'});
 
 	#title of modal
 	chooseModalType = ->
@@ -44,16 +45,7 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 	
 	#upload image
 	$scope.uploadImage = ->
-		path = $('#trigger').val().replace(/\\/g,"/")
-		if $scope.loading == false
-			$scope.loading = true
-			ExerciseService.uploadImage(path, currentUser.token).then ((result) ->
-				console.log result
-				$scope.loading = false
-			), (error) ->
-				console.log error
-				$scope.loading = false
-				return
+		
 		return
 
 

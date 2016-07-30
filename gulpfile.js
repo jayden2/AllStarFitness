@@ -160,6 +160,7 @@ gulp.task('watch', ['browserSync', 'build'], function() {
 	gulp.watch('./src/client/assets/styles/partials/*.sass', ['sass']);
 	gulp.watch('./src/client/js/**/*.coffee', ['coffee:ng-app']);
 	gulp.watch('./src/server/*.coffee', ['coffee:server']);
+	gulp.watch('./src/server/models/*.coffee', ['coffee:models']);
 	gulp.watch('./src/client/*.pug', ['pug:ng-index']);
 	gulp.watch('./src/client/views/*.pug', ['pug:ng-views']);
 	gulp.watch('./src/client/views/partials/*.pug', ['pug:ng-views']);

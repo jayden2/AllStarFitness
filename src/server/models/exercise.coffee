@@ -60,8 +60,9 @@ module.exports = class Exercise
 			return
 		return
 
-	@uploadImage = (image, res) ->
-		cloudinary.uploader.upload image.image, (result) ->
+	@uploadImage = (req, res) ->
+		console.log req.body.file
+		cloudinary.uploader.upload req.body.file, (result) ->
 			res.send result
 	#update
 	#do connection, update workout data item with id

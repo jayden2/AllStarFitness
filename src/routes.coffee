@@ -59,7 +59,7 @@ module.exports = (router) ->
 
 	#upload image for exercise
 	router.post '/api/exercises/image/', (req, res) ->
-		exercise.uploadImage req.body, res
+		exercise.uploadImage req, res
 
 	#get all exercises
 	router.get '/api/exercises/', (req, res) ->

@@ -16,6 +16,7 @@ div(class="modal-body")
 			input(type="file" id="trigger" onchange="angular.element(this).scope().setFile(this)" accept="image/*")
 			img(ng-src="{{image_source}}")
 			button(type="button" class="btn btn-primary" ng-click="uploadImage()") Upload Image
+			input(name="file" type="file" class="cloudinary-fileupload" data-cloudinary-field="image_id" data-form-data=" ... html-escaped JSON data ... ")
 
 div(class="modal-footer")
 	button(class="btn btn-danger button-delete" type="button" ng-click="delete()" ng-show="buttonDelete") Delete
