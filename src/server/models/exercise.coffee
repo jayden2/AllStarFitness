@@ -1,6 +1,13 @@
 connection = require '../config/connection'
+cloudinary = require('cloudinary')
 
 module.exports = class Exercise
+	#cloud connection
+	cloudinary.config
+		cloud_name: 'jayden159'
+		api_key: '733379363423251'
+		api_secret: 'f-SMXuDHxANZk05ecczlvu1Fc-E'
+
 	#get all exercises
 	#do connection, select all from exercises
 	@getAllExercises = (res) ->
@@ -53,6 +60,9 @@ module.exports = class Exercise
 			return
 		return
 
+	@uploadImage = (image, res) ->
+		cloudinary.uploader.upload image.image, (result) ->
+			res.send result
 	#update
 	#do connection, update workout data item with id
 	@updateExercise = (exercise, id, res) ->

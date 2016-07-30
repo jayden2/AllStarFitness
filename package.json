@@ -10,8 +10,10 @@
   "author": "Jayden Spencer",
   "license": "ISC",
   "dependencies": {
+    "angular-file-upload": "^2.3.4",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.1",
+    "cloudinary": "^1.4.1",
     "express": "^4.13.4",
     "jsonwebtoken": "^7.0.0",
     "method-override": "~2.0.2",

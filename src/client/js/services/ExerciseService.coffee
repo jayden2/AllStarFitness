@@ -3,7 +3,7 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 	##CREATE EXERCISE
 	createExercise = (exercise, token) ->
 		deferred = $q.defer()
-		$http.post('/api/Exercises/' + '?token=' + token,
+		$http.post('/api/exercises/' + '?token=' + token,
 			title: exercise.title
 			description: exercise.description
 			image: exercise.image
@@ -131,6 +131,22 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 			deferred.reject error
 			return
 		deferred.promise
+
+	##UPLOAD IMAGE
+	uploadImage = (path, token) ->
+		console.log path
+		deferred = $q.defer()
+		$http.post('http://localhost:3000/api/exercises/image/' + '?token=' + token,
+			image: path
+			'Content-Type': undefined,
+			'X-Requested-With': 'XMLHttpRequest').success ((result) ->
+				console.log result
+				deferred.resolve result
+				return
+		), (error) ->
+			deferred.reject error
+			return
+		deferred.promise
 		
 
 	{
@@ -139,6 +155,8 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 		getOneExercise: getOneExercise
 		updateExercise: updateExercise
 		deleteExercise: deleteExercise
+		favouriteExercise: favouriteExercise
+		uploadImage: uploadImage
 	}
 
 angular.module('AllStarFitness')

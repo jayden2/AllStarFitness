@@ -4,7 +4,7 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 	//dashboard header
 	include ./partials/dashboard-header.pug
 	//main content
-	//user management list
+	//exercise management list
 	div(class="row")
 		div(class="col-lg-12")
 			rd-widget
@@ -32,8 +32,7 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 									td(class="text-center") {{ exercise.date_updated | date:'dd/MM/yyyy' }}
 									td(class="text-center")
 										a(ng-click="favourite(exercise.id, exercise.favourite)")
-											i(class="fa fa-star" aria-hidden="true")
-										span {{ exercise.favourite }}
+											i(class="fa fa-star fa-2x exercise-star" aria-hidden="true" ng-class="{ faved : exercise.favourite == 1}")
 									td(class="text-center")
-										button(type="button" class="btn btn-info btn-sm" ng-click="openModal('edit', user)") EDIT 
+										button(type="button" class="btn btn-info btn-sm" ng-click="openModal('edit', exercise)") EDIT 
 											i(class="fa fa-pencil-square-o fa-fw" aria-hidden="true")

@@ -8,8 +8,8 @@ ExerciseController = ($scope, $filter, $uibModal, LoginService, ExerciseService)
 	$scope.exercises = {}
 
 	#get all exercises from service to fill table
-	$scope.getExercises = ->
-		if $scope.loading == false
+	$scope.getExercises = (continueLoading) ->
+		if $scope.loading == false || continueLoading == true
 			$scope.loading = true
 			ExerciseService.getAllExercises(currentUser.token).then ((result) ->
 				$scope.exercises = result
@@ -31,21 +31,33 @@ ExerciseController = ($scope, $filter, $uibModal, LoginService, ExerciseService)
 		return $filter('filter') array, $scope.search.query
 
 	$scope.favourite = (id, fav) ->
-		if fav == 1
-			console.log fav
-			toFav = 0
-		else
-			console.log fav
-			toFav = 1
+		$scope.loading = true
+		if fav == 1 then toFav = 0 else	toFav = 1
 		ExerciseService.favouriteExercise(id, toFav, currentUser.token).then ((result) ->
-				$scope.exercises = result
-				$scope.loading = false
-			), (error) ->
-				console.log error
-				$scope.loading = false
-				return
+			$scope.exercises = result
+			$scope.getExercises(true)
+		), (error) ->
+			console.log error
+			$scope.loading = false
+			return
 
-	$scope.getExercises()
+	$scope.openModal = (typeModal, exercise) ->
+		modalInstance = $uibModal.open(
+			animation: true
+			templateUrl: '/js/directives/modal-exercise.html'
+			controller: 'ExerciseModalController'
+			resolve:
+				type: ->
+					typeModal
+				exercise: ->
+					exercise
+		)
+		modalInstance.result.then ((formData) ->
+			if formData == 'postupdel'
+				$scope.getUsers()
+		)
+
+	$scope.getExercises(false)
 	return
 
 angular.module('AllStarFitness')

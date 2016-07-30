@@ -2,6 +2,20 @@ div(class="modal-header modal-header-success")
 	h3 {{ title }}
 div(class="modal-body")
 	form(class="form form-workout-model")
+		div(class="form-group")
+			//Title
+			label(class= "control-label" for="first_name") Exercise Title*
+			input(type="text" class="form-control" id="exercise_title" aria-describedby="basic-addon3" ng-model="exercise.title" placeholder="Enter exercise title..." ng-required="true" required)
+
+			//Description
+			label(class= "control-label" for="first_name") Exercise Description*
+			textarea(type="text" class="form-control" id="exercise_description" aria-describedby="basic-addon3" ng-model="exercise.description" placeholder="Enter exercise description..." ng-required="true" required)
+
+			//Image
+			label(class= "control-label" for="first_name") Exercise Image*
+			input(type="file" id="trigger" onchange="angular.element(this).scope().setFile(this)" accept="image/*")
+			img(ng-src="{{image_source}}")
+			button(type="button" class="btn btn-primary" ng-click="uploadImage()") Upload Image
 
 div(class="modal-footer")
 	button(class="btn btn-danger button-delete" type="button" ng-click="delete()" ng-show="buttonDelete") Delete
