@@ -3,10 +3,15 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 	#ititialise variables
 	$scope.type = type
 	savedExercise = angular.copy(exercise)
-	$scope.exercise = exercise
 	$scope.loading = false
+	$scope.exercise = { }
 	currentUser = LoginService.getUserInfo()
-	$.cloudinary.config({ cloud_name: "jayden159", api_key: '733379363423251'});
+	$.cloudinary.config
+		cloud_name: 'jayden159'
+		api_key: '733379363423251'
+
+	console.log exercise
+
 
 	#title of modal
 	chooseModalType = ->
@@ -14,10 +19,39 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 			$scope.title = "Create Exercise"
 			$scope.buttonSave = "Create Exercise"
 			$scope.buttonDelete = false
+			$scope.exercise.def_rep_start = 1
+			$scope.exercise.def_rep_end = 1
+			$scope.exercise.def_set_start = 1
+			$scope.exercise.def_set_end = 1
 		else
+			$scope.exercise = exercise
 			$scope.title = "Edit Exercise"
 			$scope.buttonSave = "Save Exercise"
 			$scope.buttonDelete = true
+
+	$scope.repStartPlus = ->
+		if parseInt($scope.exercise.def_rep_start, 10) and $scope.exercise.def_rep_start < 100 then $scope.exercise.def_rep_start++
+
+	$scope.repStartMinus = ->
+		if parseInt($scope.exercise.def_rep_start, 10) and $scope.exercise.def_rep_start > 1 then $scope.exercise.def_rep_start--
+
+	$scope.repEndPlus = ->
+		if parseInt($scope.exercise.def_rep_end, 10) and $scope.exercise.def_rep_end < 100 then $scope.exercise.def_rep_end++
+
+	$scope.repEndMinus = ->
+		if parseInt($scope.exercise.def_rep_end, 10) and $scope.exercise.def_rep_end > 1 then $scope.exercise.def_rep_end--
+
+	$scope.setStartPlus = ->
+		if parseInt($scope.exercise.def_set_start, 10) and $scope.exercise.def_set_start < 100 then $scope.exercise.def_set_start++
+
+	$scope.setStartMinus = ->
+		if parseInt($scope.exercise.def_set_start, 10) and $scope.exercise.def_set_start > 1 then $scope.exercise.def_set_start--
+
+	$scope.setEndPlus = ->
+		if parseInt($scope.exercise.def_set_end, 10) and $scope.exercise.def_set_end < 100 then $scope.exercise.def_set_end++
+
+	$scope.setEndMinus = ->
+		if parseInt($scope.exercise.def_set_end, 10) and $scope.exercise.def_set_end > 1 then $scope.exercise.def_set_end--
 
 	#close modal delete
 	$scope.delete = ->
