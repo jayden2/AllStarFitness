@@ -8,17 +8,19 @@ div(class="modal-body")
 			input(type="text" class="form-control" id="exercise_title" aria-describedby="basic-addon3" ng-model="exercise.title" placeholder="Enter exercise title...")
 
 			//Description
-			label(class= "control-label" for="first_name") Exercise Description*
+			label(class= "control-label" for="first_name") Exercise Description
 			textarea(type="text" class="form-control" id="exercise_description" aria-describedby="basic-addon3" ng-model="exercise.description" placeholder="Enter exercise description...")
 
 			//Image
-			label(class= "control-label" for="first_name") Exercise Image*
+			label(class= "control-label" for="first_name") Exercise Image
 			input(type="file" id="trigger" onchange="angular.element(this).scope().setFile(this)" accept="image/*")
-			img(ng-src="{{image_source}}")
-			button(type="button" class="btn btn-primary" ng-click="uploadImage()") Upload Image
-			input(name="file" type="file" class="cloudinary-fileupload" data-cloudinary-field="image_id" data-form-data=" ... html-escaped JSON data ... ")
-
+			img(ng-src="{{exercise.image}}" class="imagePreview" ng-show="exercise.image")
+			img(ng-src="{{image_source}}" class="imagePreview" ng-hide="exercise.image")
+			br
+			button(type="button" class="btn btn-primary uploadButton" ng-click="uploadImage()" ng-show="exercise.image") Upload Image
+			button(type="button" class="btn btn-danger removeImgButton" ng-click="removeImage()" ng-show="exercise.image") Clear Image
 			//reps
+			br
 			label(class= "control-label" for="reps") Reps
 			br
 			//min
@@ -40,29 +42,29 @@ div(class="modal-body")
 					span(class="input-group-btn data-up")
 						button(class="btn btn-default btn-info" data-dir="up" ng-click="repEndPlus()")
 							span(class="glyphicon glyphicon-plus")
-			div(class="row")
-			//sets
-			label(class= "control-label" for="reps") Sets
-			br
-			//min
-			div(class="col-xs-3")
-				div(class="input-group number-spinner")
-					span(class="input-group-btn data-dwn")
-						button(class="btn btn-default btn-info" data-dir="dwn" ng-click="setStartMinus()")
-							span(class="glyphicon glyphicon-minus")
-					input(type="text" class="form-control text-center counters" ng-model="exercise.def_set_start")
-					span(class="input-group-btn data-up")
-						button(class="btn btn-default btn-info" data-dir="up" ng-click="setStartPlus()")
-							span(class="glyphicon glyphicon-plus")
-				//max
-				div(class="input-group number-spinner")
-					span(class="input-group-btn data-dwn")
-						button(class="btn btn-default btn-info" data-dir="dwn" ng-click="setEndMinus()")
-							span(class="glyphicon glyphicon-minus")
-					input(type="text" class="form-control text-center counters" ng-model="exercise.def_set_end")
-					span(class="input-group-btn data-up")
-						button(class="btn btn-default btn-info" data-dir="up" ng-click="setEndPlus()")
-							span(class="glyphicon glyphicon-plus")
+			div(class="row sets-row")
+				//sets
+				label(class= "control-label" for="reps") Sets
+				br
+				//min
+				div(class="col-xs-3")
+					div(class="input-group number-spinner")
+						span(class="input-group-btn data-dwn")
+							button(class="btn btn-default btn-info" data-dir="dwn" ng-click="setStartMinus()")
+								span(class="glyphicon glyphicon-minus")
+						input(type="text" class="form-control text-center counters" ng-model="exercise.def_set_start")
+						span(class="input-group-btn data-up")
+							button(class="btn btn-default btn-info" data-dir="up" ng-click="setStartPlus()")
+								span(class="glyphicon glyphicon-plus")
+					//max
+					div(class="input-group number-spinner")
+						span(class="input-group-btn data-dwn")
+							button(class="btn btn-default btn-info" data-dir="dwn" ng-click="setEndMinus()")
+								span(class="glyphicon glyphicon-minus")
+						input(type="text" class="form-control text-center counters" ng-model="exercise.def_set_end")
+						span(class="input-group-btn data-up")
+							button(class="btn btn-default btn-info" data-dir="up" ng-click="setEndPlus()")
+								span(class="glyphicon glyphicon-plus")
 			div(class="row")
 
 div(class="modal-footer")

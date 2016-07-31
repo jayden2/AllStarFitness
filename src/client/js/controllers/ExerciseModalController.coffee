@@ -10,9 +10,6 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 		cloud_name: 'jayden159'
 		api_key: '733379363423251'
 
-	console.log exercise
-
-
 	#title of modal
 	chooseModalType = ->
 		if type == "create"
@@ -60,8 +57,18 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 
 	#close modal cancel
 	$scope.cancel = ->
-		$scope.exercise.title = savedExercise.title
+		$scope.exercise = savedExercise
 		$uibModalInstance.dismiss('cancel')
+
+	$scope.confirm = ->
+
+		#TODO check input valid
+		
+		if type == "create"
+			$scope.postExercise()
+		else
+			$scope.updateExercise()
+		$uibModalInstance.close('postupdel')
 
 	$scope.setFile = (element) ->
 		$scope.currentFile = element.files[0]
@@ -69,7 +76,7 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 		reader = new FileReader
 
 		reader.onload = (event) ->
-			$scope.image_source = event.target.result
+			$scope.exercise.image = event.target.result
 			$scope.$apply()
 			return
 
@@ -82,6 +89,53 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 		
 		return
 
+	#remove image
+	$scope.removeImage = ->
+		$('#trigger').val('')
+		$scope.exercise.image = null
+		return
+
+	#loading spinner if posts or not...
+	loadingCall = (isLoading) ->
+		loading_circle = "<i class='fa fa-cog fa-spin fa-lg'></i>"
+		loading_text = "loading"
+		if isLoading
+			$scope.buttonSave = ""
+			$('.login-button').append(loading_circle)
+		else
+			$('.fa-cog').remove()
+
+	#post exercise
+	$scope.postExercise = ->
+		if $scope.loading == false
+			$scope.loading = true
+			loadingCall(true)
+			ExerciseService.createExercise($scope.exercise, currentUser.token).then ((result) ->
+				$scope.exercises = result
+				$scope.loading = false
+				loadingCall(false)
+			), (error) ->
+				console.log error
+				$scope.loading = false
+				loadingCall(false)
+				return
+		return
+
+	#update exercise
+	$scope.updateExercise = ->
+		if $scope.loading == false
+			$scope.loading = true
+			loadingCall(true)
+			ExerciseService.updateExercise($scope.exercise, $scope.exercise.id, currentUser.token).then ((result) ->
+				$scope.exercises = result
+				$scope.loading = false
+				loadingCall(false)
+			), (error) ->
+				console.log error
+				$scope.loading = false
+				loadingCall(false)
+				return
+		return
 
 	#delete exercise
 	$scope.deleteExercise = ->

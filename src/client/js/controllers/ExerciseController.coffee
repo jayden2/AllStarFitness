@@ -54,7 +54,7 @@ ExerciseController = ($scope, $filter, $uibModal, LoginService, ExerciseService)
 		)
 		modalInstance.result.then ((formData) ->
 			if formData == 'postupdel'
-				$scope.getUsers()
+				$scope.getExercises(false)
 		)
 
 	$scope.getExercises(false)

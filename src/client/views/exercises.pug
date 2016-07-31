@@ -9,7 +9,7 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 		div(class="col-lg-12")
 			rd-widget
 				rd-widget-header(icon="fa-database" title="Exercises")
-					button(type="button" class="btn btn-info create-button" ng-click="openModal('create', '')") Add Exercise 
+					button(type="button" class="btn btn-info create-button-exercises" ng-click="openModal('create', '')") Add Exercise 
 						i(class="fa fa-plus fa-1x" aria-hidden="true")
 					input(type="text" placeholder="Search Exercise..." class="form-control input-sm" ng-model="search.query")
 				rd-widget-body(classes="large no-padding")
@@ -21,6 +21,7 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 									th(class="text-center") ID
 									th Title
 									th Description
+									th(class="text-center") Image
 									th(class="text-center") Date Updated
 									th(class="text-center") Favourite
 									th(class="text-center") Edit
@@ -29,6 +30,9 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 									td(class="text-center") {{ exercise.id }}
 									td {{ exercise.title }}
 									td {{ exercise.description }}
+									td(class="text-center")
+										i(class="fa fa-check-circle-o fa-2x check-ex" aria-hidden="true" ng-show="exercise.image")
+										i(class="fa fa-times-circle-o fa-2x cross-ex" aria-hidden="true" ng-hide="exercise.image")
 									td(class="text-center") {{ exercise.date_updated | date:'dd/MM/yyyy' }}
 									td(class="text-center")
 										a(ng-click="favourite(exercise.id, exercise.favourite)")
