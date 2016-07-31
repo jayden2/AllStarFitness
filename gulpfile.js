@@ -185,7 +185,7 @@ gulp.task('nodemon', function() {
 //------
 gulp.task('browserSync', ['nodemon'], function() {
 	browserSync.init(null, {
-		proxy: "http://localhost:9000",
+		proxy: "http://localhost:9000/login",
 		browser: ['google chrome'],
 		port: 3000
 	})
