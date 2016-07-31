@@ -32,11 +32,11 @@ angular.module('AllStarFitness').config [
 							$location.path '/login'
 				])
 			##TEST
-			.when('/test',
-				controller: 'DashboardController'
-				templateUrl: 'views/test.html'
-				auth: true
-				)
+			# .when('/test',
+			# 	controller: 'DashboardController'
+			# 	templateUrl: 'views/test.html'
+			# 	auth: true
+			# 	)
 			##DASH USERS
 			.when('/dashboard/users',
 				controller: 'UserController'
