@@ -135,9 +135,13 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 	##UPLOAD IMAGE
 	uploadImage = (file, token) ->
 		console.log file
+		fd = new FormData()
+
+		fd.append('file', file)
+
 		deferred = $q.defer()
 		$http.post('http://localhost:3000/api/exercises/image/' + '?token=' + token,
-			file: file,
+			fd,
 			transformRequest: angular.identity
 			headers: 'Content-Type': undefined).success ((result) ->
 				console.log result

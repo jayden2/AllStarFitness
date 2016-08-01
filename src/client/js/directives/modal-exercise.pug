@@ -15,9 +15,8 @@ div(class="modal-body")
 			label(class= "control-label" for="first_name") Exercise Image
 			input(type="file" id="trigger" onchange="angular.element(this).scope().setFile(this)" accept="image/*")
 			img(ng-src="{{exercise.image}}" class="imagePreview" ng-show="exercise.image")
-			img(ng-src="{{image_source}}" class="imagePreview" ng-hide="exercise.image")
 			br
-			button(type="button" class="btn btn-primary uploadButton" ng-click="uploadImage()" ng-show="exercise.image") Upload Image
+			button(type="button" class="btn btn-primary uploadButton" ng-click="uploadImage(exercise.image)" ng-show="exercise.image") Upload Image
 			button(type="button" class="btn btn-danger removeImgButton" ng-click="removeImage()" ng-show="exercise.image") Clear Image
 			//reps
 			br

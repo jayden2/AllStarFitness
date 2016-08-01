@@ -85,8 +85,20 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 		return
 	
 	#upload image
-	$scope.uploadImage = ->
-		
+	$scope.uploadImage = (img) ->
+		console.log 'upload log'
+		console.log $scope.currentFile
+
+		ExerciseService.uploadImage($scope.currentFile, currentUser.token).then ((result) ->
+			$scope.exercises = result
+			$scope.loading = false
+			loadingCall(false)
+		), (error) ->
+			console.log error
+			$scope.loading = false
+			loadingCall(false)
+			return
+
 		return
 
 	#remove image
