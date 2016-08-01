@@ -44,6 +44,7 @@ gulp.task('coffee:models', function() {
 gulp.task('sass', function() {
 	return gulp.src('./src/client/assets/styles/master.sass')
 		.pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+		.pipe(concat('master.min.css'))
 		.pipe(gulp.dest('./dist/client/assets/styles/'))
 		.pipe(browserSync.reload({
 			stream: true
