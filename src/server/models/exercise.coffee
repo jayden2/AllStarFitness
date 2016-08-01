@@ -1,5 +1,6 @@
 connection = require '../config/connection'
 cloudinary = require('cloudinary')
+
 #cloud connection
 cloudinary.config
 	cloud_name: 'jayden159'
@@ -61,8 +62,9 @@ module.exports = class Exercise
 
 	#file upload
 	@uploadImage = (req, res) ->
-		cloudinary.uploader.upload req.file.path, (result) ->
+		cloudinary.v2.uploader.upload req.file.path, { folder: '/allstarfitness' } , (error, result) ->
 			res.send result
+
 	#update
 	#do connection, update workout data item with id
 	@updateExercise = (exercise, id, res) ->
