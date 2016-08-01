@@ -1,6 +1,9 @@
 user = require './server/models/user'
 exercise = require './server/models/exercise'
 workout = require './server/models/workout'
+multer = require('multer')
+storage = multer.memoryStorage()
+upload = multer(dest: './tmp/')
 
 module.exports = (router) ->
 
@@ -58,7 +61,7 @@ module.exports = (router) ->
 		exercise.createExercise req.body, res
 
 	#upload image for exercise
-	router.post '/api/exercises/image/', (req, res) ->
+	router.post '/api/exercises/image/', upload.single('photo'), (req, res) ->
 		exercise.uploadImage req, res
 
 	#get all exercises

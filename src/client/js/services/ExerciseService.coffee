@@ -133,11 +133,10 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 		deferred.promise
 
 	##UPLOAD IMAGE
-	uploadImage = (file, token) ->
-		console.log file
+	uploadImage = (photo, token) ->
 		fd = new FormData()
 
-		fd.append('file', file)
+		fd.append('photo', photo)
 
 		deferred = $q.defer()
 		$http.post('http://localhost:3000/api/exercises/image/' + '?token=' + token,
