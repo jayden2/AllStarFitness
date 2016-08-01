@@ -62,7 +62,13 @@ module.exports = class Exercise
 
 	#file upload
 	@uploadImage = (req, res) ->
-		cloudinary.v2.uploader.upload req.file.path, { folder: '/allstarfitness' } , (error, result) ->
+		cloudinary.v2.uploader.upload req.file.path, { folder: '/allstarfitness' }, (error, result) ->
+			res.send result
+
+	#delete file
+	@deleteImage = (file, res) ->
+		path = 'allstarfitness/' + file.image
+		cloudinary.uploader.destroy path, (result) ->
 			res.send result
 
 	#update

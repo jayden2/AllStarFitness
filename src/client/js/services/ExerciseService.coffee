@@ -6,7 +6,7 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 		$http.post('/api/exercises/' + '?token=' + token,
 			title: exercise.title
 			description: exercise.description
-			image: ''
+			exercise.image
 			def_set_start: exercise.def_set_start
 			def_set_end: exercise.def_set_end
 			def_rep_start: exercise.def_rep_start
@@ -135,14 +135,26 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 	##UPLOAD IMAGE
 	uploadImage = (photo, token) ->
 		fd = new FormData()
-
 		fd.append('photo', photo)
 
 		deferred = $q.defer()
-		$http.post('http://localhost:3000/api/exercises/image/' + '?token=' + token,
+		$http.post('http://localhost:3000/api/exercises/image/upload/' + '?token=' + token,
 			fd,
 			transformRequest: angular.identity
 			headers: 'Content-Type': undefined).success ((result) ->
+				deferred.resolve result
+				return
+		), (error) ->
+			deferred.reject error
+			return
+		deferred.promise
+
+
+	##DELETE IMAGE
+	deleteImage = (image, token) ->
+		deferred = $q.defer()
+		$http.post('http://localhost:3000/api/exercises/image/delete/' + '?token=' + token,
+			image: image).success ((result) ->
 				deferred.resolve result
 				return
 		), (error) ->
@@ -159,6 +171,7 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 		deleteExercise: deleteExercise
 		favouriteExercise: favouriteExercise
 		uploadImage: uploadImage
+		deleteImage: deleteImage
 	}
 
 angular.module('AllStarFitness')

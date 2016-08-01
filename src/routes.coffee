@@ -61,8 +61,12 @@ module.exports = (router) ->
 		exercise.createExercise req.body, res
 
 	#upload image for exercise
-	router.post '/api/exercises/image/', upload.single('photo'), (req, res) ->
+	router.post '/api/exercises/image/upload/', upload.single('photo'), (req, res) ->
 		exercise.uploadImage req, res
+
+	#upload image for exercise
+	router.post '/api/exercises/image/delete/', (req, res) ->
+		exercise.deleteImage req.body, res
 
 	#get all exercises
 	router.get '/api/exercises/', (req, res) ->

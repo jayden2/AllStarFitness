@@ -7,6 +7,7 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 	$scope.exercise = { }
 	$scope.tempImage = null
 	$scope.currentFile = null
+	$scope.imageUploadMust = false
 	$('#trigger').val('')
 	currentUser = LoginService.getUserInfo()
 
@@ -52,11 +53,35 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 
 	#close modal delete
 	$scope.delete = ->
+
+		#check
+		if $scope.imageUploadMust == true
+			formError("Please remove the uploaded image, before you delete!")
+			return
+
+		if !isNullOrEmptyOrUndefined($scope.exercise.image)
+			$scope.loading = true
+			tempDel = $scope.exercise.image.split("/").pop()
+			tempDel = tempDel.replace(/\.[^/.]+$/, "")
+			ExerciseService.deleteImage(tempDel, currentUser.token).then ((result) ->
+				console.log result
+				$scope.exercise.image = null
+				$scope.loading = false
+				$scope.imageUploadMust = false
+			), (error) ->
+				console.log error
+				$scope.loading = false
+
 		$scope.deleteExercise()
 		$uibModalInstance.close('postupdel')
 
 	#close modal cancel
 	$scope.cancel = ->
+
+		if $scope.imageUploadMust == true
+			formError("Please remove the uploaded image before you cancel")
+			return
+
 		$scope.tempImage = null
 		$scope.currentFile = null
 		$scope.exercise.title = savedExercise.title
@@ -113,6 +138,7 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 			console.log result
 			$scope.currentFile = null
 			$('#trigger').val('')
+			$scope.imageUploadMust = true
 			$scope.exercise.image = result.secure_url
 			$scope.loading = false
 			loadingCall(false)
@@ -130,8 +156,20 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 			$('#trigger').val('')
 			$scope.currentFile = null
 			$scope.tempImage = null
+			$('.imagePreview').attr('src', '')
 		else
-			$scope.exercise.image = null
+			$scope.loading = true
+			tempDel = $scope.exercise.image.split("/").pop()
+			tempDel = tempDel.replace(/\.[^/.]+$/, "")
+			$('.imagePreview').attr('src', '')
+			ExerciseService.deleteImage(tempDel, currentUser.token).then ((result) ->
+				console.log result
+				$scope.exercise.image = null
+				$scope.loading = false
+				$scope.imageUploadMust = false
+			), (error) ->
+				console.log error
+				$scope.loading = false
 		return
 
 	#loading spinner if posts or not...
