@@ -13,11 +13,12 @@ div(class="modal-body")
 
 			//Image
 			label(class= "control-label" for="first_name") Exercise Image
-			input(type="file" id="trigger" onchange="angular.element(this).scope().setFile(this)" name="photo" accept="image/*")
-			img(ng-src="{{exercise.image}}" class="imagePreview" ng-show="exercise.image")
+			input(type="file" id="trigger" onchange="angular.element(this).scope().setFile(this)" name="photo" accept="image/*" ng-disabled="loading")
+			img(ng-src="{{ tempImage }}" class="imagePreview" ng-show="tempImage")
+			img(ng-src="{{ exercise.image }}" class="imagePreview" ng-show="exercise.image" ng-hide="tempImage")
 			br
-			button(type="button" class="btn btn-primary uploadButton" ng-click="uploadImage(exercise.image)" ng-show="exercise.image") Upload Image
-			button(type="button" class="btn btn-danger removeImgButton" ng-click="removeImage()" ng-show="exercise.image") Clear Image
+			button(type="button" class="btn btn-primary uploadButton" ng-click="uploadImage(exercise.image)" ng-show="currentFile" ng-disabled="loading") Upload Image
+			button(type="button" class="btn btn-danger removeImgButton" ng-click="removeImage()" ng-show="exercise.image || currentFile" ng-disabled="loading") Clear Image
 			//reps
 			br
 			label(class= "control-label" for="reps") Reps
@@ -67,6 +68,6 @@ div(class="modal-body")
 			div(class="row")
 
 div(class="modal-footer")
-	button(class="btn btn-danger button-delete" type="button" ng-click="delete()" ng-show="buttonDelete") Delete
-	button(class="btn btn-primary btn-confirm" type="submit" ng-click="confirm()") {{ buttonSave }}
-	button(class="btn btn-warning btn-cancel" type="button" ng-click="cancel()") Cancel
+	button(class="btn btn-danger button-delete" type="button" ng-click="delete()" ng-show="buttonDelete" ng-disabled="loading") Delete
+	button(class="btn btn-primary btn-confirm" type="submit" ng-click="confirm()" ng-disabled="loading") {{ buttonSave }}
+	button(class="btn btn-warning btn-cancel" type="button" ng-click="cancel()" ng-disabled="loading") Cancel

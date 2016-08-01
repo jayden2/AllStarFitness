@@ -5,10 +5,10 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 	savedExercise = angular.copy(exercise)
 	$scope.loading = false
 	$scope.exercise = { }
+	$scope.tempImage = null
+	$scope.currentFile = null
+	$('#trigger').val('')
 	currentUser = LoginService.getUserInfo()
-	$.cloudinary.config
-		cloud_name: 'jayden159'
-		api_key: '733379363423251'
 
 	#title of modal
 	chooseModalType = ->
@@ -57,12 +57,32 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 
 	#close modal cancel
 	$scope.cancel = ->
-		$scope.exercise = savedExercise
+		$scope.tempImage = null
+		$scope.currentFile = null
+		$scope.exercise.title = savedExercise.title
+		$scope.exercise.image = savedExercise.image
+		$scope.exercise.description = savedExercise.description
+		$scope.exercise.def_rep_start = savedExercise.def_rep_start
+		$scope.exercise.def_rep_end = savedExercise.def_rep_end
+		$scope.exercise.def_set_start = savedExercise.def_set_start
+		$scope.exercise.def_set_end = savedExercise.def_set_end
 		$uibModalInstance.dismiss('cancel')
 
 	$scope.confirm = ->
+		
+		if isNullOrEmptyOrUndefined($scope.exercise.title)
+			formError("Title is empty")
+			return
 
-		#TODO check input valid
+		if isNullOrEmptyOrUndefined($scope.exercise.image)
+			$scope.exercise.image = ""
+
+		if isNullOrEmptyOrUndefined($scope.exercise.description)
+			$scope.exercise.description = ""
+
+		if !isNullOrEmptyOrUndefined($scope.currentFile)
+			formError("You have selected an image but have not uploaded it")
+			return
 		
 		if type == "create"
 			$scope.postExercise()
@@ -70,13 +90,13 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 			$scope.updateExercise()
 		$uibModalInstance.close('postupdel')
 
+	#browse set fill
 	$scope.setFile = (element) ->
 		$scope.currentFile = element.files[0]
-		console.log $scope.currentFile
 		reader = new FileReader
 
 		reader.onload = (event) ->
-			$scope.exercise.image = event.target.result
+			$scope.tempImage = event.target.result
 			$scope.$apply()
 			return
 
@@ -86,11 +106,14 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 	
 	#upload image
 	$scope.uploadImage = (img) ->
-		console.log 'upload log'
-		console.log $scope.currentFile
-
+		$scope.loading = true
+		$scope.tempImage = null
+		$scope.exercise.image = null
 		ExerciseService.uploadImage($scope.currentFile, currentUser.token).then ((result) ->
-			$scope.exercises = result
+			console.log result
+			$scope.currentFile = null
+			$('#trigger').val('')
+			$scope.exercise.image = result.secure_url
 			$scope.loading = false
 			loadingCall(false)
 		), (error) ->
@@ -103,8 +126,12 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 
 	#remove image
 	$scope.removeImage = ->
-		$('#trigger').val('')
-		$scope.exercise.image = null
+		if !isNullOrEmptyOrUndefined($scope.currentFile)
+			$('#trigger').val('')
+			$scope.currentFile = null
+			$scope.tempImage = null
+		else
+			$scope.exercise.image = null
 		return
 
 	#loading spinner if posts or not...
@@ -116,6 +143,16 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 			$('.login-button').append(loading_circle)
 		else
 			$('.fa-cog').remove()
+
+	#display error on form if there is an error
+	formError = (errorText) ->
+		$('.alert').remove()
+		error_message = "<div class='alert alert-danger alert-dismissible' role='alert'>" + errorText + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>"
+		$('form').prepend(error_message)
+
+	#validate form
+	isNullOrEmptyOrUndefined = (value) ->
+		!value
 
 	#post exercise
 	$scope.postExercise = ->

@@ -143,7 +143,6 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 			fd,
 			transformRequest: angular.identity
 			headers: 'Content-Type': undefined).success ((result) ->
-				console.log result
 				deferred.resolve result
 				return
 		), (error) ->
