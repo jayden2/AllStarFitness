@@ -6,7 +6,7 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 		$http.post('/api/exercises/' + '?token=' + token,
 			title: exercise.title
 			description: exercise.description
-			exercise.image
+			image: exercise.image
 			def_set_start: exercise.def_set_start
 			def_set_end: exercise.def_set_end
 			def_rep_start: exercise.def_rep_start
