@@ -21,7 +21,7 @@ WorkoutController = ($scope, $filter, $uibModal, LoginService, WorkoutService) -
 		return
 
 	#search and filter workouts from search
-	$scope.filteredUsers = ->
+	$scope.filteredWorkouts = ->
 		$scope.resultAmount = false
 		array = []
 		for key of $scope.workouts
