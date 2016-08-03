@@ -47,14 +47,7 @@ WorkoutService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 		workoutSave = {}
 		$http.get('/api/workouts/' + id + '?token=' + token).success ((result) ->
 			if result
-				workoutSave =
-					id: result.id
-					title: result.title
-					collection: result.collection
-					user_id: result.user_id
-					template: result.template
-					date_created: result.date_created
-					date_updated: result.date_updated
+				workoutSave = result
 				deferred.resolve workoutSave
 				return
 			else
@@ -102,6 +95,22 @@ WorkoutService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 				deferred.reject error
 				return
 			deferred.promise
+
+		##TEMPLATE WORKOUT
+		templateWorkout = (id, template, token) ->
+			deferred = $q.defer()
+			$http.put('/api/workouts/' + id + '/template/?token=' + token,
+				template: template).success ((result) ->
+				if result.success == true
+					workoutSave =
+						success: result.success
+						message: result.message
+					deferred.resolve workoutSave
+					return
+			), (error) ->
+				deferred.reject error
+				return
+			deferred.promise
 		
 
 	{
@@ -110,6 +119,7 @@ WorkoutService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 		getOneWorkout: getOneWorkout
 		updateWorkout: updateWorkout
 		deleteWorkout: deleteWorkout
+		templateWorkout: templateWorkout
 	}
 
 angular.module('AllStarFitness')

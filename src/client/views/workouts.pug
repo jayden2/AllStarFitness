@@ -27,7 +27,7 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 									td(class="text-center") {{ workout.id }}
 									td {{ workout.title }}
 									td(class="text-center") {{ workout.collection }}
-									td(class="text-center") {{ workout.user_id }}
+									td(class="text-center") {{ workout.user_id }} {{ workout.first_name }} {{ workout.last_name }}
 									td(class="text-center") {{ workout.date_updated | date:'dd/MM/yyyy' }}
 									td(class="text-center")
 										span {{ workout.template }}
