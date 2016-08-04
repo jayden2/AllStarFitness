@@ -31,11 +31,19 @@ i.fa.fa-star.fa-2x.exercise-star
 
 .exercise-star
 	cursor: pointer
-	color: #d6ceac
+	color: $star-fade
 .exercise-star.faved
-	color: #f0d233
+	color: $star-colour
 .exercise-star:hover
-	color: darken(#f0d233, 10%)
+	color: darken($star-colour, 10%)
+
+.workout-template
+	cursor: pointer
+	color: lighten(grey, 25%)
+.workout-template.tempd
+	color: $primary-colour
+.workout-template:hover
+	color: darken($primary-colour, 5%)
 
 .form-workout-model img
 	width: 50%
