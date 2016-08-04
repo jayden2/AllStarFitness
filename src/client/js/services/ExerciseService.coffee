@@ -138,7 +138,7 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 		fd.append('photo', photo)
 
 		deferred = $q.defer()
-		$http.post('http://localhost:3000/api/exercises/image/upload/' + '?token=' + token,
+		$http.post('/api/exercises/image/upload/' + '?token=' + token,
 			fd,
 			transformRequest: angular.identity
 			headers: 'Content-Type': undefined).success ((result) ->
@@ -153,7 +153,7 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 	##DELETE IMAGE
 	deleteImage = (image, token) ->
 		deferred = $q.defer()
-		$http.post('http://localhost:3000/api/exercises/image/delete/' + '?token=' + token,
+		$http.post('/api/exercises/image/delete/' + '?token=' + token,
 			image: image).success ((result) ->
 				deferred.resolve result
 				return
