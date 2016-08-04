@@ -45,7 +45,7 @@ WorkoutService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 	getOneWorkout = (id, token) ->
 		deferred = $q.defer()
 		workoutSave = {}
-		$http.get('/api/workouts/' + id + '?token=' + token).success ((result) ->
+		$http.get('/api/workouts/' + id + '/?token=' + token).success ((result) ->
 			if result
 				workoutSave = result
 				deferred.resolve workoutSave

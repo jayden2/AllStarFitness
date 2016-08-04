@@ -1,4 +1,4 @@
-WorkoutController = ($scope, $filter, $uibModal, LoginService, WorkoutService) ->
+WorkoutController = ($scope, $filter, $location, LoginService, WorkoutService) ->
 
 	#define workouts
 	$scope.loading = false
@@ -7,7 +7,7 @@ WorkoutController = ($scope, $filter, $uibModal, LoginService, WorkoutService) -
 	currentUser = LoginService.getUserInfo()
 	$scope.workouts = {}
 
-	#get all users from service to fill table
+	#get all workout from service to fill table
 	$scope.getWorkouts = (continueLoading) ->
 		if $scope.loading == false || continueLoading == true
 			$scope.loading = true
@@ -42,6 +42,17 @@ WorkoutController = ($scope, $filter, $uibModal, LoginService, WorkoutService) -
 			$scope.loading = false
 			return
 
+	$scope.countCollection = (collection) ->
+		return numOf = collection.split(/,/).length
+
+	#create edit location path -- edit with id
+	$scope.createEditWorkout = (type, workout) ->
+		if type == 'create'
+			$location.path '/dashboard/workouts/create/'
+		else
+			$location.path '/dashboard/workouts/edit/' + workout.id
+		return
+
 	$scope.getWorkouts(false)
 	return
 
@@ -49,7 +60,7 @@ angular.module('AllStarFitness')
 	.controller 'WorkoutController', [
 		'$scope'
 		'$filter'
-		'$uibModal'
+		'$location'
 		'LoginService'
 		'WorkoutService'
 		WorkoutController

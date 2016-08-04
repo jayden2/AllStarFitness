@@ -1,11 +1,10 @@
-WorkoutCreateController = ($scope, $filter, $uibModal, LoginService, WorkoutService) ->
+WorkoutCreateController = ($scope, $filter, LoginService, WorkoutService, ExerciseService) ->
 	return
 
 angular.module('AllStarFitness')
 	.controller 'WorkoutCreateController', [
 		'$scope'
 		'$filter'
-		'$uibModal'
 		'LoginService'
 		'WorkoutService'
 		'ExerciseService'

@@ -94,7 +94,7 @@ angular.module('AllStarFitness').config [
 			##DASH WORKOUTS --CREATE
 			.when('/dashboard/workouts/create',
 				controller: 'WorkoutCreateController'
-				templateUrl: 'views/workouts-create.html'
+				templateUrl: 'views/workout-create.html'
 				resolve: auth: [
 					'$q'
 					'$location'
@@ -110,9 +110,9 @@ angular.module('AllStarFitness').config [
 							$location.path '/login'
 				])
 			##DASH WORKOUTS --EDIT
-			.when('/dashboard/workouts/edit',
+			.when('/dashboard/workouts/edit/:id',
 				controller: 'WorkoutEditController'
-				templateUrl: 'views/workouts-edit.html'
+				templateUrl: 'views/workout-edit.html'
 				resolve: auth: [
 					'$q'
 					'$location'

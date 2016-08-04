@@ -46,6 +46,30 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 			return
 		deferred.promise
 
+	#GET MULTIPLE EXERCISES
+	getMultipleExercises = (selection, token) ->
+		deferred = $q.defer()
+		exerciseSave = {}
+		#push into object array
+		$http.get('/api/exercises/multiple/' + '?token=' + token,
+			headers:
+				'selection': selection).success ((result) ->
+			if result
+				exerciseSave = result
+				deferred.resolve exerciseSave
+				return
+			else
+				exerciseSave =
+					success: false
+					message: 'Exercises not found!'
+				deferred.resolve exerciseSave
+				return
+		), (error) ->
+			console.log error
+			deferred.reject error
+			return
+		deferred.promise
+
 	#GET ONE EXERCISES
 	getOneExercise = (id, token) ->
 		deferred = $q.defer()
@@ -166,6 +190,7 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 	{
 		createExercise: createExercise
 		getAllExercises: getAllExercises
+		getMultipleExercises: getMultipleExercises
 		getOneExercise: getOneExercise
 		updateExercise: updateExercise
 		deleteExercise: deleteExercise

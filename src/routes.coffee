@@ -60,6 +60,10 @@ module.exports = (router) ->
 	router.post '/api/exercises/', (req, res) ->
 		exercise.createExercise req.body, res
 
+	#get multiple exercises based on collection
+	router.get '/api/exercises/multiple/', (req, res) ->
+		exercise.getMultipleExercises req.headers, res
+
 	#upload image for exercise
 	router.post '/api/exercises/image/upload/', upload.single('photo'), (req, res) ->
 		exercise.uploadImage req, res

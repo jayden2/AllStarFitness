@@ -30,6 +30,17 @@ module.exports = class Exercise
 			return
 		return
 
+	#get multiple exercises based on array
+	#do connection, select one exercise from database
+	@getMultipleExercises = (collection, res) ->
+		connection.acquire (err, con) ->
+			con.query 'SELECT * FROM exercises WHERE id IN (' + collection.selection + ')', (err, result) ->
+				con.release()
+				res.send result
+				return
+			return
+		return
+
 	#get one exercise --SHORT
 	#do connection, select one exercise from database
 	@getSingleExerciseShort = (id, res) ->
