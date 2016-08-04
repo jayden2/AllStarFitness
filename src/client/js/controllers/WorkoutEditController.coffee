@@ -11,7 +11,7 @@ WorkoutEditController = ($scope, $filter, $routeParams, LoginService, WorkoutSer
 		if $scope.loading == false
 			$scope.loading = true
 			WorkoutService.getOneWorkout($routeParams.id, currentUser.token).then ((result) ->
-				$scope.workout = result
+				$scope.workout = result[0]
 				$scope.loading = false
 				console.log $scope.workout
 				getWorkoutCollection()
@@ -24,8 +24,8 @@ WorkoutEditController = ($scope, $filter, $routeParams, LoginService, WorkoutSer
 	getWorkoutCollection = ->
 		if $scope.loading == false
 			$scope.loading = true
-			console.log $scope.workout[0].collection
-			ExerciseService.getMultipleExercises($scope.workout[0].collection, currentUser.token).then ((result) ->
+			console.log $scope.workout.collection
+			ExerciseService.getMultipleExercises($scope.workout.collection, currentUser.token).then ((result) ->
 				$scope.collection = result
 				$scope.loading = false
 				console.log $scope.collection
