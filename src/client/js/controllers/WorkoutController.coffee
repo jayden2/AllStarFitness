@@ -11,7 +11,7 @@ WorkoutController = ($scope, $filter, $uibModal, LoginService, WorkoutService) -
 	$scope.getWorkouts = ->
 		if $scope.loading == false
 			$scope.loading = true
-			UserService.getAllWorkouts(currentUser.token).then ((result) ->
+			WorkoutService.getAllWorkouts(currentUser.token).then ((result) ->
 				$scope.workouts = result
 				$scope.loading = false
 			), (error) ->
@@ -36,7 +36,6 @@ WorkoutController = ($scope, $filter, $uibModal, LoginService, WorkoutService) -
 
 angular.module('AllStarFitness')
 	.controller 'WorkoutController', [
-		'$scope'
 		'$scope'
 		'$filter'
 		'$uibModal'

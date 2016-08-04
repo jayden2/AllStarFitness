@@ -5,7 +5,7 @@ module.exports = class Workout
 	#do connection, select all from workouts
 	@getAllWorkouts = (res) ->
 		connection.acquire (err, con) ->
-			con.query 'SELECT workouts.*, users.first_name, users.last_name FROM workouts LEFT JOIN users on users.id = workouts.user_id', (err, result) ->
+			con.query 'SELECT workouts.*, users.first_name, users.last_name, users.gender FROM workouts LEFT JOIN users on users.id = workouts.user_id', (err, result) ->
 				con.release()
 				res.send result
 				return
@@ -16,7 +16,7 @@ module.exports = class Workout
 	#do connection, select one workout from database
 	@getSingleWorkout = (id, res) ->
 		connection.acquire (err, con) ->
-			con.query 'SELECT workouts.*, users.first_name, users.last_name FROM workouts LEFT JOIN users on users.id = workouts.user_id WHERE id = ?', [id], (err, result) ->
+			con.query 'SELECT workouts.*, users.first_name, users.last_name, users.gender FROM workouts LEFT JOIN users on users.id = workouts.user_id WHERE id = ?', [id], (err, result) ->
 				con.release()
 				res.send result
 				return

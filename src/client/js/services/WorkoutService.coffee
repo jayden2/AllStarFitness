@@ -81,36 +81,36 @@ WorkoutService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 			return
 		deferred.promise
 
-		##DELETE WORKOUT
-		deleteWorkout = (id, token) ->
-			deferred = $q.defer()
-			$http.delete('/api/workouts/' + id + '?token=' + token).success ((result) ->
-				if result.success == true
-					workoutSave =
-						success: result.success
-						message: result.message
-					deferred.resolve workoutSave
-					return
-			), (error) ->
-				deferred.reject error
+	##DELETE WORKOUT
+	deleteWorkout = (id, token) ->
+		deferred = $q.defer()
+		$http.delete('/api/workouts/' + id + '?token=' + token).success ((result) ->
+			if result.success == true
+				workoutSave =
+					success: result.success
+					message: result.message
+				deferred.resolve workoutSave
 				return
-			deferred.promise
+		), (error) ->
+			deferred.reject error
+			return
+		deferred.promise
 
-		##TEMPLATE WORKOUT
-		templateWorkout = (id, template, token) ->
-			deferred = $q.defer()
-			$http.put('/api/workouts/' + id + '/template/?token=' + token,
-				template: template).success ((result) ->
-				if result.success == true
-					workoutSave =
-						success: result.success
-						message: result.message
-					deferred.resolve workoutSave
-					return
-			), (error) ->
-				deferred.reject error
+	##TEMPLATE WORKOUT
+	templateWorkout = (id, template, token) ->
+		deferred = $q.defer()
+		$http.put('/api/workouts/' + id + '/template/?token=' + token,
+			template: template).success ((result) ->
+			if result.success == true
+				workoutSave =
+					success: result.success
+					message: result.message
+				deferred.resolve workoutSave
 				return
-			deferred.promise
+		), (error) ->
+			deferred.reject error
+			return
+		deferred.promise
 		
 
 	{
