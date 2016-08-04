@@ -91,6 +91,42 @@ angular.module('AllStarFitness').config [
 							$q.reject authenticated: false
 							$location.path '/login'
 				])
+			##DASH WORKOUTS --CREATE
+			.when('/dashboard/workouts/create',
+				controller: 'WorkoutCreateController'
+				templateUrl: 'views/workouts-create.html'
+				resolve: auth: [
+					'$q'
+					'$location'
+					'LoginService'
+					
+					($q, $location, LoginService) ->
+						#get user details!
+						userAuth = LoginService.getUserInfo()
+						if userAuth
+							$q.when userAuth
+						else
+							$q.reject authenticated: false
+							$location.path '/login'
+				])
+			##DASH WORKOUTS --EDIT
+			.when('/dashboard/workouts/edit',
+				controller: 'WorkoutEditController'
+				templateUrl: 'views/workouts-edit.html'
+				resolve: auth: [
+					'$q'
+					'$location'
+					'LoginService'
+					
+					($q, $location, LoginService) ->
+						#get user details!
+						userAuth = LoginService.getUserInfo()
+						if userAuth
+							$q.when userAuth
+						else
+							$q.reject authenticated: false
+							$location.path '/login'
+				])
 			.otherwise redirectTo: '/'
 		
 		#this is to remove the hash(#) using the history api
