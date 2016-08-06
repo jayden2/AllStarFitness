@@ -133,11 +133,17 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 	$scope.uploadImage = (img) ->
 		$scope.loading = true
 		$scope.tempImage = null
-		$scope.exercise.image = null
-		ExerciseService.uploadImage($scope.currentFile, currentUser.token).then ((result) ->
-			console.log result
+
+		ExerciseService.uploadImage($scope.currentFile, currentUser.token).then ((result) ->			
+
 			$scope.currentFile = null
 			$('#trigger').val('')
+			
+
+			#if image already exists remove it
+			if !isNullOrEmptyOrUndefined($scope.exercise.image)
+				$scope.removeImage('newUpload')
+
 			$scope.imageUploadMust = true
 			$scope.exercise.image = result.secure_url
 			$scope.loading = false
@@ -151,7 +157,7 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 		return
 
 	#remove image
-	$scope.removeImage = ->
+	$scope.removeImage = (from) ->
 		if !isNullOrEmptyOrUndefined($scope.currentFile)
 			$('#trigger').val('')
 			$scope.currentFile = null
@@ -161,12 +167,12 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 			$scope.loading = true
 			tempDel = $scope.exercise.image.split("/").pop()
 			tempDel = tempDel.replace(/\.[^/.]+$/, "")
-			$('.imagePreview').attr('src', '')
 			ExerciseService.deleteImage(tempDel, currentUser.token).then ((result) ->
 				console.log result
-				$scope.exercise.image = null
-				$scope.loading = false
-				$scope.imageUploadMust = false
+				if from == 'deletion'
+					$scope.exercise.image = null
+					$scope.loading = false
+					$scope.imageUploadMust = false
 			), (error) ->
 				console.log error
 				$scope.loading = false
