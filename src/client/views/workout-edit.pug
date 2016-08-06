@@ -5,10 +5,24 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 	include ./partials/dashboard-header.pug
 	//main content
 	//user management list
-	div(class="row")
+
+	div(class="row tool-header")
+		div(class="col-lg-6 add-exercise")
+				h4 Add Exercise
+				input(type="text" ng-model="selected" uib-typeahead="exercise as exercise.title for exercise in exercises | filter:$viewValue | limitTo:8" class="form-control" placeholder="Search by exercise title..." ng-hide="loading")
+				button(class="btn btn-confirm" ng-click="addExercise(selected)" ng-show="selected.id") Add {{ selected.title }} 
+					i(class="fa fa-plus" aria-hidden="true")
+
+		div(class=" col-lg-6 savepub-exercise")
+			h4 Save and Publish
+			button(class="btn btn-warning" ng-click="pubishPDF()" ng-show="collection") Publish to PDF
+			button(class="btn btn-confirm" ng-click="saveWorkout()" ng-show="workoutChanged") Save Workout
+
+	div(class="row exercise-table")
 		div(class="col-lg-12")
 			div(class="title-box")
 				h1(class="title-header") {{ workout.title }}
+			div(class="title-box")
 				h2(class="sub-header") {{ workout.first_name }} {{ workout.last_name }}
 
 			div(class="workout-box")
@@ -20,17 +34,21 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 				li(ng-repeat="item in collection" class="exercise-item")
 					div(class="row")
 						h3(class="col-xs-7 item-title") {{ item.title }}
-						div(class="col-xs-5")
-							div(class="box-set")
+						ul(class="col-xs-5 box-nums")
+							li(class="box-set")
 								span(class="item-set-start") {{ item.def_set_start }}
 								span(ng-hide="item.def_set_end == 1")  - 
 								span(class="item-set-end" ng-hide="item.def_set_end == 1") {{ item.def_set_end }}
+								br
+								span sets
 							
-							div(class="box-rep")
+							li(class="box-rep")
 								span(class="item-rep-start") {{ item.def_rep_start }}
 								span(ng-hide="item.def_rep_end == 1")  - 
 								span(class="item-rep-end" ng-hide="item.def_rep_end == 1") {{ item.def_rep_end }}
+								br
+								span reps
 
-						div(class="row")
-							img(class="col-xs-7 item-image" ng-src="{{ item.image }}")
-							p(class="col-xs-4 item-description") {{ item.description }}
+					div(class="row")
+						img(class="col-xs-8 item-image" ng-src="{{ item.image }}")
+						p(class="col-xs-4 item-description") {{ item.description }}
