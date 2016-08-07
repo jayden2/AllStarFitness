@@ -93,6 +93,26 @@ module.exports = class Workout
 			return
 		return
 
+	#update
+	#do connection, update workout collection data based on id
+	@updateWorkoutCollection = (workout, id, res) ->
+		connection.acquire (err, con) ->
+			con.query 'UPDATE workouts SET collection = ? WHERE id = ?',
+			[workout.collection, id], (err, result) ->
+				con.release()
+				#error check if successful query or not
+				if err
+					return res.status(403).send(
+						success: false
+						message: 'workout update failed')
+				else
+					res.send
+						success: true
+						message: 'workout updated successfully'
+				return
+			return
+		return
+
 	#delete
 	#do connection, delete workout data with id
 	@deleteWorkout = (id, res) ->

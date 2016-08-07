@@ -123,6 +123,10 @@ module.exports = (router) ->
 	#update workout -- TEMPLATE
 	router.put '/api/workouts/:id/template/', (req, res) ->
 		workout.updateWorkoutTemplate req.body, req.params.id, res
+
+	#update workout -- COLLECTION
+	router.put '/api/workouts/:id/collection/', (req, res) ->
+		workout.updateWorkoutCollection req.body, req.params.id, res
 	
 	#delete workout
 	router.delete '/api/workouts/:id/', (req, res) ->

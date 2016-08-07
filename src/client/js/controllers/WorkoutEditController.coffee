@@ -35,9 +35,10 @@ WorkoutEditController = ($scope, $filter, $routeParams, LoginService, WorkoutSer
 			if commaRound then collectionHolder += ", " + value.id else collectionHolder += value.id
 			commaRound = true
 
-		WorkoutService.templateWorkout($scope.workout.id, collectionHolder, currentUser.token).then ((result) ->
+		WorkoutService.updateCollectionWorkout($scope.workout.id, collectionHolder, currentUser.token).then ((result) ->
 				console.log result
 				$scope.loading = false
+				$scope.workoutChanged = false
 			), (error) ->
 				console.log error
 				$scope.loading = false
