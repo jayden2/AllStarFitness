@@ -28,6 +28,14 @@ WorkoutEditController = ($scope, $filter, $routeParams, LoginService, WorkoutSer
 	$scope.saveWorkout = ->
 		console.log 'saving workout'
 		console.log $scope.collection
+		collectionHolder = ""
+		commaRound = false
+
+		angular.forEach $scope.collection, (value, key) ->
+			if commaRound then collectionHolder += ", " + value.id else collectionHolder += value.id
+			commaRound = true
+
+		console.log collectionHolder
 		return
 
 	#get all exercises to fill dropdown selection

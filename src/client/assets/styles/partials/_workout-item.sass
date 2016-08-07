@@ -1,6 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto)
 .exercise-table
 	font-family: 'Roboto', sans-serif
+	max-width: 1050px
+
+	h3
+		text-align: left
 
 .title-box
 	background-color: darken($fitness-style-guy, 3%)
@@ -24,10 +28,22 @@
 
 	ul
 		list-style-type: none
-		padding-top: 15px
+		padding-left: 0px
+		-moz-column-count: 2
+		-moz-column-gap: 60px
+		-webkit-column-count: 2
+		-webkit-column-gap: 60px
+		column-count: 2
+		column-gap: 60px
 	li
 		font-weight: bold
 		font-size: 1.2em
+		padding-top: 2px
+	li:nth-child(odd)
+		margin-top: 10px
+
+	p
+		text-align: center
 
 .exercise-list
 	list-style-type: none
