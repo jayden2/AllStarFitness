@@ -35,7 +35,14 @@ WorkoutEditController = ($scope, $filter, $routeParams, LoginService, WorkoutSer
 			if commaRound then collectionHolder += ", " + value.id else collectionHolder += value.id
 			commaRound = true
 
-		console.log collectionHolder
+		WorkoutService.templateWorkout($scope.workout.id, collectionHolder, currentUser.token).then ((result) ->
+				console.log result
+				$scope.loading = false
+			), (error) ->
+				console.log error
+				$scope.loading = false
+				return
+		
 		return
 
 	#get all exercises to fill dropdown selection
