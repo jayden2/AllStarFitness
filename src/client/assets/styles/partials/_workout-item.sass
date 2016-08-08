@@ -29,6 +29,7 @@
 	ul
 		list-style-type: none
 		padding-left: 0px
+		margin-top: 10px
 		-moz-column-count: 2
 		-moz-column-gap: 60px
 		-webkit-column-count: 2
@@ -39,11 +40,17 @@
 		font-weight: bold
 		font-size: 1.2em
 		padding-top: 2px
-	li:nth-child(odd)
-		margin-top: 10px
-
 	p
 		text-align: center
+	
+.workout-box-odd
+	li:nth-child(even)
+		margin-top: 15px
+	li:nth-child(odd)
+		margin-top: -10px
+
+.workout-box-even
+	
 
 .exercise-list
 	list-style-type: none

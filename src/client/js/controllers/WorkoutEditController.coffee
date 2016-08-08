@@ -24,7 +24,9 @@ WorkoutEditController = ($scope, $filter, $routeParams, LoginService, WorkoutSer
 				$scope.collection.push(selected)
 				$scope.selected = null
 				$('.add-exercise > input').val('')
+				checkCollectionLength()
 			return
+		return
 
 	#remove exercise from collection
 	$scope.removeExercise = (selected) ->
@@ -33,13 +35,15 @@ WorkoutEditController = ($scope, $filter, $routeParams, LoginService, WorkoutSer
 				$scope.collection.splice(key, 1)
 				$scope.workoutChanged = true
 
+		checkCollectionLength()
+		return
+
 
 	$scope.saveWorkout = ->
-		console.log 'saving workout'
-		console.log $scope.collection
 		collectionHolder = ""
 		commaRound = false
 
+		#check if there if length in collection so that it iterates over something that exists
 		if $scope.collection.length
 			angular.forEach $scope.collection, (value, key) ->
 				if commaRound then collectionHolder += ", " + value.id else collectionHolder += value.id
@@ -89,16 +93,23 @@ WorkoutEditController = ($scope, $filter, $routeParams, LoginService, WorkoutSer
 			$scope.loading = true
 			ExerciseService.getMultipleExercises($scope.workout.collection, currentUser.token).then ((result) ->
 				$scope.collection = result
+				checkCollectionLength()
 				$scope.loading = false
-				console.log $scope.collection
 			), (error) ->
 				console.log error
 				$scope.loading = false
 				return
 		return
 
-	$scope.$watch 'collection', ->
-		console.log 'edited'
+	#adjust styles in exercise title list
+	checkCollectionLength = ->
+		if Object.keys($scope.collection).length % 2 == 0
+			$('.workout-box').removeClass('workout-box-odd')
+			$('.workout-box').addClass('workout-box-even')
+		else
+			$('.workout-box').removeClass('workout-box-even')
+			$('.workout-box').addClass('workout-box-odd')
+		return
 
 	#push error or success
 	errOrSaveResult = (type, message) ->
