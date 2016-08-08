@@ -11,7 +11,6 @@ WorkoutEditController = ($scope, $filter, $routeParams, LoginService, WorkoutSer
 	$scope.sortableOptions =
 		update: (e, ui) ->
 			$scope.workoutChanged = true
-			console.log $scope.collection
 		axis: 'y'
 
 	#push selected exercise to collection
