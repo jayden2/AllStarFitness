@@ -51,7 +51,6 @@ WorkoutEditController = ($scope, $filter, $routeParams, LoginService, WorkoutSer
 		#check if there if length in collection so that it iterates over something that exists
 		if $scope.collection.length
 			angular.forEach $scope.collection, (value, key) ->
-				console.log value.id + " " + value.title
 				if commaRound then collectionHolder += ", " + value.id else collectionHolder += value.id
 				commaRound = true
 		else
@@ -114,8 +113,6 @@ WorkoutEditController = ($scope, $filter, $routeParams, LoginService, WorkoutSer
 		while i < Object.keys(unsortedcollection).length
 			angular.forEach unsortedcollection, (value, key) ->
 				if value.id.toString() == collectionIds[i].toString()
-					console.log "found"
-					console.log value
 					$scope.collection.push(value)
 					return
 			i++
