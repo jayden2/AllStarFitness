@@ -52,3 +52,5 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 					div(class="row")
 						img(class="col-xs-8 item-image" ng-src="{{ item.image }}")
 						p(class="col-xs-4 item-description") {{ item.description }}
+
+					button(class="btn btn-danger remove-exercise" ng-click="removeExercise(item)") Remove

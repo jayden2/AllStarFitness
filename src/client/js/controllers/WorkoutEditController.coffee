@@ -13,17 +13,26 @@ WorkoutEditController = ($scope, $filter, $routeParams, LoginService, WorkoutSer
 	$scope.addExercise = (selected) ->
 		found = false
 		$('.alert').remove()
+		if $scope.collection != null
+			angular.forEach $scope.collection, (value, key) ->
+				if value.id == selected.id
+					found = true
+					error_message = "<div class='alert alert-danger alert-dismissible' role='alert'>" + 'Cannot add `' + selected.title + '` exercise as it already exists!' + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>"
+					$('.add-exercise:first-child').prepend(error_message)
+			if !found
+				$scope.workoutChanged = true
+				$scope.collection.push(selected)
+				$scope.selected = null
+				$('.add-exercise > input').val('')
+			return
+
+	#remove exercise from collection
+	$scope.removeExercise = (selected) ->
 		angular.forEach $scope.collection, (value, key) ->
-			if value.title == selected.title
-				found = true
-				error_message = "<div class='alert alert-danger alert-dismissible' role='alert'>" + 'Cannot add `' + selected.title + '` exercise as it already exists!' + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>"
-				$('.add-exercise:first-child').prepend(error_message)
-		if !found
-			$scope.workoutChanged = true
-			$scope.collection.push(selected)
-			$scope.selected = null
-			$('.add-exercise > input').val('')
-		return
+			if value.id == selected.id
+				$scope.collection.splice(key, 1)
+				$scope.workoutChanged = true
+
 
 	$scope.saveWorkout = ->
 		console.log 'saving workout'
@@ -31,12 +40,15 @@ WorkoutEditController = ($scope, $filter, $routeParams, LoginService, WorkoutSer
 		collectionHolder = ""
 		commaRound = false
 
-		angular.forEach $scope.collection, (value, key) ->
-			if commaRound then collectionHolder += ", " + value.id else collectionHolder += value.id
-			commaRound = true
+		if $scope.collection.length
+			angular.forEach $scope.collection, (value, key) ->
+				if commaRound then collectionHolder += ", " + value.id else collectionHolder += value.id
+				commaRound = true
+		else
+			collectionHolder = "0"
 
 		WorkoutService.updateCollectionWorkout($scope.workout.id, collectionHolder, currentUser.token).then ((result) ->
-				console.log result
+				errOrSaveResult(result.success, result.message)
 				$scope.loading = false
 				$scope.workoutChanged = false
 			), (error) ->
@@ -85,7 +97,18 @@ WorkoutEditController = ($scope, $filter, $routeParams, LoginService, WorkoutSer
 				return
 		return
 
+	$scope.$watch 'collection', ->
+		console.log 'edited'
 
+	#push error or success
+	errOrSaveResult = (type, message) ->
+		$('.alert').remove()
+		if type == true
+			sendMessage = "<div class='alert alert-success alert-dismissible' role='alert'>" + message + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>"
+		else
+			sendMessage = "<div class='alert alert-danger alert-dismissible' role='alert'>" + message + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>"
+		$('.savepub-exercise').prepend(sendMessage)
+		return
 
 	getWorkout()
 	getAllExercises()
