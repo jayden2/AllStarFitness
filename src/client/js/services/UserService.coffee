@@ -7,7 +7,6 @@ UserService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 			last_name: user.last_name
 			email: user.email
 			user_type: 'none'
-			password: 'none'
 			gender: user.gender
 			age: user.age
 			date_created: user.date_created).success ((result) ->
@@ -82,7 +81,6 @@ UserService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 			last_name: user.last_name
 			email: user.email
 			user_type: 'none'
-			password: 'none'
 			gender: user.gender
 			age: user.age).success ((result) ->
 				if result.success == true

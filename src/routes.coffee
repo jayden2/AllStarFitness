@@ -1,3 +1,4 @@
+admin = require './server/models/admin'
 user = require './server/models/user'
 exercise = require './server/models/exercise'
 workout = require './server/models/workout'
@@ -13,20 +14,32 @@ module.exports = (router) ->
 
 	#authenticate user!
 	router.post '/api/authenticate/', (req, res) ->
-		user.checkValidUser req.body, res
+		admin.checkValidAdmin req.body, res
 
 	#checkValidEmail
 	router.get '/api/users/:email/check/', (req, res) ->
-		user.checkValidEmail req.params.email, res
+		admin.checkValidEmail req.params.email, res
 
 	#openshift health
 	router.get '/health', (req, res) ->
 		res.writeHead 200
 		res.end()
 
+	#create admin
+	router.post '/api/admins/', (req, res) ->
+		admin.createAdmin req.body, res
+
 	#api middleware for all requests
 	router.use '/api/', (req, res, next) ->
-		user.verifyUser req, res, next
+		admin.verifyAdmin req, res, next
+
+	##----------------##
+	##--USER ROUTES---##
+	##----------------##
+
+	#get 1 admin
+	router.get '/api/admins/:id/', (req, res) ->
+		admin.getSingleAdmin req.params.id, res
 
 	##----------------##
 	##--USER ROUTES---##
