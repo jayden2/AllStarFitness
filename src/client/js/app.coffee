@@ -1,1 +1,1 @@
-angular.module('AllStarFitness', ['ui.bootstrap', 'ngRoute', 'ngCookies'])
+angular.module('AllStarFitness', ['ui.bootstrap', 'ui.sortable', 'ngRoute', 'ngCookies'])
