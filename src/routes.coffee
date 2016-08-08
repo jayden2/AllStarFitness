@@ -25,10 +25,6 @@ module.exports = (router) ->
 		res.writeHead 200
 		res.end()
 
-	#create admin
-	router.post '/api/admins/', (req, res) ->
-		admin.createAdmin req.body, res
-
 	#api middleware for all requests
 	router.use '/api/', (req, res, next) ->
 		admin.verifyAdmin req, res, next
@@ -37,6 +33,10 @@ module.exports = (router) ->
 	##--USER ROUTES---##
 	##----------------##
 
+	#create admin
+	router.post '/api/admins/', (req, res) ->
+		admin.createAdmin req.body, res
+	
 	#get 1 admin
 	router.get '/api/admins/:id/', (req, res) ->
 		admin.getSingleAdmin req.params.id, res
