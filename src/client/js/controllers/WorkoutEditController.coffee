@@ -4,10 +4,15 @@ WorkoutEditController = ($scope, $filter, $routeParams, LoginService, WorkoutSer
 	$scope.workoutChanged = false
 	$scope.workout = { }
 	$scope.exercises = { }
-	$scope.collection = { }
+	$scope.collection = []
 	$scope.search = { }
 	currentUser = LoginService.getUserInfo()
 
+	$scope.sortableOptions =
+		update: (e, ui) ->
+			$scope.workoutChanged = true
+			console.log $scope.collection
+		axis: 'y'
 
 	#push selected exercise to collection
 	$scope.addExercise = (selected) ->
@@ -46,6 +51,7 @@ WorkoutEditController = ($scope, $filter, $routeParams, LoginService, WorkoutSer
 		#check if there if length in collection so that it iterates over something that exists
 		if $scope.collection.length
 			angular.forEach $scope.collection, (value, key) ->
+				console.log value.id + " " + value.title
 				if commaRound then collectionHolder += ", " + value.id else collectionHolder += value.id
 				commaRound = true
 		else
@@ -92,13 +98,27 @@ WorkoutEditController = ($scope, $filter, $routeParams, LoginService, WorkoutSer
 		if $scope.loading == false
 			$scope.loading = true
 			ExerciseService.getMultipleExercises($scope.workout.collection, currentUser.token).then ((result) ->
-				$scope.collection = result
+				sortCollection(result)
 				checkCollectionLength()
 				$scope.loading = false
 			), (error) ->
 				console.log error
 				$scope.loading = false
 				return
+		return
+
+	#sort array collection, get the get data, iterate through it and assemble
+	sortCollection = (unsortedcollection) ->
+		collectionIds = $scope.workout.collection.split(', ')
+		i = 0	
+		while i < Object.keys(unsortedcollection).length
+			angular.forEach unsortedcollection, (value, key) ->
+				if value.id.toString() == collectionIds[i].toString()
+					console.log "found"
+					console.log value
+					$scope.collection.push(value)
+					return
+			i++
 		return
 
 	#adjust styles in exercise title list

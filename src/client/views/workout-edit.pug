@@ -15,7 +15,7 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 
 		div(class=" col-lg-6 savepub-exercise")
 			h4 Save and Publish
-			button(class="btn btn-warning" ng-click="pubishPDF()" ng-show="collection") Publish to PDF
+			button(class="btn btn-warning" ng-click="pubishPDF()" ng-show="collection !== '0'") Publish to PDF
 			button(class="btn btn-confirm" ng-click="saveWorkout()" ng-show="workoutChanged") Save Workout
 
 	div(class="row exercise-table")
@@ -30,7 +30,7 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 					li(ng-repeat="item in collection")
 						p {{ item.title }}
 
-			ul(class="exercise-list")
+			ul(ui-sortable="sortableOptions" ng-model="collection" class="exercise-list")
 				li(ng-repeat="item in collection" class="exercise-item")
 					div(class="row")
 						h3(class="col-xs-7 item-title") {{ item.title }}
