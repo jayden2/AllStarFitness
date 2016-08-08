@@ -33,7 +33,6 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 									td(class="text-center") {{ workout.first_name }} {{ workout.last_name }}
 									td(class="text-center") {{ workout.date_updated | date:'dd/MM/yyyy' }}
 									td(class="text-center")
-										span {{ workout.collection }}
 										a(ng-click="template(workout.id, workout.template)")
 											i(class="fa fa-file-text fa-2x workout-template" aria-hidden="true" ng-class="{ tempd : workout.template == 1}")
 									td(class="text-center")
