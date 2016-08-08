@@ -21,7 +21,7 @@ WorkoutEditController = ($scope, $filter, $routeParams, LoginService, WorkoutSer
 			angular.forEach $scope.collection, (value, key) ->
 				if value.id == selected.id
 					found = true
-					error_message = "<div class='alert alert-danger alert-dismissible' role='alert'>" + 'Cannot add `' + selected.title + '` exercise as it already exists!' + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>"
+					error_message = "<div class='alert alert-danger alert-dismissible' role='alert'>" + selected.title + ' is already in the workout!' + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>"
 					$('.add-exercise:first-child').prepend(error_message)
 			if !found
 				$scope.workoutChanged = true
