@@ -55,18 +55,22 @@ module.exports = class Exercise
 	#do connection, insert exercise data into database
 	@createExercise = (exercise, res) ->
 		connection.acquire (err, con) ->
-			con.query 'INSERT INTO exercises (title, description, image, def_set_start, def_set_end, def_rep_start, def_rep_end, date_created, favourite) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+			con.query 'INSERT INTO exercises (title, description, image, def_set_start, def_set_end, def_rep_start, def_rep_end, date_created, favourite) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);',
 			[exercise.title, exercise.description, exercise.image, exercise.def_set_start, exercise.def_set_end, exercise.def_rep_start, exercise.def_rep_end, exercise.date_created, exercise.favourite], (err, result) ->
-				con.release()
 				#error check if succesful query or not
 				if err
 					return res.status(403).send(
 						success: false
 						message: 'failed creating exercise')
 				else
-					res.send
-						success: true
-						message: 'exercise created successfully'
+					con.query 'SELECT LAST_INSERT_ID() as return_id', (err, result) ->
+						con.release()
+						res.send
+							return_id: result[0].return_id
+							success: true
+							message: 'exercise created successfully'
+						return
+					return
 				return
 			return
 		return

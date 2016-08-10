@@ -15,6 +15,7 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 			favourite: 0).success ((result) ->
 			if result.success == true
 				exerciseSave =
+					return_id: result.return_id
 					success: result.success
 					message: result.message
 				deferred.resolve exerciseSave

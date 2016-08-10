@@ -1,4 +1,4 @@
-WorkoutEditController = ($scope, $filter, $routeParams, LoginService, WorkoutService, ExerciseService) ->
+WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, LoginService, WorkoutService, ExerciseService) ->
 
 	$scope.loading = false
 	$scope.workoutChanged = false
@@ -42,6 +42,37 @@ WorkoutEditController = ($scope, $filter, $routeParams, LoginService, WorkoutSer
 		checkCollectionLength()
 		return
 
+	$scope.duplicateExercise = (item) ->
+		if $scope.loading == false
+			$scope.loading = true
+			ExerciseService.createExercise(item, currentUser.token).then ((result) ->
+				console.log result.return_id
+				$scope.loading = false
+				duplicateExerciseBody(result.return_id)
+			), (error) ->
+				console.log error
+				$scope.loading = false
+				return
+		duplicateExerciseBody = ->
+			return
+		return
+
+	$scope.editExercise = (typeModal, exercise) ->
+		modalInstance = $uibModal.open(
+			animation: true
+			templateUrl: '/js/directives/modal-exercise.html'
+			controller: 'ExerciseModalController'
+			resolve:
+				type: ->
+					typeModal
+				exercise: ->
+					exercise
+		)
+		modalInstance.result.then ((formData) ->
+			if formData == 'postupdel'
+				errOrSaveResult(true, "successfully edited exercise!")
+		)
+		return
 
 	$scope.saveWorkout = ->
 		collectionHolder = ""
@@ -146,6 +177,7 @@ angular.module('AllStarFitness')
 		'$scope'
 		'$filter'
 		'$routeParams'
+		'$uibModal'
 		'LoginService'
 		'WorkoutService'
 		'ExerciseService'

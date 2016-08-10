@@ -21,11 +21,19 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 			$scope.exercise.def_rep_end = 1
 			$scope.exercise.def_set_start = 1
 			$scope.exercise.def_set_end = 1
+			$scope.buttonDupilcate = false
+		else if type == "editOnWorkout"
+			$scope.exercise = exercise
+			$scope.title = "Edit Exercise"
+			$scope.buttonSave = "Save Exercise"
+			$scope.buttonDelete = false
+			$scope.buttonDupilcate = true
 		else
 			$scope.exercise = exercise
 			$scope.title = "Edit Exercise"
 			$scope.buttonSave = "Save Exercise"
 			$scope.buttonDelete = true
+			$scope.buttonDupilcate = false
 
 	$scope.repStartPlus = ->
 		if parseInt($scope.exercise.def_rep_start, 10) and $scope.exercise.def_rep_start < 100 then $scope.exercise.def_rep_start++

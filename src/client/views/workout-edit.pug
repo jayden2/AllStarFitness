@@ -37,15 +37,15 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 						ul(class="col-xs-5 box-nums")
 							li(class="box-set")
 								span(class="item-set-start") {{ item.def_set_start }}
-								span(ng-hide="item.def_set_end == 1")  - 
-								span(class="item-set-end" ng-hide="item.def_set_end == 1") {{ item.def_set_end }}
+								span(ng-if="item.def_set_end != 1")  - 
+								span(class="item-set-end" ng-if="item.def_set_end != 1") {{ item.def_set_end }}
 								br
 								span sets
 							
 							li(class="box-rep")
 								span(class="item-rep-start") {{ item.def_rep_start }}
-								span(ng-hide="item.def_rep_end == 1")  - 
-								span(class="item-rep-end" ng-hide="item.def_rep_end == 1") {{ item.def_rep_end }}
+								span(ng-if="item.def_rep_end != 1")  - 
+								span(class="item-rep-end" ng-if="item.def_rep_end != 1") {{ item.def_rep_end }}
 								br
 								span reps
 
@@ -53,4 +53,6 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 						img(class="col-xs-8 item-image" ng-src="{{ item.image }}")
 						p(class="col-xs-4 item-description") {{ item.description }}
 
+					button(class="btn btn-success duplicate-exercise" ng-click="duplicateExercise(item)") Duplicate
+					button(class="btn btn-warning edit-exercise" ng-click="editExercise('editOnWorkout', item)") Edit
 					button(class="btn btn-danger remove-exercise" ng-click="removeExercise(item)") Remove
