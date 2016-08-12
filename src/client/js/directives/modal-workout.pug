@@ -1,9 +1,18 @@
 div(class="modal-header modal-header-success")
-	h3 {{ title }}
+	h3 Create Workout
 div(class="modal-body")
 	form(class="form form-document-model")
+		//workout title
+		label(class= "control-label" for="workout_title") Workout Title
+		input(type="text" class="form-control" id="workout_title" aria-describedby="basic-addon3" ng-model="workout.title" placeholder="Enter title of workout..." ng-required="true" required)
+
+		//add user
+		label(class= "control-label" for="name") Add User
+		input(type="text" ng-model="selected" uib-typeahead="user as user.first_name + ' ' + user.last_name for user in users | filter:$viewValue | limitTo:8" class="form-control" placeholder="Search by users name..." ng-hide="loading")
+
+		button(class="btn btn-confirm" ng-click="selectUser(selected)" ng-show="selected.id") Select {{ selected.first_name }} {{ selected.last_name }} 
+			i(class="fa fa-plus" aria-hidden="true")
 		
 div(class="modal-footer")
-	button(class="btn btn-danger button-delete" type="button" ng-click="delete()" ng-show="buttonDelete") Delete
-	button(class="btn btn-primary btn-confirm" type="submit" ng-click="confirm()") {{ buttonSave }}
+	button(class="btn btn-primary btn-confirm" type="submit" ng-click="confirm()") Create Workout
 	button(class="btn btn-warning btn-cancel" type="button" ng-click="cancel()") Cancel

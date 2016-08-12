@@ -1,4 +1,4 @@
-WorkoutController = ($scope, $filter, $location, LoginService, WorkoutService) ->
+WorkoutController = ($scope, $filter, $location, $uibModal, $document, LoginService, WorkoutService) ->
 
 	#define workouts
 	$scope.loading = false
@@ -45,13 +45,20 @@ WorkoutController = ($scope, $filter, $location, LoginService, WorkoutService) -
 	$scope.countCollection = (collection) ->
 		return numOf = collection.split(/,/).length
 
-	#create edit location path -- edit with id
-	$scope.createEditWorkout = (type, workout) ->
-		if type == 'create'
-			$location.path '/dashboard/workouts/create/'
-		else
-			$location.path '/dashboard/workouts/edit/' + workout.id
+	$scope.openModal = ->
+		modalInstance = $uibModal.open(
+			templateUrl: '/js/directives/modal-workout.html'
+			controller: 'WorkoutModalController'
+		)
+		modalInstance.result.then ((formData) ->
+			if formData == 'postupdel'
+				$scope.getWorkouts()
+		)
 		return
+
+	#create edit location path -- edit with id
+	$scope.editWorkout = (type, workout) ->
+		$location.path '/dashboard/workouts/edit/' + workout.id
 
 	$scope.getWorkouts(false)
 	return
@@ -61,6 +68,8 @@ angular.module('AllStarFitness')
 		'$scope'
 		'$filter'
 		'$location'
+		'$uibModal'
+		'$document'
 		'LoginService'
 		'WorkoutService'
 		WorkoutController

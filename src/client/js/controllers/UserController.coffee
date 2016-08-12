@@ -42,7 +42,6 @@ UserController = ($scope, $filter, $uibModal, LoginService, UserService) ->
 
 	$scope.openModal = (typeModal, user) ->
 		modalInstance = $uibModal.open(
-			animation: true
 			templateUrl: '/js/directives/modal-user.html'
 			controller: 'UserModalController'
 			resolve:
@@ -55,8 +54,6 @@ UserController = ($scope, $filter, $uibModal, LoginService, UserService) ->
 			if formData == 'postupdel'
 				$scope.getUsers()
 		)
-
-	$scope.getUsers()
 	return
 
 angular.module('AllStarFitness')

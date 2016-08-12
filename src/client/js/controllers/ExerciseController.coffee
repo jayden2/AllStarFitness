@@ -43,7 +43,6 @@ ExerciseController = ($scope, $filter, $uibModal, LoginService, ExerciseService)
 
 	$scope.openModal = (typeModal, exercise) ->
 		modalInstance = $uibModal.open(
-			animation: true
 			templateUrl: '/js/directives/modal-exercise.html'
 			controller: 'ExerciseModalController'
 			resolve:
@@ -56,8 +55,6 @@ ExerciseController = ($scope, $filter, $uibModal, LoginService, ExerciseService)
 			if formData == 'postupdel'
 				$scope.getExercises(false)
 		)
-
-	$scope.getExercises(false)
 	return
 
 angular.module('AllStarFitness')
