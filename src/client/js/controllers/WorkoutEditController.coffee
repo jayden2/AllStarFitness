@@ -45,6 +45,10 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, LoginService,
 	$scope.duplicateExercise = (item) ->
 		if $scope.loading == false
 			$scope.loading = true
+			console.log item
+			#state that the item is a duplicated over original
+			item.duplicated = 1
+			console.log item
 			ExerciseService.createExercise(item, currentUser.token).then ((result) ->
 				console.log result.return_id
 				$scope.loading = false

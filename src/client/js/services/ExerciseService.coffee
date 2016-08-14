@@ -7,6 +7,7 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 			title: exercise.title
 			description: exercise.description
 			image: exercise.image
+			duplicated: exercise.duplicated
 			def_set_start: exercise.def_set_start
 			def_set_end: exercise.def_set_end
 			def_rep_start: exercise.def_rep_start

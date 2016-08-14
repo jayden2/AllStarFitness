@@ -9,7 +9,7 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 	div(class="row tool-header")
 		div(class="col-lg-6 add-exercise")
 				h4 Add Exercise
-				input(type="text" ng-model="selected" uib-typeahead="exercise as exercise.title for exercise in exercises | filter:$viewValue | limitTo:8" class="form-control" placeholder="Search by exercise title..." ng-hide="loading")
+				input(type="text" ng-model="selected" uib-typeahead="exercise as exercise.title + (exercise.duplicated == 1 ? ' (copy)' : '') for exercise in exercises | filter:$viewValue | limitTo:8" class="form-control" placeholder="Search by exercise title..." ng-hide="loading")
 				button(class="btn btn-confirm" ng-click="addExercise(selected)" ng-show="selected.id") Add {{ selected.title }} 
 					i(class="fa fa-plus" aria-hidden="true")
 

@@ -93,6 +93,7 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 		$scope.currentFile = null
 		$scope.exercise.title = savedExercise.title
 		$scope.exercise.image = savedExercise.image
+		$scope.exercise.duplicated = savedExercise.duplicated
 		$scope.exercise.description = savedExercise.description
 		$scope.exercise.def_rep_start = savedExercise.def_rep_start
 		$scope.exercise.def_rep_end = savedExercise.def_rep_end
@@ -117,6 +118,7 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 			return
 		
 		if type == "create"
+			$scope.exercise.duplicated = 0
 			$scope.postExercise()
 		else
 			$scope.updateExercise()
