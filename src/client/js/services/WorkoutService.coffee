@@ -7,7 +7,7 @@ WorkoutService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 			title: workout.title
 			collection: workout.collection
 			user_id: workout.user_id
-			template: workout.template
+			template: 0
 			date_created: workout.date_created).success ((result) ->
 			if result.success == true
 				workoutSave =

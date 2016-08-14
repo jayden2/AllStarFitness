@@ -5,21 +5,23 @@ div(class="modal-body")
 		div(class="form-group")
 			//firstname
 			label(class= "control-label" for="first_name") First Name*
-			input(type="text" class="form-control" id="first_name" aria-describedby="basic-addon3" ng-model="user.first_name" placeholder="Enter users first name..." ng-required="true" required)
+			input(type="text" class="form-control" id="first_name" aria-describedby="basic-addon3" ng-model="user.first_name" placeholder="Enter users first name..." ng-required="true" maxlength="50" required)
 			
 			//lastname
 			label(class= "control-label" for="last_name") Surname*
-			input(type="text" class="form-control" id="last_name" aria-describedby="basic-addon3" ng-model="user.last_name" placeholder="Enter users surname..." ng-required="true" required)
+			input(type="text" class="form-control" id="last_name" aria-describedby="basic-addon3" ng-model="user.last_name" placeholder="Enter users surname..." ng-required="true" maxlength="100" required)
 			
 			//email
 			label(class= "control-label" for="email") Email
-			input(type="email" class="form-control" id="email" aria-describedby="basic-addon3" ng-model="user.email" placeholder="Enter users email..." ng-required="true")
+			input(type="email" class="form-control" id="email" aria-describedby="basic-addon3" ng-model="user.email" placeholder="Enter users email..." maxlength="100" ng-required="true")
+
 			//gender
 			label(class= "control-label" for="gender") Gender*
 			div(class="form-group")
 				select(class="form-control" ng-model="gender" id="gender" required)
 					option(value="female" selected) Female
 					option(value="male") Male
+
 			//age --calender component
 			label(class= "control-label" for="age") Age ({{ age }})
 			div(class="col-md-10")
