@@ -1,7 +1,6 @@
 WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, $location, LoginService, WorkoutService, ExerciseService) ->
 
 	$scope.loading = false
-	$scope.workoutChanged = false
 	$scope.workout = { }
 	$scope.exercises = { }
 	$scope.collection = []
@@ -9,8 +8,6 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, $location, Lo
 	currentUser = LoginService.getUserInfo()
 
 	$scope.sortableOptions =
-		update: (e, ui) ->
-			$scope.workoutChanged = true
 		axis: 'y'
 
 	#push selected exercise to collection
@@ -24,7 +21,6 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, $location, Lo
 					error_message = "<div class='alert alert-danger alert-dismissible' role='alert'>" + selected.title + ' is already in the workout!' + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>"
 					$('.add-exercise:first-child').prepend(error_message)
 			if !found
-				$scope.workoutChanged = true
 				$scope.collection.push(selected)
 				$scope.selected = null
 				$('.add-exercise > input').val('')
@@ -37,7 +33,6 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, $location, Lo
 		angular.forEach $scope.collection, (value, key) ->
 			if value.id == selected.id
 				$scope.collection.splice(key, 1)
-				$scope.workoutChanged = true
 
 		checkCollectionLength()
 		return
@@ -116,7 +111,6 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, $location, Lo
 		WorkoutService.updateCollectionWorkout($scope.workout.id, collectionHolder, currentUser.token).then ((result) ->
 				errOrSaveResult(result.success, result.message)
 				$scope.loading = false
-				$scope.workoutChanged = false
 			), (error) ->
 				console.log error
 				$scope.loading = false
