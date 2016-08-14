@@ -61,7 +61,6 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 
 	#close modal delete
 	$scope.delete = ->
-
 		#check
 		if $scope.imageUploadMust == true
 			formError("Please remove the uploaded image, before you delete!")

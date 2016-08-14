@@ -54,6 +54,8 @@ UserController = ($scope, $filter, $uibModal, LoginService, UserService) ->
 			if formData == 'postupdel'
 				$scope.getUsers()
 		)
+		
+	$scope.getUsers()
 	return
 
 angular.module('AllStarFitness')

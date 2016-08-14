@@ -55,6 +55,8 @@ ExerciseController = ($scope, $filter, $uibModal, LoginService, ExerciseService)
 			if formData == 'postupdel'
 				$scope.getExercises(false)
 		)
+
+	$scope.getExercises(false)
 	return
 
 angular.module('AllStarFitness')
