@@ -18,10 +18,13 @@ WorkoutModalController = ($scope, $uibModalInstance, WorkoutService, LoginServic
 			return
 		else
 			$scope.workout.user_id = $scope.selected.id
-			
 
 		if isNullOrEmptyOrUndefined($scope.workout.collection)
 			$scope.workout.collection = 0
+
+		if !$scope.workout.collection.toString().match /^[0-9, ]*$/
+			formError("Exercise id collection has been inputted incorrectly")
+			return
 
 		postWorkout()
 

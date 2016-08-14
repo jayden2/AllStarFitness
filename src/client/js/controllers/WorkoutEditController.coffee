@@ -138,7 +138,7 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, LoginService,
 
 	#sort array collection, get the get data, iterate through it and assemble
 	sortCollection = (unsortedcollection) ->
-		collectionIds = $scope.workout.collection.split(', ')
+		collectionIds = $scope.workout.collection.replace(" ", "").split(',')
 		i = 0	
 		while i < Object.keys(unsortedcollection).length
 			angular.forEach unsortedcollection, (value, key) ->

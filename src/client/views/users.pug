@@ -27,8 +27,9 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 							tbody
 								tr(ng-repeat="user in filteredUsers()")
 									td(class="text-center") {{ user.id }}
-									td {{ user.first_name }} {{ user.last_name }}
-									td {{ user.email }}
+									td {{ user.first_name }} {{ user.last_name| limitTo: 50 }}{{ exercise.last_name.length > 50 ? '...' : ''}}
+									td
+										a(href="mailto:{{user.email}}?Subject=AllStar%Fitness") {{ user.email }}
 									td(class="text-center") {{ user.gender | lowercase }}
 									td(class="text-center" ng-bind="getAge(user.age)")
 									td(class="text-center")
