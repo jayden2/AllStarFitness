@@ -1,4 +1,4 @@
-WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, LoginService, WorkoutService, ExerciseService) ->
+WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, $location, LoginService, WorkoutService, ExerciseService) ->
 
 	$scope.loading = false
 	$scope.workoutChanged = false
@@ -45,19 +45,30 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, LoginService,
 	$scope.duplicateExercise = (item) ->
 		if $scope.loading == false
 			$scope.loading = true
-			console.log item
 			#state that the item is a duplicated over original
 			item.duplicated = 1
-			console.log item
 			ExerciseService.createExercise(item, currentUser.token).then ((result) ->
-				console.log result.return_id
 				$scope.loading = false
 				duplicateExerciseBody(result.return_id)
 			), (error) ->
 				console.log error
 				$scope.loading = false
 				return
-		duplicateExerciseBody = ->
+		duplicateExerciseBody = (id) ->
+			newExercise = {
+				id: id
+				title: item.title
+				description: item.description
+				image: item.image
+				duplicated: 1
+				def_set_start: item.def_set_start
+				def_set_end: item.def_set_end
+				def_rep_start: item.def_rep_start
+				def_rep_end: item.def_rep_end
+				date_created: item.date_created
+				favourite: 0
+			}
+			$scope.collection.push(newExercise)
 			return
 		return
 
@@ -76,6 +87,18 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, LoginService,
 			if formData == 'postupdel'
 				errOrSaveResult(true, "successfully edited exercise!")
 		)
+		return
+
+	$scope.removeWorkout = ->
+		if $scope.loading == false
+			$scope.loading = true
+			WorkoutService.deleteWorkout($scope.workout.id, currentUser.token).then ((result) ->
+					$scope.loading = false
+					$location.path '/dashboard/workouts'
+				), (error) ->
+					console.log error
+					$scope.loading = false
+					return
 		return
 
 	$scope.saveWorkout = ->
@@ -182,6 +205,7 @@ angular.module('AllStarFitness')
 		'$filter'
 		'$routeParams'
 		'$uibModal'
+		'$location'
 		'LoginService'
 		'WorkoutService'
 		'ExerciseService'

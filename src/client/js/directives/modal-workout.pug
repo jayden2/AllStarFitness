@@ -8,11 +8,11 @@ div(class="modal-body")
 		input(type="text" class="form-control" id="workout_title" aria-describedby="basic-addon3" ng-model="workout.title" placeholder="Enter title of workout..." ng-required="true" maxlength="100" required)
 
 		//add user
-		label(class= "control-label" for="name") Select User*
-		input(type="text" ng-model="selected" uib-typeahead="user as user.first_name + ' ' + user.last_name for user in users | filter:$viewValue | limitTo:8" class="form-control" placeholder="Search by users name..." ng-hide="loading")
+		label(class= "control-label" for="name") User*
+		input(type="text" ng-model="selected" uib-typeahead="user as user.first_name + ' ' + user.last_name for user in users | filter:$viewValue | limitTo:8" class="form-control" placeholder="Search and select by users name..." ng-hide="loading")
 
 		//add collection
-		label(class= "control-label" for="collection") Insert Collection
+		label(class= "control-label" for="collection") Exercise ID Collection
 		input(type="text" class="form-control" id="workout_title" aria-describedby="basic-addon3" ng-model="workout.collection" placeholder="Enter exercise collection eg.(1, 23, 19, 3)" ng-required="true" maxlength="100" required)
 		
 div(class="modal-footer")
