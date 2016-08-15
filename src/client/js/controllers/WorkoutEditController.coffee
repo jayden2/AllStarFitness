@@ -10,6 +10,13 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, $location, Lo
 	$scope.sortableOptions =
 		axis: 'y'
 
+	#pdf config
+	cache_width = $('.exercise-table').width()
+	a4 = [
+		595.28
+		841.89
+	]
+
 	#push selected exercise to collection
 	$scope.addExercise = (selected) ->
 		found = false
@@ -196,6 +203,27 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, $location, Lo
 		else
 			sendMessage = "<div class='alert alert-danger alert-dismissible' role='alert'>" + message + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>"
 		$('.savepub-exercise').prepend(sendMessage)
+		return
+
+	$scope.getCanvas = ->
+		console.log 'hello'
+		$('.header-table').width(a4[0] * 1.3333).css 'max-width', 'none'
+		html2canvas $('.exercise-table'),
+			imageTimeout: 2000
+			allowTaint: true
+			removeContainer: true
+
+	$scope.pubishPDF = ->
+		$scope.saveWorkout()
+		$scope.getCanvas().then (canvas) ->
+			img = canvas.toDataURL('image/png')
+			doc = new jsPDF(
+				unit: 'px'
+				format: 'a4')
+			doc.addImage img, 'image/png', -35, 0
+			doc.save $scope.workout.title.toString() + '.pdf'
+			$('.exercise-table').width cache_width
+			return
 		return
 
 	getWorkout()
