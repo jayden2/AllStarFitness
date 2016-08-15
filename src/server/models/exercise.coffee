@@ -55,8 +55,8 @@ module.exports = class Exercise
 	#do connection, insert exercise data into database
 	@createExercise = (exercise, res) ->
 		connection.acquire (err, con) ->
-			con.query 'INSERT INTO exercises (title, description, image, duplicated, def_set_start, def_set_end, def_rep_start, def_rep_end, date_created, favourite) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);',
-			[exercise.title, exercise.description, exercise.image, exercise.duplicated, exercise.def_set_start, exercise.def_set_end, exercise.def_rep_start, exercise.def_rep_end, exercise.date_created, exercise.favourite], (err, result) ->
+			con.query 'INSERT INTO exercises (title, description, image, duplicated, rep_time, def_set_start, def_set_end, def_rep_start, def_rep_end, date_created, favourite) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);',
+			[exercise.title, exercise.description, exercise.image, exercise.duplicated, exercise.rep_time, exercise.def_set_start, exercise.def_set_end, exercise.def_rep_start, exercise.def_rep_end, exercise.date_created, exercise.favourite], (err, result) ->
 				#error check if succesful query or not
 				if err
 					return res.status(403).send(
@@ -90,8 +90,8 @@ module.exports = class Exercise
 	#do connection, update workout data item with id
 	@updateExercise = (exercise, id, res) ->
 		connection.acquire (err, con) ->
-			con.query 'UPDATE exercises SET title = ?, description = ?, image = ?, def_set_start = ?, def_set_end = ?, def_rep_start = ?, def_rep_end = ?, favourite = ? WHERE id = ?',
-			[exercise.title, exercise.description, exercise.image, exercise.def_set_start, exercise.def_set_end, exercise.def_rep_start, exercise.def_rep_end, exercise.favourite, id], (err, result) ->
+			con.query 'UPDATE exercises SET title = ?, description = ?, image = ?, rep_time = ?, def_set_start = ?, def_set_end = ?, def_rep_start = ?, def_rep_end = ?, favourite = ? WHERE id = ?',
+			[exercise.title, exercise.description, exercise.image, exercise.rep_time, exercise.def_set_start, exercise.def_set_end, exercise.def_rep_start, exercise.def_rep_end, exercise.favourite, id], (err, result) ->
 				con.release()
 				#error check if successful query or not
 				if err

@@ -8,6 +8,7 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 			description: exercise.description
 			image: exercise.image
 			duplicated: exercise.duplicated
+			rep_time: exercise.rep_time
 			def_set_start: exercise.def_set_start
 			def_set_end: exercise.def_set_end
 			def_rep_start: exercise.def_rep_start
@@ -84,6 +85,7 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 					title: result.title
 					description: result.description
 					image: result.image
+					rep_time: result.rep_time
 					def_set_start: result.def_set_start
 					def_set_end: result.def_set_end
 					def_rep_start: result.def_rep_start
@@ -111,6 +113,7 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 			title: exercise.title
 			description: exercise.description
 			image: exercise.image
+			rep_time: exercise.rep_time
 			def_set_start: exercise.def_set_start
 			def_set_end: exercise.def_set_end
 			def_rep_start: exercise.def_rep_start
