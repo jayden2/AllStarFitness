@@ -5,6 +5,16 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 	savedExercise = angular.copy(exercise)
 	$scope.loading = false
 	$scope.exercise = { }
+	$scope.repTime = [
+		{
+			id: 'rep'
+			name: 'Reps'
+		}
+		{
+			id: 'time'
+			name: 'Time (seconds)'
+		}
+	]
 	$scope.tempImage = null
 	$scope.currentFile = null
 	$scope.imageUploadMust = false
@@ -21,7 +31,9 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 			$scope.exercise.def_rep_end = 1
 			$scope.exercise.def_set_start = 1
 			$scope.exercise.def_set_end = 1
+			$scope.exercise.rep_time = "rep"
 			$scope.buttonDupilcate = false
+			$scope.RT = "reps"
 		else if type == "editOnWorkout"
 			$scope.exercise = exercise
 			$scope.title = "Edit Exercise"
@@ -36,25 +48,25 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 			$scope.buttonDupilcate = false
 
 	$scope.repStartPlus = ->
-		if parseInt($scope.exercise.def_rep_start, 10) and $scope.exercise.def_rep_start < 100 then $scope.exercise.def_rep_start++
+		if parseInt($scope.exercise.def_rep_start, 10) and $scope.exercise.def_rep_start < 999 then $scope.exercise.def_rep_start++
 
 	$scope.repStartMinus = ->
 		if parseInt($scope.exercise.def_rep_start, 10) and $scope.exercise.def_rep_start > 1 then $scope.exercise.def_rep_start--
 
 	$scope.repEndPlus = ->
-		if parseInt($scope.exercise.def_rep_end, 10) and $scope.exercise.def_rep_end < 100 then $scope.exercise.def_rep_end++
+		if parseInt($scope.exercise.def_rep_end, 10) and $scope.exercise.def_rep_end < 999 then $scope.exercise.def_rep_end++
 
 	$scope.repEndMinus = ->
 		if parseInt($scope.exercise.def_rep_end, 10) and $scope.exercise.def_rep_end > 1 then $scope.exercise.def_rep_end--
 
 	$scope.setStartPlus = ->
-		if parseInt($scope.exercise.def_set_start, 10) and $scope.exercise.def_set_start < 100 then $scope.exercise.def_set_start++
+		if parseInt($scope.exercise.def_set_start, 10) and $scope.exercise.def_set_start < 999 then $scope.exercise.def_set_start++
 
 	$scope.setStartMinus = ->
 		if parseInt($scope.exercise.def_set_start, 10) and $scope.exercise.def_set_start > 1 then $scope.exercise.def_set_start--
 
 	$scope.setEndPlus = ->
-		if parseInt($scope.exercise.def_set_end, 10) and $scope.exercise.def_set_end < 100 then $scope.exercise.def_set_end++
+		if parseInt($scope.exercise.def_set_end, 10) and $scope.exercise.def_set_end < 999 then $scope.exercise.def_set_end++
 
 	$scope.setEndMinus = ->
 		if parseInt($scope.exercise.def_set_end, 10) and $scope.exercise.def_set_end > 1 then $scope.exercise.def_set_end--
@@ -95,6 +107,7 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 		$scope.exercise.image = savedExercise.image
 		$scope.exercise.duplicated = savedExercise.duplicated
 		$scope.exercise.description = savedExercise.description
+		$scope.exercise.rep_time = savedExercise.rep_time
 		$scope.exercise.def_rep_start = savedExercise.def_rep_start
 		$scope.exercise.def_rep_end = savedExercise.def_rep_end
 		$scope.exercise.def_set_start = savedExercise.def_set_start
@@ -117,6 +130,8 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 			formError("You have selected an image but have not uploaded it")
 			return
 		
+		console.log $scope.exercise.rep_time
+
 		if type == "create"
 			$scope.exercise.duplicated = 0
 			$scope.postExercise()
