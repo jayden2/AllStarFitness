@@ -21,11 +21,12 @@ div(class="modal-body")
 			button(type="button" class="btn btn-primary uploadButton" ng-click="uploadImage(exercise.image)" ng-show="currentFile" ng-disabled="loading") Upload Image
 			button(type="button" class="btn btn-danger removeImgButton" ng-click="removeImage('deletion')" ng-show="exercise.image || currentFile" ng-disabled="loading") Clear Image
 			//reps
-			br
-			label(class= "control-label" for="reps") Reps
-			br
-			//min
+			div(class="form-group")
+				select(class="form-control repTime" ng-model="exercise.rep_time")
+					option(ng-repeat="option in repTime" value="{{ option.id }}") {{ option.name }}
+			
 			div(class="col-xs-3")
+				//min
 				div(class="input-group number-spinner")
 					span(class="input-group-btn data-dwn")
 						button(class="btn btn-default btn-info" data-dir="dwn" ng-click="repStartMinus()")

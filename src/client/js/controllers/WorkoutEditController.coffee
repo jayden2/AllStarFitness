@@ -56,6 +56,7 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, $location, Lo
 				description: item.description
 				image: item.image
 				duplicated: 1
+				rep_time: item.rep_time
 				def_set_start: item.def_set_start
 				def_set_end: item.def_set_end
 				def_rep_start: item.def_rep_start
@@ -103,7 +104,7 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, $location, Lo
 		#check if there if length in collection so that it iterates over something that exists
 		if $scope.collection.length
 			angular.forEach $scope.collection, (value, key) ->
-				if commaRound then collectionHolder += ", " + value.id else collectionHolder += value.id
+				if commaRound then collectionHolder += "," + value.id else collectionHolder += value.id
 				commaRound = true
 		else
 			collectionHolder = "0"
@@ -138,6 +139,7 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, $location, Lo
 				$scope.workout = result[0]
 				$scope.loading = false
 				getWorkoutCollection()
+				maleOrFemale()
 			), (error) ->
 				console.log error
 				$scope.loading = false
@@ -159,7 +161,7 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, $location, Lo
 
 	#sort array collection, get the get data, iterate through it and assemble
 	sortCollection = (unsortedcollection) ->
-		collectionIds = $scope.workout.collection.replace(" ", "").split(',')
+		collectionIds = $scope.workout.collection.split(',')
 		i = 0	
 		while i < Object.keys(unsortedcollection).length
 			angular.forEach unsortedcollection, (value, key) ->
@@ -167,6 +169,13 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, $location, Lo
 					$scope.collection.push(value)
 					return
 			i++
+		return
+
+	maleOrFemale = ->
+		if $scope.workout.gender == 'f'
+			$('.exercise-table').addClass('fForm')
+		else
+			$('.exercise-table').addClass('mForm')
 		return
 
 	#adjust styles in exercise title list
