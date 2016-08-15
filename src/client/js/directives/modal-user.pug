@@ -17,14 +17,13 @@ div(class="modal-body")
 
 			//gender
 			label(class= "control-label" for="gender") Gender*
-			div(class="form-group")
-				select(class="form-control" ng-model="gender" id="gender" required)
-					option(value="female" selected) Female
-					option(value="male") Male
+			select(class="form-control" ng-model="gender" id="gender" required)
+				option(value="female" selected) Female
+				option(value="male") Male
 
 			//age --calender component
-			label(class= "control-label" for="age") Age ({{ age }})
-			div(class="col-md-10")
+			label(class= "control-label ageLabel" for="age") Age ({{ age }})
+			div(class="col-md-10 ageSelector")
 				p(class="input-group")
 					input(type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" ng-change="getAge()")
 					span(class="input-group-btn")
