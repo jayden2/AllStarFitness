@@ -4,6 +4,9 @@ html(lang="en")
 		meta(charset="UTF-8")
 		base(href="/")
 		title All Star Fitneess Dashboard
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+		meta(name="description" content="AllStar Fitness Workout Planner and Printer")
+		meta(name="author" content="Jayden Spencer")
 		link(rel="stylesheet" href="./assets/libs/bootstrap.min.css")
 		link(rel="stylesheet" href="./assets/libs/font-awesome.min.css")
 		link(rel="stylesheet" href="./assets/libs/rdash.min.css")
@@ -18,13 +21,8 @@ html(lang="en")
 		script(src="assets/libs/jquery-ui.min.js")
 		script(src="assets/libs/ui-bootstrap-tpls.min.js")
 		script(src="assets/libs/bootstrap.min.js")
-		meta(name="viewport" content="width=device-width, initial-scale=1")
 	body(ng-app="AllStarFitness" ng-controller="MasterController")
 		div(ng-view)
-
-		//PDF CDNS
-		script(src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js")
-		script(src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js")
 
 		//Angular JS
 		script(src="js/app.min.js")
