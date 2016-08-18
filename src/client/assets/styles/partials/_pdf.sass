@@ -1,0 +1,124 @@
+@media print
+	@import url(https://fonts.googleapis.com/css?family=Roboto)
+	li
+		page-break-inside: avoid
+	body
+		//background-color: orange !important
+		color: black !important
+		font-family: 'Roboto', sans-serif !important
+		margin: 0 !important
+
+	.title-box-pdf
+		margin: 0 !important
+		background-color: darken($fitness-style-guy, 3%) !important
+		padding: 5px !important
+
+	.workout-logo-pdf
+		float: right
+		margin-top: -50px
+		margin-right: 10px
+		width: 6%
+		height: auto
+		
+	.title-header-pdf
+		color: $white !important
+		font-size: 2em !important
+		padding-left: 10px
+
+	.sub-header-pdf
+		color: $white !important
+		font-size: 1.3em !important
+		padding-left: 10px
+
+	.workout-box-pdf
+		padding: 5px !important
+
+		ul
+			list-style-type: none !important
+			padding-left: 0px !important
+			margin-top: 5px !important
+			-moz-column-count: 2 !important
+			-moz-column-gap: 60px !important
+			-webkit-column-count: 2 !important
+			-webkit-column-gap: 60px !important
+			column-count: 2 !important
+			column-gap: 60px !important
+		li
+			font-weight: 500 !important
+			font-size: 1.2em !important
+			padding-top: 2px !important
+		p
+			text-align: center !important
+	
+	.exercise-list-pdf
+		list-style-type: none !important
+		padding-left: 0 !important
+
+	.exercise-item-pdf
+		padding-bottom: 10px !important
+		margin-top: 8px !important
+
+	.item-title-pdf
+		padding: 13px !important
+		color: $white !important
+		font-size: 1.4em !important
+		margin-top: 0px !important
+	
+	.box-nums-pdf
+		list-style-type: none !important
+		color: #fff !important
+		
+		li
+			display: inline !important
+			float: left !important
+			padding: 10px !important
+			color: #fff !important
+			text-align: center !important
+			min-width: 60px !important
+			max-width: 50% !important
+
+		li:not(:first-child)
+			margin-left: 15px !important
+
+		span
+			color: #fff !important
+
+	.item-image-pdf
+		float: left !important
+		margin-top: 10px !important
+		width: 430px !important
+		height: auto !important
+		padding-right: 0 !important
+
+	.item-description-pdf
+		float: right
+		padding-left: 2px !important
+		font-size: 1.1em !important
+		margin-top: 25px !important
+		text-align: left !important
+
+
+	//all below require colour change!
+	.title-box-pdf
+		background-color: darken($fitness-style-guy-header, 3%) !important
+
+	.title-box-pdf
+		background-color: darken($fitness-style-gal-header, 3%) !important
+
+	.title-box-pdf:not(:first-child)
+		background-color: lighten($fitness-style-guy, 2%) !important
+
+	.title-box-pdf:not(:first-child)
+		background-color: lighten($fitness-style-gal, 2%) !important
+
+	.item-title-pdf
+		background-color: $fitness-style-guy !important
+		
+	.item-title-pdf
+		background-color: $fitness-style-gal !important
+
+	.box-nums-pdf li
+		background-color: $fitness-style-guy-setrep !important
+
+	.box-nums-pdf li
+		background-color: $fitness-style-gal-setrep !important

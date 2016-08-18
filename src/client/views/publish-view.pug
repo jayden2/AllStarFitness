@@ -1,34 +1,39 @@
-div(class="row exercise-table")
+div(class="row publish-pdf")
 	div(class="col-lg-12")
-		div(class="title-box")
-			h1(class="title-header") {{ workout.title }}
-		div(class="title-box")
-			h2(class="sub-header") {{ workout.first_name }} {{ workout.last_name }}
+		div(class="title-box-pdf")
+			h1(class="title-header-pdf") {{ workout.title }}
+			img(src="assets/images/logo_white.png" class="workout-logo-pdf")
+		div(class="title-box-pdf")
+			h2(class="sub-header-pdf") {{ workout.first_name }} {{ workout.last_name }}
 
-		div(class="workout-box")
+		div(class="workout-box-pdf")
 			ul
 				li(ng-repeat="item in collection")
 					p {{ item.title }}
 
-		ul(ui-sortable="sortableOptions" ng-model="collection" class="exercise-list")
+		ul(ng-model="collection" class="exercise-list")
 			li(ng-repeat="item in collection" class="exercise-item")
 				div(class="row")
-					h3(class="col-xs-7 item-title") {{ item.title }}
-					ul(class="col-xs-5 box-nums")
-						li(class="box-set")
-							span(class="item-set-start") {{ item.def_set_start }}
+					h3(class="col-xs-7 item-title-pdf") {{ item.title }}
+					ul(class="col-xs-5 box-nums-pdf")
+						li(class="box-set-pdf")
+							span(class="item-set-start-pdf") {{ item.def_set_start }}
 							span(ng-if="item.def_set_end != 1")  - 
-							span(class="item-set-end" ng-if="item.def_set_end != 1") {{ item.def_set_end }}
+							span(class="item-set-end-pdf" ng-if="item.def_set_end != 1") {{ item.def_set_end }}
 							br
-							span sets
+							span(ng-if="item.def_set_start == 1 && item.def_set_end == 1") set
+							span(ng-if="item.def_set_start != 1 || item.def_set_end != 1") sets
 						
-						li(class="box-rep")
-							span(class="item-rep-start") {{ item.def_rep_start }}
+						li(class="box-rep-pdf")
+							span(class="item-rep-start-pdf") {{ item.def_rep_start }}
 							span(ng-if="item.def_rep_end != 1")  - 
-							span(class="item-rep-end" ng-if="item.def_rep_end != 1") {{ item.def_rep_end }}
+							span(class="item-rep-end-pdf" ng-if="item.def_rep_end != 1") {{ item.def_rep_end }}
 							br
-							span reps
+							span(ng-if="item.def_rep_start == 1 && item.def_rep_end == 1 && item.rep_time == 'rep'") rep
+							span(ng-if="item.def_rep_start != 1 && item.rep_time == 'rep' || item.def_rep_end != 1 && item.rep_time == 'rep'") reps
+							span(ng-if="item.def_rep_start == 1 && item.def_rep_end == 1 && item.rep_time == 'time'") second
+							span(ng-if="item.def_rep_start != 1 && item.rep_time == 'time' || item.def_rep_end != 1 && item.rep_time == 'time'") seconds
 
 				div(class="row")
-					img(class="col-xs-8 item-image" ng-src="{{ item.image }}")
-					p(class="col-xs-4 item-description") {{ item.description }}
+					img(class="col-xs-8 item-image-pdf" ng-src="{{ item.image }}")
+					p(class="col-xs-4 item-description-pdf") {{ item.description }}

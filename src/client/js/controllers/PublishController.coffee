@@ -1,4 +1,4 @@
-publishController = ($scope, $routeParams, LoginService, WorkoutService, ExerciseService) ->
+PublishController = ($scope, $routeParams, LoginService, WorkoutService, ExerciseService) ->
 
 	#scope variables
 	$scope.loading = false
@@ -28,6 +28,7 @@ publishController = ($scope, $routeParams, LoginService, WorkoutService, Exercis
 				$scope.workout = result[0]
 				$scope.loading = false
 				getWorkoutCollection()
+				maleOrFemale()
 			), (error) ->
 				console.log error
 				$scope.loading = false
@@ -39,7 +40,6 @@ publishController = ($scope, $routeParams, LoginService, WorkoutService, Exercis
 			$scope.loading = true
 			ExerciseService.getMultipleExercises($scope.workout.collection, currentUser.token).then ((result) ->
 				sortCollection(result)
-				checkCollectionLength()
 				$scope.loading = false
 			), (error) ->
 				console.log error
@@ -49,7 +49,7 @@ publishController = ($scope, $routeParams, LoginService, WorkoutService, Exercis
 
 	#sort array collection, get the get data, iterate through it and assemble
 	sortCollection = (unsortedcollection) ->
-		collectionIds = $scope.workout.collection.split(', ')
+		collectionIds = $scope.workout.collection.split(',')
 		i = 0	
 		while i < Object.keys(unsortedcollection).length
 			angular.forEach unsortedcollection, (value, key) ->
@@ -59,26 +59,24 @@ publishController = ($scope, $routeParams, LoginService, WorkoutService, Exercis
 			i++
 		return
 
-	#adjust styles in exercise title list
-	checkCollectionLength = ->
-		if Object.keys($scope.collection).length % 2 == 0
-			$('.workout-box').removeClass('workout-box-odd')
-			$('.workout-box').addClass('workout-box-even')
+	maleOrFemale = ->
+		if $scope.workout.gender == 'f'
+			$('.exercise-table').addClass('fForm')
 		else
-			$('.workout-box').removeClass('workout-box-even')
-			$('.workout-box').addClass('workout-box-odd')
+			$('.exercise-table').addClass('mForm')
 		return
+
 
 	getWorkout()
 	getAllExercises()
 	return
 
 angular.module('AllStarFitness')
-	.controller 'publishController', [
+	.controller 'PublishController', [
 		'$scope'
 		'$routeParams'
 		'LoginService'
 		'WorkoutService'
 		'ExerciseService'
-		publishController
+		PublishController
 	]
