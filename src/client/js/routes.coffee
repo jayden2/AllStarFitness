@@ -31,12 +31,24 @@ angular.module('AllStarFitness').config [
 							$q.reject authenticated: false
 							$location.path '/login'
 				])
-			##TEST
-			# .when('/test',
-			# 	controller: 'DashboardController'
-			# 	templateUrl: 'views/test.html'
-			# 	auth: true
-			# 	)
+			#PUBLISH WORKOUT
+			.when('/dashboard/publish/:id',
+				controller: 'PublishController'
+				templateUrl: 'views/publish-view.html'
+				resolve: auth: [
+					'$q'
+					'$location'
+					'LoginService'
+					
+					($q, $location, LoginService) ->
+						#get user details!
+						userAuth = LoginService.getUserInfo()
+						if userAuth
+							$q.when userAuth
+						else
+							$q.reject authenticated: false
+							$location.path '/login'
+				])
 			##DASH USERS
 			.when('/dashboard/users',
 				controller: 'UserController'
