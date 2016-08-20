@@ -1,7 +1,8 @@
 angular.module('AllStarFitness').config [
 	'$routeProvider'
 	'$locationProvider'
-	($routeProvider, $locationProvider) ->
+	'$compileProvider'
+	($routeProvider, $locationProvider, $compileProvider) ->
 		$routeProvider
 			##HOME
 			.when('/',
@@ -125,4 +126,7 @@ angular.module('AllStarFitness').config [
 		
 		#this is to remove the hash(#) using the history api
 		$locationProvider.html5Mode(true)
+
+		#disable debug mode for prod
+		$compileProvider.debugInfoEnabled(false)
 ]
