@@ -24,7 +24,6 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, $location, Lo
 				$scope.collection.push(selected)
 				$scope.selected = null
 				$('.add-exercise > input').val('')
-				checkCollectionLength()
 			return
 		return
 
@@ -33,8 +32,6 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, $location, Lo
 		angular.forEach $scope.collection, (value, key) ->
 			if value.id == selected.id
 				$scope.collection.splice(key, 1)
-
-		checkCollectionLength()
 		return
 
 	$scope.duplicateExercise = (item) ->
@@ -151,7 +148,6 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, $location, Lo
 			$scope.loading = true
 			ExerciseService.getMultipleExercises($scope.workout.collection, currentUser.token).then ((result) ->
 				sortCollection(result)
-				checkCollectionLength()
 				$scope.loading = false
 			), (error) ->
 				console.log error
@@ -182,16 +178,6 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, $location, Lo
 			when 'yellow' then $('.exercise-table').addClass('form-yell')
 			when 'black' then $('.exercise-table').addClass('form-bla')
 			else $('.exercise-table').addClass('form-blue')
-		return
-
-	#adjust styles in exercise title list
-	checkCollectionLength = ->
-		if Object.keys($scope.collection).length % 2 == 0
-			$('.workout-box').removeClass('workout-box-odd')
-			$('.workout-box').addClass('workout-box-even')
-		else
-			$('.workout-box').removeClass('workout-box-even')
-			$('.workout-box').addClass('workout-box-odd')
 		return
 
 	#push error or success
