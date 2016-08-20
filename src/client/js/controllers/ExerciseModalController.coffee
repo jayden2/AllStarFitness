@@ -129,8 +129,6 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 		if !isNullOrEmptyOrUndefined($scope.currentFile)
 			formError("You have selected an image but have not uploaded it")
 			return
-		
-		console.log $scope.exercise.rep_time
 
 		if type == "create"
 			$scope.exercise.duplicated = 0

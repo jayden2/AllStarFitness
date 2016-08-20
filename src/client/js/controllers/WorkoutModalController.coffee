@@ -51,7 +51,6 @@ WorkoutModalController = ($scope, $uibModalInstance, WorkoutService, LoginServic
 	postWorkout = ->
 		if $scope.loading == false
 			$scope.loading = true
-			console.log $scope.workout
 			WorkoutService.createWorkout($scope.workout, currentUser.token).then ((result) ->
 				$scope.workout = result
 				$scope.loading = false
