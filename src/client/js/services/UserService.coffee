@@ -7,7 +7,7 @@ UserService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 			last_name: user.last_name
 			email: user.email
 			user_type: 'none'
-			gender: user.gender
+			colour: user.colour
 			age: user.age
 			date_created: user.date_created).success ((result) ->
 			if result.success == true
@@ -55,8 +55,8 @@ UserService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 					last_name: result.last_name
 					email: result.email
 					user_type: result.user_type
-					gender: result.gender
-					age: result.gender
+					colour: result.colour
+					age: result.age
 					date_created: result.date_created
 					date_updated: result.date_updated
 				deferred.resolve userSave
@@ -81,7 +81,7 @@ UserService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 			last_name: user.last_name
 			email: user.email
 			user_type: 'none'
-			gender: user.gender
+			colour: user.colour
 			age: user.age).success ((result) ->
 				if result.success == true
 					userSave =

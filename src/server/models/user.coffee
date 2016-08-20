@@ -24,8 +24,8 @@ module.exports = class User
 	#do connection, insert user data into database
 	@createUser = (user, res) ->
 		connection.acquire (err, con) ->
-			con.query 'INSERT INTO users (first_name, last_name, email, user_type, gender, age, date_created) VALUES (?, ?, ?, ?, ?, ?, ?)',
-			[user.first_name, user.last_name, user.email, user.user_type, user.gender, user.age, user.date_created], (err, result) ->
+			con.query 'INSERT INTO users (first_name, last_name, email, user_type, colour, age, date_created) VALUES (?, ?, ?, ?, ?, ?, ?)',
+			[user.first_name, user.last_name, user.email, user.user_type, user.colour, user.age, user.date_created], (err, result) ->
 				con.release()
 				#error check if succesful query or not
 				if err
@@ -44,8 +44,8 @@ module.exports = class User
 	#do connection, update user data item with id
 	@updateUser = (user, id, res) ->
 		connection.acquire (err, con) ->
-			con.query 'UPDATE users SET first_name = ?, last_name = ?, email = ?, user_type = ?, gender = ?, age = ? WHERE id = ?',
-			[user.first_name, user.last_name, user.email, user.user_type, user.gender, user.age, id], (err, result) ->
+			con.query 'UPDATE users SET first_name = ?, last_name = ?, email = ?, user_type = ?, colour = ?, age = ? WHERE id = ?',
+			[user.first_name, user.last_name, user.email, user.user_type, user.colour, user.age, id], (err, result) ->
 				con.release()
 				#error check if successful query or not
 				if err

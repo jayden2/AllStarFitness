@@ -59,6 +59,7 @@ PublishController = ($scope, $routeParams, LoginService, WorkoutService, Exercis
 			i++
 		return
 
+	#change to colour case
 	maleOrFemale = ->
 		if $scope.workout.gender == 'f'
 			$('.exercise-table').addClass('fForm')

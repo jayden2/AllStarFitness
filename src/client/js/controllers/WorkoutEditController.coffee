@@ -171,8 +171,9 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, $location, Lo
 			i++
 		return
 
+	#change to colour case
 	maleOrFemale = ->
-		if $scope.workout.gender == 'f'
+		if $scope.workout.colour == 'f'
 			$('.exercise-table').addClass('fForm')
 		else
 			$('.exercise-table').addClass('mForm')

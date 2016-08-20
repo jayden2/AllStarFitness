@@ -8,6 +8,41 @@ UserModalController = ($scope, $uibModalInstance, UserService, LoginService, typ
 	currentUser = LoginService.getUserInfo()
 	$scope.altInputFormats = ['M!/d!/yyyy']
 
+	$scope.colours = [
+		{
+			id: 'blue'
+			name: 'Blue'
+		}
+		{
+			id: 'green'
+			name: 'Green'
+		}
+		{
+			id: 'orange'
+			name: 'Orange'
+		}
+		{
+			id: 'red'
+			name: 'Red'
+		}
+		{
+			id: 'pink'
+			name: 'Pink'
+		}
+		{
+			id: 'purple'
+			name: 'Purple'
+		}
+		{
+			id: 'black'
+			name: 'Black'
+		}
+		{
+			id: 'yellow'
+			name: 'yellow'
+		}
+	]
+
 	#title of modal
 	chooseModalType = ->
 		if type == "create"
@@ -33,7 +68,6 @@ UserModalController = ($scope, $uibModalInstance, UserService, LoginService, typ
 		if isValidDate()
 			formError("Incorrect date format")
 			return
-		$scope.genderToChar()
 		$scope.user.age = $scope.dt
 		if type == "create"
 			$scope.postUser()
@@ -89,20 +123,6 @@ UserModalController = ($scope, $uibModalInstance, UserService, LoginService, typ
 			if (m < 0 || (m == 0 && today.getDate() < birthDate.getDate()))
 				age--
 			$scope.age = age
-
-	#get gender
-	$scope.getGender = ->
-		if user.gender == "m"
-			$scope.gender = "male"
-		else
-			$scope.gender = "female"
-
-	#turn selection choice from word to char
-	$scope.genderToChar = ->
-		if $scope.gender == "male"
-			$scope.user.gender = "m"
-		else
-			$scope.user.gender = "f"
 
 	#post user
 	$scope.postUser = ->
@@ -173,7 +193,6 @@ UserModalController = ($scope, $uibModalInstance, UserService, LoginService, typ
 	chooseModalType()
 	$scope.today()
 	$scope.getAge()
-	$scope.getGender()
 
 	return
 
