@@ -13,7 +13,6 @@
 	height: auto
 
 .title-box
-	background-color: darken($fitness-style-guy, 3%)
 	padding: 5px
 	
 	.title-header
@@ -24,18 +23,6 @@
 	.sub-header
 		@extend .title-header
 		font-size: 1.3em
-
-.mForm .title-box
-	background-color: darken($fitness-style-guy-header, 3%)
-
-.fForm .title-box
-	background-color: darken($fitness-style-gal-header, 3%)
-
-.mForm .title-box:not(:first-child)
-	background-color: lighten($fitness-style-guy, 2%)
-
-.fForm .title-box:not(:first-child)
-	background-color: lighten($fitness-style-gal, 2%)
 
 .workout-box
 	background-color: white
@@ -63,18 +50,6 @@
 		margin-top: 15px
 	li:nth-child(odd)
 		margin-top: -10px
-
-.mForm .item-title
-	background-color: $fitness-style-guy
-		
-.fForm .item-title
-	background-color: $fitness-style-gal
-
-.mForm .box-nums li
-	background-color: $fitness-style-guy-setrep
-
-.fForm .box-nums li
-	background-color: $fitness-style-gal-setrep
 
 .exercise-list
 	list-style-type: none
@@ -164,3 +139,18 @@
 		.btn-danger
 			margin-top: 0px
 			margin-left: 10px
+
+@each $current-colour in $colour-list
+	$i: index($colour-list, $current-colour)
+	.form-#{$current-colour}
+		.title-box
+			background-color: darken(nth($hex-list, $i), 3%)
+
+		.title-box:not(:first-child)
+			background-color: lighten(nth($hex-list, $i), 2%)
+
+		.item-title
+			background-color: nth($hex-list, $i)
+
+		.box-nums li
+			background-color: nth($hex-list, $i)

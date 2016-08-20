@@ -139,7 +139,7 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, $location, Lo
 				$scope.workout = result[0]
 				$scope.loading = false
 				getWorkoutCollection()
-				maleOrFemale()
+				colourChoice()
 			), (error) ->
 				console.log error
 				$scope.loading = false
@@ -171,12 +171,17 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, $location, Lo
 			i++
 		return
 
-	#change to colour case
-	maleOrFemale = ->
-		if $scope.workout.colour == 'f'
-			$('.exercise-table').addClass('fForm')
-		else
-			$('.exercise-table').addClass('mForm')
+	#colour case to change colour theme
+	colourChoice = ->
+		switch $scope.workout.colour
+			when 'green' then $('.exercise-table').addClass('form-green')
+			when 'red' then $('.exercise-table').addClass('form-red')
+			when 'purple' then $('.exercise-table').addClass('form-purple')
+			when 'orange' then $('.exercise-table').addClass('form-orange')
+			when 'pink' then $('.exercise-table').addClass('form-pink')
+			when 'yellow' then $('.exercise-table').addClass('form-yell')
+			when 'black' then $('.exercise-table').addClass('form-bla')
+			else $('.exercise-table').addClass('form-blue')
 		return
 
 	#adjust styles in exercise title list
@@ -200,6 +205,7 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, $location, Lo
 		return
 
 	$scope.pubishPDF = ->
+		$scope.saveWorkout()
 		$location.path '/dashboard/publish/' + $routeParams.id
 		return
 

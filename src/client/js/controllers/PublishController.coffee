@@ -28,7 +28,7 @@ PublishController = ($scope, $routeParams, LoginService, WorkoutService, Exercis
 				$scope.workout = result[0]
 				$scope.loading = false
 				getWorkoutCollection()
-				maleOrFemale()
+				colourChoice()
 			), (error) ->
 				console.log error
 				$scope.loading = false
@@ -59,12 +59,17 @@ PublishController = ($scope, $routeParams, LoginService, WorkoutService, Exercis
 			i++
 		return
 
-	#change to colour case
-	maleOrFemale = ->
-		if $scope.workout.gender == 'f'
-			$('.exercise-table').addClass('fForm')
-		else
-			$('.exercise-table').addClass('mForm')
+	#colour case to change colour theme
+	colourChoice = ->
+		switch $scope.workout.colour
+			when 'green' then $('.publish-pdf').addClass('form-pdf-green')
+			when 'red' then $('.publish-pdf').addClass('form-pdf-red')
+			when 'purple' then $('.publish-pdf').addClass('form-pdf-purple')
+			when 'orange' then $('.publish-pdf').addClass('form-pdf-orange')
+			when 'pink' then $('.publish-pdf').addClass('form-pdf-pink')
+			when 'yellow' then $('.publish-pdf').addClass('form-pdf-yell')
+			when 'black' then $('.publish-pdf').addClass('form-pdf-bla')
+			else $('.publish-pdf').addClass('form-blue')
 		return
 
 
