@@ -1,7 +1,8 @@
 connection = require '../config/connection'
+require('dotenv').config()
 jwt = require 'jsonwebtoken'
 bcrypt = require 'bcrypt-nodejs'
-secretPassword = 'superSpecialSecretPasswordThatNooneWouldEverGuess123@#$%^&^$'
+secretPassword = process.env.SUPRER_SECRET
 
 module.exports = class Admin
 

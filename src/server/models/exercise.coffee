@@ -1,11 +1,12 @@
 connection = require '../config/connection'
 cloudinary = require('cloudinary')
+require('dotenv').config()
 
 #cloud connection
 cloudinary.config
-	cloud_name: 'jayden159'
-	api_key: '733379363423251'
-	api_secret: 'f-SMXuDHxANZk05ecczlvu1Fc-E'
+	cloud_name: process.env.CLOUD_NAME
+	api_key: process.env.CLOUD_API_KEY
+	api_secret: process.env.CLOUD_API_SECRET
 
 module.exports = class Exercise
 	#get all exercises

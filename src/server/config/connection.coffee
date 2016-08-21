@@ -1,4 +1,5 @@
 mysql = require('mysql')
+require('dotenv').config()
 
 #create connection pool
 module.exports = class Connection
@@ -7,12 +8,11 @@ module.exports = class Connection
 	@init: ->
 		@pool = mysql.createPool(
 			connectionLimit: 10
-			#127.3.143.130 change to for prod
-			host: 'localhost'
-			port: '3306'
-			user: 'admindEJ2fyi'
-			password: 'NeduHQFdnB6k'
-			database: 'allstarfitness')
+			host: process.env.DB_HOST_LOCAL
+			port: process.env.DB_PORT
+			user: process.env.DB_USER
+			password: process.env.DB_PASS
+			database: process.env.DB_NAME)
 	#connect and get callback
 	@acquire: (callback) ->
 		@pool.getConnection (err, connection) ->
