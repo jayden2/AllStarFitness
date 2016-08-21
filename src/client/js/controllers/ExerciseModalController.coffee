@@ -193,8 +193,11 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 				console.log result
 				if from == 'deletion'
 					$scope.exercise.image = null
+					$scope.currentFile = null
+					$scope.tempImage = null
 					$scope.loading = false
 					$scope.imageUploadMust = false
+					$('.imagePreview').attr( "src", "" )
 			), (error) ->
 				console.log error
 				$scope.loading = false

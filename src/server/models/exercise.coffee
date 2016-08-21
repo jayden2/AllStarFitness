@@ -1,5 +1,6 @@
 connection = require '../config/connection'
 cloudinary = require('cloudinary')
+fs = require('fs')
 require('dotenv').config()
 
 #cloud connection
@@ -79,6 +80,7 @@ module.exports = class Exercise
 	#file upload
 	@uploadImage = (req, res) ->
 		cloudinary.v2.uploader.upload req.file.path, { folder: '/allstarfitness' }, (error, result) ->
+			fs.unlink('./' + req.file.path)
 			res.send result
 
 	#delete file
