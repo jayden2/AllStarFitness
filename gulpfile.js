@@ -60,48 +60,6 @@ gulp.task('coffee:ng-app', function() {
 			stream: true
 		}))
 });
-
-/*
-//coffee -- angular app
-gulp.task('coffee:ng-app', function() {
-	gulp.src('./src/client/app.coffee')
-		.pipe(coffee({bare: true}).on('error', gutil.log))
-		.pipe(gulp.dest('./dist/client/'))
-		.pipe(browserSync.reload({
-			stream: true
-		}))
-});
-
-//coffee -- angular controllers
-gulp.task('coffee:ng-controllers', function() {
-	gulp.src('./src/client/controllers/*.coffee')
-		.pipe(coffee({bare: true}).on('error', gutil.log))
-		.pipe(gulp.dest('./dist/client/controllers/'))
-		.pipe(browserSync.reload({
-			stream: true
-		}))
-});
-
-//coffee -- angular services
-gulp.task('coffee:ng-services', function() {
-	gulp.src('./src/client/services/*.coffee')
-		.pipe(coffee({bare: true}).on('error', gutil.log))
-		.pipe(gulp.dest('./dist/client/services/'))
-		.pipe(browserSync.reload({
-			stream: true
-		}))
-});
-
-//coffee -- angular directives
-gulp.task('coffee:ng-directives', function() {
-	gulp.src('./src/client/directives/*.coffee')
-		.pipe(coffee({bare: true}).on('error', gutil.log))
-		.pipe(gulp.dest('./dist/client/directives/'))
-		.pipe(browserSync.reload({
-			stream: true
-		}))
-});
-*/
 //pug -- angular index view
 gulp.task('pug:ng-index', function buildHTML() {
 	return gulp.src('./src/client/*.pug')
@@ -256,7 +214,6 @@ gulp.task('serve', function (callback) {
 		'copy:fonts',
 		'minify:html-ngapp',
 		'minify:html-views'
-		//TODO prefix min and minify js and css
 	], callback
 	)
 });
