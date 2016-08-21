@@ -1,7 +1,7 @@
-LoginService = ($http, $q, $window, $httpParamSerializerJQLike) ->
+LoginService = ($http, $q, $window, $location, $cookieStore, $httpParamSerializerJQLike) ->
 	login = (user) ->
 		deferred = $q.defer()
-		userSave = {}
+		userSave = []
 
 		$http.post('/api/authenticate',
 			email: user.email
@@ -16,6 +16,8 @@ LoginService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 					email: result.email
 					id: result.id
 				$window.sessionStorage['userSave'] = JSON.stringify(userSave)
+				$cookieStore.put 'user', JSON.stringify(userSave)
+
 				deferred.resolve userSave
 				return
 			else
@@ -33,14 +35,21 @@ LoginService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 	logout = ->
 		userSave = null
 		$window.sessionStorage['userSave'] = null
+		$cookieStore.put 'user', null
 		return
 
 	getUserInfo = ->
-		userSave = JSON.parse($window.sessionStorage['userSave'])
+		if JSON.parse($cookieStore.get('user')) != null
+			userSave = JSON.parse($cookieStore.get('user'))
+		else
+			$location.path '/login'
+		return userSave
 
 	init = ->
 		if $window.sessionStorage['userSave']
-			user = JSON.parse($window.sessionStorage['userSave'])
+			userSave = JSON.parse($window.sessionStorage['userSave'])
+		else
+			userSave = JSON.parse($cookieStore.get('user'))
 		return
 
 	init()
@@ -48,6 +57,7 @@ LoginService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 		login: login
 		logout: logout
 		getUserInfo: getUserInfo
+		init: init
 	}
 
 angular.module('AllStarFitness')
@@ -55,6 +65,8 @@ angular.module('AllStarFitness')
 		'$http'
 		'$q'
 		'$window'
+		'$location'
+		'$cookieStore'
 		'$httpParamSerializerJQLike'
 		LoginService
 	]
