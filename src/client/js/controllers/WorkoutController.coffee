@@ -56,9 +56,12 @@ WorkoutController = ($scope, $filter, $location, $uibModal, $document, LoginServ
 		)
 		return
 
-	#create edit location path -- edit with id
-	$scope.editWorkout = (type, workout) ->
-		$location.path '/dashboard/workouts/edit/' + workout.id
+	#create edit or publish location path -- edit or publish with id
+	$scope.editPublishWorkout = (type, workout) ->
+		if type == 'edit'
+			$location.path '/dashboard/workouts/edit/' + workout.id
+		else
+			$location.path '/dashboard/publish/' + workout.id
 
 	$scope.getWorkouts(false)
 	return

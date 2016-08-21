@@ -4,3 +4,32 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 	//dashboard header
 	include ./partials/dashboard-header.pug
 	//main content
+	div(class="row" ng-controller="WorkoutController")
+		div(class="col-lg-12")
+			rd-widget
+				rd-widget-header(icon="fa-file-text" title="Publish Workouts")
+					input(type="text" placeholder="Search Workouts..." class="form-control input-sm" ng-model="search.query")
+				rd-widget-body(classes="large no-padding")
+					rd-loading(ng-show="loading")
+					div(class="table-responsive" ng-hide="loading")
+						table(class="table table-striped table-hover")
+							thead
+								tr
+									th(class="text-center") ID
+									th Title
+									th(class="text-center") Exercises
+									th(class="text-center") User
+									th(class="text-center") Date Created
+									th(class="text-center") Date Updated
+									th(class="text-center") Publish
+							tbody
+								tr(ng-repeat="workout in filteredWorkouts()")
+									td(class="text-center") {{ workout.id }}
+									td {{ workout.title | limitTo: 50 }}{{ workout.title.length > 50 ? '...' : ''}}
+									td(class="text-center" ng-if="workout.collection !== '0'") {{ countCollection(workout.collection) }}
+									td(class="text-center" ng-if="workout.collection == '0'") 0
+									td(class="text-center") {{ workout.first_name | limitTo: 50 }} {{ workout.last_name | limitTo: 50 }}{{ workout.last_name.length > 50 ? '...' : ''}}
+									td(class="text-center") {{ workout.date_created | date:'dd/MM/yyyy' }}
+									td(class="text-center") {{ workout.date_updated | date:'dd/MM/yyyy' }}
+									td(class="text-center")
+										button(type="button" class="btn btn-info btn-sm" ng-click="editPublishWorkout('publish', workout)") PUBLISH
