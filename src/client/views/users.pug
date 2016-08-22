@@ -25,7 +25,7 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 									th(class="text-center") Age
 									th(class="text-center") Edit
 							tbody
-								tr(ng-repeat="user in filteredUsers()")
+								tr(ng-repeat="user in filteredUsers() | orderBy:['first_name','last_name', 'email']")
 									td(class="text-center") {{ user.id }}
 									td {{ user.first_name }} {{ user.last_name | limitTo: 50 }}{{ user.last_name.length > 50 ? '...' : ''}}
 									td

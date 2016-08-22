@@ -9,7 +9,7 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 		div(class="col-lg-12")
 			rd-widget
 				rd-widget-header(icon="fa-file-text" title="Create and Edit Workouts")
-					button(type="button" class="btn btn-info create-button-exercises" ng-click="openModal()") Add Workout 
+					button(type="button" class="btn btn-info create-button-workouts" ng-click="openModal()") Add Workout 
 						i(class="fa fa-plus fa-1x" aria-hidden="true")
 					input(type="text" placeholder="Search Workouts..." class="form-control input-sm" ng-model="search.query")
 				rd-widget-body(classes="large no-padding")
@@ -26,7 +26,7 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 									th(class="text-center") Template
 									th(class="text-center") Edit
 							tbody
-								tr(ng-repeat="workout in filteredWorkouts()")
+								tr(ng-repeat="workout in filteredWorkouts() | orderBy:['title', '-date_updated']")
 									td(class="text-center") {{ workout.id }}
 									td {{ workout.title | limitTo: 50 }}{{ workout.title.length > 50 ? '...' : ''}}
 									td(class="text-center" ng-if="workout.collection !== '0'") {{ countCollection(workout.collection) }}
