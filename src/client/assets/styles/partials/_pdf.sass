@@ -1,5 +1,5 @@
 @media print
-	$colour-list-pdf: green red purple orange pink blue yell bla
+	$colour-list-pdf: green red purple orange pink bloop yell bla
 	$hex-list-pdf: #2ecc71 #c0392b #8e44ad #d35400 #db0a5b #297cb0 #f1c40f #2c3e50
 	li
 		page-break-inside: avoid
@@ -32,26 +32,9 @@
 
 	.workout-box-pdf
 		padding: 5px !important
-
-		ul
-			list-style-type: none !important
-			padding-left: 0px !important
-			margin-top: 0px !important
-			-moz-column-count: 2 !important
-			-moz-column-gap: 60px !important
-			-webkit-column-count: 2 !important
-			-webkit-column-gap: 60px !important
-			column-count: 2 !important
-			column-gap: 60px !important
-		li
-			font-weight: 500 !important
-			font-size: 1.2em !important
-			padding-top: 0px !important
-		p
-			text-align: center !important
 	
 	.exercise-list-pdf
-		margin-top: -10px !important
+		margin-top: 10px !important
 		list-style-type: none !important
 		padding-left: 0 !important
 
@@ -86,16 +69,21 @@
 
 	.item-image-pdf
 		float: left !important
-		margin-top: 10px !important
-		width: 430px !important
-		height: auto !important
+		margin-top: 5px !important
+		max-width: 100px
+		height: auto
 		padding-right: 0 !important
+		padding-left: 0
+		padding-right: 0
+		margin-left: 0
+		margin-right: 0
 
 	.item-description-pdf
 		float: right
-		padding-left: 2px !important
-		font-size: 1.1em !important
-		margin-top: 5px !important
+		margin-left: 0
+		padding-left: 3px !important
+		font-size: 1em !important
+		margin-top: 3px !important
 		text-align: left !important
 
 	@each $current-colour-pdf in $colour-list-pdf
@@ -114,7 +102,7 @@
 				background-color: nth($hex-list-pdf, $i) !important
 
 @media screen
-	$colour-list-pdf: green red purple orange pink blue yell bla
+	$colour-list-pdf: green red purple orange pink bloop yell bla
 	$hex-list-pdf: #2ecc71 #c0392b #8e44ad #d35400 #db0a5b #297cb0 #f1c40f #2c3e50
 	@import url(https://fonts.googleapis.com/css?family=Roboto)
 	li
@@ -144,30 +132,9 @@
 		color: $white !important
 		font-size: 1.3em !important
 		padding-left: 10px
-
-	.workout-box-pdf
-		padding: 5px !important
-
-		ul
-			list-style-type: none !important
-			padding-left: 0px !important
-			margin-top: 0px !important
-			-moz-column-count: 2 !important
-			-moz-column-gap: 60px !important
-			-webkit-column-count: 2 !important
-			-webkit-column-gap: 60px !important
-			column-count: 2 !important
-			column-gap: 60px !important
-			margin: 0
-		li
-			font-weight: 500 !important
-			font-size: 1.2em !important
-			padding-top: 0px !important
-		p
-			text-align: center !important
 	
 	.exercise-list-pdf
-		margin-top: -10px !important
+		margin-top: 10px !important
 		list-style-type: none !important
 		padding-left: 0 !important
 
