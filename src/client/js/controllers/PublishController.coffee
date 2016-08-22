@@ -69,6 +69,7 @@ PublishController = ($scope, $routeParams, LoginService, WorkoutService, Exercis
 			when 'pink' then $('.publish-pdf').addClass('form-pdf-pink')
 			when 'yellow' then $('.publish-pdf').addClass('form-pdf-yell')
 			when 'black' then $('.publish-pdf').addClass('form-pdf-bla')
+			when 'blue' then $('.publish-pdf').addClass('form-pdf-bloop')
 			else $('.publish-pdf').addClass('form-blue')
 		return
 

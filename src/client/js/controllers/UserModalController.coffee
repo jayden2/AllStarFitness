@@ -39,7 +39,7 @@ UserModalController = ($scope, $uibModalInstance, UserService, LoginService, typ
 		}
 		{
 			id: 'yellow'
-			name: 'yellow'
+			name: 'Yellow'
 		}
 	]
 

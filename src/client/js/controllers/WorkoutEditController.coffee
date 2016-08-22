@@ -58,6 +58,7 @@ WorkoutEditController = ($scope, $filter, $routeParams, $uibModal, $location, Lo
 				def_set_end: item.def_set_end
 				def_rep_start: item.def_rep_start
 				def_rep_end: item.def_rep_end
+				def_tempo: item.def_tempo
 				date_created: item.date_created
 				favourite: 0
 			}
