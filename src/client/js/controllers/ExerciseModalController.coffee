@@ -82,14 +82,15 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 			$scope.loading = true
 			tempDel = $scope.exercise.image.split("/").pop()
 			tempDel = tempDel.replace(/\.[^/.]+$/, "")
-			ExerciseService.deleteImage(tempDel, currentUser.token).then ((result) ->
-				console.log result
-				$scope.exercise.image = null
-				$scope.loading = false
-				$scope.imageUploadMust = false
-			), (error) ->
-				console.log error
-				$scope.loading = false
+			if $scope.exercise.duplicated == 0
+				ExerciseService.deleteImage(tempDel, currentUser.token).then ((result) ->
+					console.log result
+					$scope.exercise.image = null
+					$scope.loading = false
+					$scope.imageUploadMust = false
+				), (error) ->
+					console.log error
+					$scope.loading = false
 
 		$scope.deleteExercise()
 		$uibModalInstance.close('postupdel')
