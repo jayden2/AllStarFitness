@@ -9,9 +9,20 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 		div(class="col-lg-12")
 			rd-widget
 				rd-widget-header(icon="fa-database" title="Create and Edit Exercises")
+					div(class="btn-group filter-button")
+						button(type="button" class="btn btn-default dropdown-toggle filter-drop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+							span Show Original 
+								span(class="caret")
+						ul(class="dropdown-menu")
+							li
+								a(href="#" data-value="Show Original" ng-click="filterDupe('orig')") Show Original 
+							li
+								a(href="#" data-value="Show Favourites" ng-click="filterDupe('favourite')") Show Favourites 
+							li
+								a(href="#" data-value="Show All" ng-click="filterDupe('all')") Show All 
 					button(type="button" class="btn btn-info create-button-exercises" ng-click="openModal('create', '')") Add Exercise 
 						i(class="fa fa-plus fa-1x" aria-hidden="true")
-					input(type="text" placeholder="Search Exercise..." class="form-control input-sm" ng-model="search.query")
+					input(type="text" placeholder="Search Exercise..." class="form-control input-sm input-exercise-search" ng-model="search.query")
 				rd-widget-body(classes="large no-padding")
 					rd-loading(ng-show="loading")
 					div(class="table-responsive" ng-hide="loading")
@@ -27,7 +38,7 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 									th(class="text-center") Favourite
 									th(class="text-center") Edit
 							tbody
-								tr(ng-repeat="exercise in filteredExercises()")
+								tr(ng-repeat="exercise in filteredExercises() | orderBy:'title'")
 									td(class="text-center") {{ exercise.id }}
 									td {{ exercise.title | limitTo: 50 }}{{ exercise.title.length > 50 ? '...' : ''}}
 									td {{ exercise.description | limitTo: 65 }}{{ exercise.description.length > 65 ? '...' : ''}}

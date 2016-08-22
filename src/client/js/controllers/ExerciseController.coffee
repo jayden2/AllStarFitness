@@ -6,6 +6,7 @@ ExerciseController = ($scope, $filter, $uibModal, LoginService, ExerciseService)
 	$scope.search = { }
 	currentUser = LoginService.getUserInfo()
 	$scope.exercises = {}
+	$scope.filterExercise = 'orig'
 
 	#get all exercises from service to fill table
 	$scope.getExercises = (continueLoading) ->
@@ -19,6 +20,21 @@ ExerciseController = ($scope, $filter, $uibModal, LoginService, ExerciseService)
 				$scope.loading = false
 				return
 		return
+	$scope.filterDupe = (dupe) ->
+		console.log dupe
+		if dupe == 'all'
+			$('.filter-drop').html $(this).text() + '<span>Show All </span>' + ' <span class="caret"></span>'
+			$scope.filterExercise = 'all'
+			$scope.filteredExercises()
+		if dupe == 'favourite'
+			$('.filter-drop').html $(this).text() + '<span>Show Favourites </span>' + ' <span class="caret"></span>'
+			$scope.filterExercise = 'favourite'
+			$scope.filteredExercises()
+		else
+			$('.filter-drop').html $(this).text() + '<span>Show Original </span>' + ' <span class="caret"></span>'
+			$scope.filterExercise = 'orig'
+			$scope.filteredExercises()
+		return
 
 	#search and filter users from search
 	$scope.filteredExercises = ->
@@ -27,7 +43,14 @@ ExerciseController = ($scope, $filter, $uibModal, LoginService, ExerciseService)
 		for key of $scope.exercises
 			$scope.resultAmount = true
 			`key = key`
-			array.push $scope.exercises[key]
+			if ($scope.filterExercise == 'all')
+				array.push $scope.exercises[key]
+			else if ($scope.filterExercise == 'favourite')
+				if ($scope.exercises[key].favourite == 1)
+					array.push $scope.exercises[key]
+			else
+				if ($scope.exercises[key].duplicated == 0)
+					array.push $scope.exercises[key]
 		return $filter('filter') array, $scope.search.query
 
 	$scope.favourite = (id, fav) ->

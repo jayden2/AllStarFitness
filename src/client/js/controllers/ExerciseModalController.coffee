@@ -31,6 +31,7 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 			$scope.exercise.def_rep_end = 1
 			$scope.exercise.def_set_start = 1
 			$scope.exercise.def_set_end = 1
+			$scope.exercise.def_tempo = "0-0-0"
 			$scope.exercise.rep_time = "rep"
 			$scope.buttonDupilcate = false
 			$scope.RT = "reps"
@@ -113,6 +114,7 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 		$scope.exercise.def_rep_end = savedExercise.def_rep_end
 		$scope.exercise.def_set_start = savedExercise.def_set_start
 		$scope.exercise.def_set_end = savedExercise.def_set_end
+		$scope.exercise.def_temp = savedExercise.def_temp
 		$uibModalInstance.dismiss('cancel')
 
 	$scope.confirm = ->
