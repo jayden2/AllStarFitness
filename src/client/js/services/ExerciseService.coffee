@@ -13,6 +13,7 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 			def_set_end: exercise.def_set_end
 			def_rep_start: exercise.def_rep_start
 			def_rep_end: exercise.def_rep_end
+			def_tempo: exercise.def_tempo
 			date_created: exercise.date_created
 			favourite: 0).success ((result) ->
 			if result.success == true
@@ -90,6 +91,7 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 					def_set_end: result.def_set_end
 					def_rep_start: result.def_rep_start
 					def_rep_end: result.def_rep_end
+					def_tempo: result.def_tempo
 					date_created: result.date_created
 					favourite: result.favourite
 				deferred.resolve exerciseSave
@@ -118,6 +120,7 @@ ExerciseService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 			def_set_end: exercise.def_set_end
 			def_rep_start: exercise.def_rep_start
 			def_rep_end: exercise.def_rep_end
+			def_tempo: exercise.def_tempo
 			favourite: exercise.favourite).success ((result) ->
 			if result.success == true
 				exerciseSave =

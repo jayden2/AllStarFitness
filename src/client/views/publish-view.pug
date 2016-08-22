@@ -5,12 +5,6 @@ div(class="row publish-pdf")
 			img(src="assets/images/logo_white.png" class="workout-logo-pdf")
 		div(class="title-box-pdf")
 			h2(class="sub-header-pdf") {{ workout.first_name }} {{ workout.last_name }}
-
-		div(class="workout-box-pdf")
-			ul
-				li(ng-repeat="item in collection")
-					p {{ item.title }}
-
 		ul(ng-model="collection" class="exercise-list-pdf")
 			li(ng-repeat="item in collection" class="exercise-item-pdf")
 				div(class="row")
@@ -33,7 +27,11 @@ div(class="row publish-pdf")
 							span(ng-if="item.def_rep_start != 1 && item.rep_time == 'rep' || item.def_rep_end != 1 && item.rep_time == 'rep'") reps
 							span(ng-if="item.def_rep_start == 1 && item.def_rep_end == 1 && item.rep_time == 'time'") second
 							span(ng-if="item.def_rep_start != 1 && item.rep_time == 'time' || item.def_rep_end != 1 && item.rep_time == 'time'") seconds
+						li(class="box-tempo-pdf" ng-hide="item.def_tempo == 0")
+							span(class="item-tempo-pdf") {{ item.def_tempo }}
+							br
+							span() tempo
 
 				div(class="row")
-					img(class="col-xs-8 item-image-pdf" ng-src="{{ item.image }}")
-					p(class="col-xs-4 item-description-pdf") {{ item.description }}
+					img(class="col-xs-5 item-image-pdf" ng-src="{{ item.image }}")
+					p(class="col-xs-7 item-description-pdf") {{ item.description }}

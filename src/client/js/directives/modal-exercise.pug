@@ -14,13 +14,13 @@ div(class="modal-body")
 			//Image
 			label(class= "control-label" for="first_name") Exercise Image
 			br
-			input(type="file" id="trigger" onchange="angular.element(this).scope().setFile(this)" name="photo" accept="image/*" ng-hide="exercise.duplicated == 1" ng-disabled="loading")
+			input(type="file" id="trigger" onchange="angular.element(this).scope().setFile(this)" name="photo" accept="image/*" ng-disabled="loading || exercise.duplicated == 1 || exercise.image")
 			rd-loading(ng-show="loading")
 			img(ng-src="{{ tempImage }}" class="imagePreview" ng-show="tempImage" ng-loading="loading")
 			img(ng-src="{{ exercise.image }}" class="imagePreview" ng-show="exercise.image" ng-hide="tempImage || loading")
 			br
-			button(type="button" class="btn btn-primary uploadButton" ng-click="uploadImage(exercise.image)" ng-show="currentFile && exercise.duplicated == 0" ng-disabled="loading") Upload Image
-			button(type="button" class="btn btn-danger removeImgButton" ng-click="removeImage('deletion')" ng-show="exercise.image || currentFile" ng-hide="exercise.duplicated == 1" ng-disabled="loading") Clear Image
+			button(type="button" class="btn btn-primary uploadButton" ng-click="uploadImage(exercise.image)" ng-show="currentFile" ng-disabled="loading || exercise.duplicated == 1") Upload Image
+			button(type="button" class="btn btn-danger removeImgButton" ng-click="removeImage('deletion')" ng-show="exercise.image || currentFile" ng-disabled="loading || exercise.duplicated == 1") Clear Image
 			//reps
 			div(class="form-group")
 				select(class="form-control repTime" ng-model="exercise.rep_time")
@@ -47,7 +47,7 @@ div(class="modal-body")
 							span(class="glyphicon glyphicon-plus")
 			div(class="sets-row")
 				//sets
-				label(class= "control-label" for="reps") Sets
+				label(class= "control-label" for="sets") Sets
 				br
 				//min
 				div(class="col-xs-3")
@@ -68,6 +68,9 @@ div(class="modal-body")
 						span(class="input-group-btn data-up")
 							button(class="btn btn-default btn-info" data-dir="up" ng-click="setEndPlus()")
 								span(class="glyphicon glyphicon-plus")
+			div(class="row tempo-row")
+				label(class="control-label" for="tempo") Tempo
+				input(type="text" class="form-control" ng-model="exercise.def_tempo" placeholder="1-2-3" maxlength="5")
 			div(class="row")
 
 div(class="modal-footer")

@@ -27,11 +27,6 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 			div(class="title-box")
 				h2(class="sub-header") {{ workout.first_name }} {{ workout.last_name }}
 
-			div(class="workout-box")
-				ul
-					li(ng-repeat="item in collection")
-						p {{ item.title }}
-
 			ul(ui-sortable="sortableOptions" ng-model="collection" class="exercise-list")
 				li(ng-repeat="item in collection" class="exercise-item")
 					div(class="row")
@@ -54,10 +49,14 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 								span(ng-if="item.def_rep_start != 1 && item.rep_time == 'rep' || item.def_rep_end != 1 && item.rep_time == 'rep'") reps
 								span(ng-if="item.def_rep_start == 1 && item.def_rep_end == 1 && item.rep_time == 'time'") second
 								span(ng-if="item.def_rep_start != 1 && item.rep_time == 'time' || item.def_rep_end != 1 && item.rep_time == 'time'") seconds
+							li(class="box-tempo" ng-hide="item.def_tempo == 0")
+								span(class="item-tempo") {{ item.def_tempo }}
+								br
+								span tempo
 
 					div(class="row")
-						img(class="col-xs-8 item-image" ng-src="{{ item.image }}")
-						p(class="col-xs-4 item-description") {{ item.description }}
+						img(class="col-xs-5 item-image" ng-src="{{ item.image }}")
+						p(class="col-xs-7 item-description") {{ item.description }}
 
 					button(class="btn btn-success duplicate-exercise" ng-click="duplicateExercise(item)") Duplicate
 					button(class="btn btn-warning edit-exercise" ng-click="editExercise('editOnWorkout', item)") Edit
