@@ -21,12 +21,11 @@ ExerciseController = ($scope, $filter, $uibModal, LoginService, ExerciseService)
 				return
 		return
 	$scope.filterDupe = (dupe) ->
-		console.log dupe
 		if dupe == 'all'
 			$('.filter-drop').html $(this).text() + '<span>Show All </span>' + ' <span class="caret"></span>'
 			$scope.filterExercise = 'all'
 			$scope.filteredExercises()
-		if dupe == 'favourite'
+		else if dupe == 'favourite'
 			$('.filter-drop').html $(this).text() + '<span>Show Favourites </span>' + ' <span class="caret"></span>'
 			$scope.filterExercise = 'favourite'
 			$scope.filteredExercises()
