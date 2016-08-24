@@ -20,18 +20,20 @@ div(id="page-wrapper" ng-class="{'open': toggle}" ng-controller="DashboardContro
 								tr
 									th(class="text-center") ID
 									th Title
+									th Description
 									th(class="text-center") Exercises
 									th(class="text-center") User
 									th(class="text-center") Date Updated
 									th(class="text-center") Template
 									th(class="text-center") Edit
 							tbody
-								tr(ng-repeat="workout in filteredWorkouts() | orderBy:['title', '-date_updated']")
+								tr(ng-repeat="workout in filteredWorkouts() | orderBy:['-date_updated', 'title']")
 									td(class="text-center") {{ workout.id }}
-									td {{ workout.title | limitTo: 50 }}{{ workout.title.length > 50 ? '...' : ''}}
+									td {{ workout.title | limitTo: 50 }}{{ workout.title.length > 50 ? '...' : '' }}
+									td {{ workout.description | limitTo: 150 }}{{ workout.description.length > 50 ? '...' : '' }}
 									td(class="text-center" ng-if="workout.collection !== '0'") {{ countCollection(workout.collection) }}
 									td(class="text-center" ng-if="workout.collection == '0'") 0
-									td(class="text-center") {{ workout.first_name | limitTo: 50 }} {{ workout.last_name | limitTo: 50 }}{{ workout.last_name.length > 50 ? '...' : ''}}
+									td(class="text-center") {{ workout.first_name | limitTo: 50 }} {{ workout.last_name | limitTo: 50 }}{{ workout.last_name.length > 50 ? '...' : '' }}
 									td(class="text-center") {{ workout.date_updated | date:'dd/MM/yyyy' }}
 									td(class="text-center")
 										a(ng-click="template(workout.id, workout.template)")

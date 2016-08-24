@@ -73,13 +73,11 @@ UserModalController = ($scope, $uibModalInstance, UserService, LoginService, typ
 			$scope.postUser()
 		else
 			$scope.updateUser()
-		$uibModalInstance.close('postupdel')
 		
 
 	#close modal delete
 	$scope.delete = ->
 		$scope.deleteUser()
-		$uibModalInstance.close('postupdel')
 		
 	#close modal cancel
 	$scope.cancel = ->
@@ -103,16 +101,6 @@ UserModalController = ($scope, $uibModalInstance, UserService, LoginService, typ
 	$scope.popup1 =
 		opened: false
 
-	#loading spinner if posts or not...
-	loadingCall = (isLoading) ->
-		loading_circle = "<i class='fa fa-cog fa-spin fa-lg'></i>"
-		loading_text = "loading"
-		if isLoading
-			$scope.buttonSave = ""
-			$('.login-button').append(loading_circle)
-		else
-			$('.fa-cog').remove()
-
 	#calculate age
 	$scope.getAge = ->
 		if isNaN($scope.dt) == false
@@ -128,15 +116,14 @@ UserModalController = ($scope, $uibModalInstance, UserService, LoginService, typ
 	$scope.postUser = ->
 		if $scope.loading == false
 			$scope.loading = true
-			loadingCall(true)
 			UserService.createUser($scope.user, currentUser.token).then ((result) ->
 				$scope.users = result
 				$scope.loading = false
-				loadingCall(false)
+				$uibModalInstance.close('postupdel')
 			), (error) ->
 				console.log error
 				$scope.loading = false
-				loadingCall(false)
+				$uibModalInstance.close('postupdel')
 				return
 		return
 
@@ -144,15 +131,14 @@ UserModalController = ($scope, $uibModalInstance, UserService, LoginService, typ
 	$scope.updateUser = ->
 		if $scope.loading == false
 			$scope.loading = true
-			loadingCall(true)
 			UserService.updateUser($scope.user, $scope.user.id, currentUser.token).then ((result) ->
 				$scope.users = result
 				$scope.loading = false
-				loadingCall(false)
+				$uibModalInstance.close('postupdel')
 			), (error) ->
 				console.log error
 				$scope.loading = false
-				loadingCall(false)
+				$uibModalInstance.close('postupdel')
 				return
 		return
 
@@ -160,15 +146,14 @@ UserModalController = ($scope, $uibModalInstance, UserService, LoginService, typ
 	$scope.deleteUser = ->
 		if $scope.loading == false
 			$scope.loading = true
-			loadingCall(true)
 			UserService.deleteUser($scope.user.id, currentUser.token).then ((result) ->
 				$scope.users = result
 				$scope.loading = false
-				loadingCall(false)
+				$uibModalInstance.close('postupdel')
 			), (error) ->
 				console.log error
 				$scope.loading = false
-				loadingCall(false)
+				$uibModalInstance.close('postupdel')
 				return
 		return
 

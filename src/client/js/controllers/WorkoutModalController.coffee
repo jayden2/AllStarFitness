@@ -4,6 +4,7 @@ WorkoutModalController = ($scope, $uibModalInstance, WorkoutService, LoginServic
 	$scope.users = { }
 	$scope.search = { }
 	$scope.workout = { }
+	$scope.workout.description = ""
 	$scope.loading = false
 	currentUser = LoginService.getUserInfo()
 
@@ -27,8 +28,6 @@ WorkoutModalController = ($scope, $uibModalInstance, WorkoutService, LoginServic
 			return
 
 		postWorkout()
-
-		$uibModalInstance.close('postupdel')
 		return
 
 	$scope.cancel = ->
@@ -54,9 +53,11 @@ WorkoutModalController = ($scope, $uibModalInstance, WorkoutService, LoginServic
 			WorkoutService.createWorkout($scope.workout, currentUser.token).then ((result) ->
 				$scope.workout = result
 				$scope.loading = false
+				$uibModalInstance.close('postupdel')
 			), (error) ->
 				console.log error
 				$scope.loading = false
+				$uibModalInstance.close('postupdel')
 				return
 		return
 

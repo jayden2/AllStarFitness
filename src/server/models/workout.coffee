@@ -27,7 +27,7 @@ module.exports = class Workout
 	#do connection, select one workout from database
 	@getSingleWorkoutShort = (id, res) ->
 		connection.acquire (err, con) ->
-			con.query 'SELECT id, title, collection, template FROM workouts WHERE id = ?', [id], (err, result) ->
+			con.query 'SELECT id, title, description, collection, template FROM workouts WHERE id = ?', [id], (err, result) ->
 				con.release()
 				res.send result
 				return
@@ -37,8 +37,8 @@ module.exports = class Workout
 	#do connection, insert workout data into database
 	@createWorkout = (workout, res) ->
 		connection.acquire (err, con) ->
-			con.query 'INSERT INTO workouts (title, collection, user_id, template, date_created) VALUES (?, ?, ?, ?, ?)',
-			[workout.title, workout.collection, workout.user_id, workout.template, workout.date_created], (err, result) ->
+			con.query 'INSERT INTO workouts (title, description, collection, user_id, template, date_created) VALUES (?, ?, ?, ?, ?, ?)',
+			[workout.title, workout.description, workout.collection, workout.user_id, workout.template, workout.date_created], (err, result) ->
 				con.release()
 				#error check if succesful query or not
 				if err
@@ -57,8 +57,8 @@ module.exports = class Workout
 	#do connection, update workout data item with id
 	@updateWorkout = (workout, id, res) ->
 		connection.acquire (err, con) ->
-			con.query 'UPDATE workouts SET title = ?, collection = ?, user_id = ?, template = ? WHERE id = ?',
-			[workout.title, workout.collection, workout.user_id, workout.template, id], (err, result) ->
+			con.query 'UPDATE workouts SET title = ?, description = ?, collection = ?, user_id = ?, template = ? WHERE id = ?',
+			[workout.title, workout.description, workout.collection, workout.user_id, workout.template, id], (err, result) ->
 				con.release()
 				#error check if successful query or not
 				if err

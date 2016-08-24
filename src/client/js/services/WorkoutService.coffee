@@ -5,6 +5,7 @@ WorkoutService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 		deferred = $q.defer()
 		$http.post('/api/workouts/' + '?token=' + token,
 			title: workout.title
+			description: workout.description
 			collection: workout.collection
 			user_id: workout.user_id
 			template: 0
@@ -67,6 +68,7 @@ WorkoutService = ($http, $q, $window, $httpParamSerializerJQLike) ->
 		deferred = $q.defer()
 		$http.put('/api/workouts/' + id + '?token=' + token,
 			title: workout.title
+			description: workout.description
 			collection: workout.collection
 			user_id: workout.user_id
 			template: workout.template).success ((result) ->

@@ -94,7 +94,6 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 					$scope.loading = false
 
 		$scope.deleteExercise()
-		$uibModalInstance.close('postupdel')
 
 	#close modal cancel
 	$scope.cancel = ->
@@ -138,7 +137,6 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 			$scope.postExercise()
 		else
 			$scope.updateExercise()
-		$uibModalInstance.close('postupdel')
 
 	#browse set fill
 	$scope.setFile = (element) ->
@@ -235,10 +233,12 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 				$scope.exercises = result
 				$scope.loading = false
 				loadingCall(false)
+				$uibModalInstance.close('postupdel')
 			), (error) ->
 				console.log error
 				$scope.loading = false
 				loadingCall(false)
+				$uibModalInstance.close('postupdel')
 				return
 		return
 
@@ -251,10 +251,12 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 				$scope.exercises = result
 				$scope.loading = false
 				loadingCall(false)
+				$uibModalInstance.close('postupdel')
 			), (error) ->
 				console.log error
 				$scope.loading = false
 				loadingCall(false)
+				$uibModalInstance.close('postupdel')
 				return
 		return
 
@@ -267,10 +269,12 @@ ExerciseModalController = ($scope, $uibModalInstance, ExerciseService, LoginServ
 				$scope.exercises = result
 				$scope.loading = false
 				loadingCall(false)
+				$uibModalInstance.close('postupdel')
 			), (error) ->
 				console.log error
 				$scope.loading = false
 				loadingCall(false)
+				$uibModalInstance.close('postupdel')
 				return
 		return
 
