@@ -1,5 +1,5 @@
 div(class="modal-header modal-header-success")
-	h3 Create Workout
+	h3 {{ title }}
 div(class="modal-body")
 	form(class="form form-document-model")
 		
@@ -8,7 +8,7 @@ div(class="modal-body")
 		input(type="text" class="form-control" id="workout_title" aria-describedby="basic-addon3" ng-model="workout.title" placeholder="Enter title of workout..." ng-required="true" maxlength="100" required)
 
 		//workout description
-		label(class= "control-label" for="workout_title") Workout Description
+		label(class= "control-label" for="workout_description") Workout Description
 		textarea(type="text" class="form-control" id="workout_description" aria-describedby="basic-addon3" ng-model="workout.description" placeholder="Enter workout description..." maxlength="2500")
 
 		//add user
@@ -17,8 +17,8 @@ div(class="modal-body")
 
 		//add collection
 		label(class= "control-label" for="collection") Exercise ID Collection
-		input(type="text" class="form-control" id="workout_title" aria-describedby="basic-addon3" ng-model="workout.collection" placeholder="Enter exercise collection eg.(1,23,19,3)" ng-required="true" maxlength="100" required)
+		input(type="text" class="form-control" id="workout_collection" aria-describedby="basic-addon3" ng-model="workout.collection" placeholder="Enter exercise collection eg.(1,23,19,3)" ng-required="true" maxlength="100" required)
 		
 div(class="modal-footer")
-	button(class="btn btn-primary btn-confirm" type="submit" ng-click="confirm()" ng-disabled="loading") Create Workout
+	button(class="btn btn-primary btn-confirm" type="submit" ng-click="confirm()" ng-disabled="loading") {{ buttonSave }}
 	button(class="btn btn-warning btn-cancel" type="button" ng-click="cancel()" ng-disabled="loading") Cancel

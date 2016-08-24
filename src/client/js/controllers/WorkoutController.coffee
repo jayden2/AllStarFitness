@@ -4,6 +4,7 @@ WorkoutController = ($scope, $filter, $location, $uibModal, $document, LoginServ
 	$scope.loading = false
 	$scope.resultAmount = false
 	$scope.search = { }
+	$scope.filterWorkout = 'all'
 	currentUser = LoginService.getUserInfo()
 	$scope.workouts = {}
 
@@ -20,6 +21,18 @@ WorkoutController = ($scope, $filter, $location, $uibModal, $document, LoginServ
 				return
 		return
 
+	#filter template and all
+	$scope.filterTemp = (temp) ->
+		if temp == 'all'
+			$('.filter-drop').html $(this).text() + '<span>Show All </span>' + ' <span class="caret"></span>'
+			$scope.filterWorkout = 'all'
+			$scope.filteredWorkouts()
+		else
+			$('.filter-drop').html $(this).text() + '<span>Show Templates </span>' + ' <span class="caret"></span>'
+			$scope.filterWorkout = 'temp'
+			$scope.filteredWorkouts()
+		return
+
 	#search and filter workouts from search
 	$scope.filteredWorkouts = ->
 		$scope.resultAmount = false
@@ -27,7 +40,11 @@ WorkoutController = ($scope, $filter, $location, $uibModal, $document, LoginServ
 		for key of $scope.workouts
 			$scope.resultAmount = true
 			`key = key`
-			array.push $scope.workouts[key]
+			if ($scope.filterWorkout == 'temp')
+				if ($scope.workouts[key].template == 1)
+					array.push $scope.workouts[key]
+			else
+				array.push $scope.workouts[key]
 		return $filter('filter') array, $scope.search.query
 
 	#call service to make item a template
@@ -43,12 +60,20 @@ WorkoutController = ($scope, $filter, $location, $uibModal, $document, LoginServ
 			return
 
 	$scope.countCollection = (collection) ->
-		return numOf = collection.split(/,/).length
+		if !collection
+			return numOf
+		else
+			return numOf = collection.split(/,/).length
 
-	$scope.openModal = ->
+	$scope.openModal = (typeModal, workout) ->
 		modalInstance = $uibModal.open(
 			templateUrl: '/js/directives/modal-workout.html'
 			controller: 'WorkoutModalController'
+			resolve:
+				type: ->
+					typeModal
+				workout: ->
+					workout
 		)
 		modalInstance.result.then ((formData) ->
 			if formData == 'postupdel'

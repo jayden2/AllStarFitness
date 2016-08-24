@@ -1,12 +1,29 @@
-WorkoutModalController = ($scope, $uibModalInstance, WorkoutService, LoginService, UserService) ->
+WorkoutModalController = ($scope, $uibModalInstance, WorkoutService, LoginService, UserService, type, workout) ->
 	
 	#ititialise variables
 	$scope.users = { }
 	$scope.search = { }
-	$scope.workout = { }
-	$scope.workout.description = ""
+	$scope.workout = workout
+	savedWorkout = angular.copy(workout)
 	$scope.loading = false
 	currentUser = LoginService.getUserInfo()
+
+	#title of modal
+	chooseModalType = ->
+		if type == "create"
+			$scope.title = "Create Workout"
+			$scope.buttonSave = "Create Workout"
+			$scope.buttonDelete = false
+			$scope.workout.description = ""
+		else
+			$scope.title = "Edit Workout"
+			$scope.buttonSave = "Save Workout"
+			$scope.buttonDelete = true
+			$scope.selected = {
+				id: $scope.workout.id
+				first_name: $scope.workout.first_name
+				last_name: $scope.workout.last_name
+			}
 
 	$scope.confirm = ->
 		#check if title is empty
@@ -26,11 +43,16 @@ WorkoutModalController = ($scope, $uibModalInstance, WorkoutService, LoginServic
 		if !$scope.workout.collection.toString().match /^[0-9, ]*$/
 			formError("Exercise id collection has been inputted incorrectly")
 			return
-
-		postWorkout()
+		if type == 'create'
+			postWorkout()
+		else
+			updateWorkout()
 		return
 
 	$scope.cancel = ->
+		$scope.workout.title = savedWorkout.title
+		$scope.workout.description = savedWorkout.description
+		$scope.workout.collection = savedWorkout.collection
 		$uibModalInstance.dismiss('cancel')
 		return
 
@@ -61,6 +83,20 @@ WorkoutModalController = ($scope, $uibModalInstance, WorkoutService, LoginServic
 				return
 		return
 
+	updateWorkout = ->
+		if $scope.loading == false
+			$scope.loading = true
+			WorkoutService.updateWorkout($scope.workout, $scope.workout.id, currentUser.token).then ((result) ->
+				$scope.workout = result
+				$scope.loading = false
+				$uibModalInstance.close('postupdel')
+			), (error) ->
+				console.log error
+				$scope.loading = false
+				$uibModalInstance.close('postupdel')
+				return
+		return
+
 	#display error on form if there is an error
 	formError = (errorText) ->
 		$('.alert').remove()
@@ -71,6 +107,7 @@ WorkoutModalController = ($scope, $uibModalInstance, WorkoutService, LoginServic
 	isNullOrEmptyOrUndefined = (value) ->
 		!value
 
+	chooseModalType()
 	getUsers()
 	return
 
@@ -81,5 +118,7 @@ angular.module('AllStarFitness')
 		'WorkoutService'
 		'LoginService'
 		'UserService'
+		'type'
+		'workout'
 		WorkoutModalController
 	]
