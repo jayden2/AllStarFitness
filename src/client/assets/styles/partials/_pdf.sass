@@ -15,26 +15,149 @@
 
 	.workout-logo-pdf
 		float: right
-		margin-top: -50px
+		margin-top: -30px
 		margin-right: 10px
-		width: 6%
+		width: 4%
 		height: auto
 		
 	.title-header-pdf
+		margin-top: 9px !important
+		margin-bottom: 3px !important
+		margin-left: 15px !important
 		color: $white !important
-		font-size: 2em !important
-		padding-left: 10px
+		font-size: 1.3em !important
 
 	.sub-header-pdf
 		color: $white !important
-		font-size: 1.3em !important
+		font-size: 1.1em !important
+		margin-top: 8px !important
+		margin-bottom: 3px !important
 		padding-left: 10px
 
 	.workout-box-pdf
-		padding: 5px !important
+		padding: 5px
+		.description-header-pdf
+			white-space: pre-line
+			margin-left: 15px
+			font-size: 0.9em
+			margin: 3px 3px 4px 15px
 	
 	.exercise-list-pdf
-		margin-top: 10px !important
+		margin-top: 3px !important
+		list-style-type: none !important
+		padding-left: 0 !important
+
+	.exercise-item-pdf
+		padding-bottom: 5px !important
+		margin-top: 3px !important
+
+	.item-title-pdf
+		padding: 8px !important
+		color: $white !important
+		font-size: 1.1em !important
+		margin-top: 0px !important
+	
+	.box-nums-pdf
+		list-style-type: none !important
+		color: #fff !important
+		
+		li
+			display: inline !important
+			float: left !important
+			padding: 6px !important
+			color: #fff !important
+			text-align: center !important
+			min-width: 60px !important
+			max-width: 50% !important
+
+		li:not(:first-child)
+			margin-left: 15px !important
+
+		span
+			color: #fff !important
+
+	.item-image-pdf
+		float: left !important
+		margin-top: 5px !important
+		width: 30% !important
+		max-width: 300px !important
+		height: auto !important
+		padding-right: 0 !important
+		padding-left: 0 !important
+		padding-right: 0 !important
+		margin-left: 0 !important
+		margin-right: 0 !important
+
+	.item-description-pdf
+		white-space: pre-line
+		float: right
+		margin-left: 0
+		padding-left: 5px !important
+		font-size: 0.8em !important
+		margin-top: 5px !important
+		text-align: left !important
+
+	@each $current-colour-pdf in $colour-list-pdf
+		$i: index($colour-list-pdf, $current-colour-pdf)
+		.form-pdf-#{$current-colour-pdf}
+			.title-box-pdf
+				background-color: darken(nth($hex-list-pdf, $i), 3%) !important
+
+			.title-box-pdf:not(:first-child)
+				background-color: lighten(nth($hex-list-pdf, $i), 2%) !important
+
+			.item-title-pdf
+				background-color: nth($hex-list-pdf, $i) !important
+
+			.box-nums-pdf li
+				background-color: nth($hex-list-pdf, $i) !important
+
+@media screen
+	$colour-list-pdf: green red purple orange pink bloop yell bla
+	$hex-list-pdf: #2ecc71 #c0392b #8e44ad #d35400 #db0a5b #297cb0 #f1c40f #2c3e50
+	li
+		page-break-inside: avoid
+	body
+		//background-color: orange !important
+		color: black !important
+		font-family: 'Roboto', sans-serif !important
+		margin: 0 !important
+
+	.title-box-pdf
+		margin: 0 !important
+		padding: 5px !important
+
+	.workout-logo-pdf
+		float: right
+		margin-top: -30px
+		margin-right: 10px
+		width: 4%
+		height: auto
+		
+	.title-header-pdf
+		margin-top: 9px !important
+		margin-bottom: 3px !important
+		margin-left: 15px !important
+		color: $white !important
+		font-size: 1.3em !important
+
+	.sub-header-pdf
+		color: $white !important
+		font-size: 1.1em !important
+		margin-top: 8px !important
+		margin-bottom: 3px !important
+		padding-left: 10px
+
+	.workout-box-pdf
+		padding: 5px
+		.description-header-pdf
+			white-space: pre-line
+			margin-left: 15px
+			font-size: 1em
+			margin: 3px 3px 4px 15px
+	
+	.exercise-list-pdf
+		margin-top: 3px !important
 		list-style-type: none !important
 		padding-left: 0 !important
 
@@ -82,100 +205,8 @@
 		white-space: pre-line
 		float: right
 		margin-left: 0
-		padding-left: 3px !important
+		padding-left: 5px !important
 		font-size: 1em !important
-		margin-top: 3px !important
-		text-align: left !important
-
-	@each $current-colour-pdf in $colour-list-pdf
-		$i: index($colour-list-pdf, $current-colour-pdf)
-		.form-pdf-#{$current-colour-pdf}
-			.title-box-pdf
-				background-color: darken(nth($hex-list-pdf, $i), 3%) !important
-
-			.title-box-pdf:not(:first-child)
-				background-color: lighten(nth($hex-list-pdf, $i), 2%) !important
-
-			.item-title-pdf
-				background-color: nth($hex-list-pdf, $i) !important
-
-			.box-nums-pdf li
-				background-color: nth($hex-list-pdf, $i) !important
-
-@media screen
-	$colour-list-pdf: green red purple orange pink bloop yell bla
-	$hex-list-pdf: #2ecc71 #c0392b #8e44ad #d35400 #db0a5b #297cb0 #f1c40f #2c3e50
-	@import url(https://fonts.googleapis.com/css?family=Roboto)
-	li
-		page-break-inside: avoid
-	body
-		//background-color: orange !important
-		color: black !important
-		margin: 0 !important
-
-	.title-box-pdf
-		margin: 0 !important
-		padding: 5px !important
-
-	.workout-logo-pdf
-		float: right
-		margin-top: -50px
-		margin-right: 10px
-		width: 6%
-		height: auto
-		
-	.title-header-pdf
-		color: $white !important
-		font-size: 2em !important
-		padding-left: 10px
-
-	.sub-header-pdf
-		color: $white !important
-		font-size: 1.3em !important
-		padding-left: 10px
-	
-	.exercise-list-pdf
-		margin-top: 10px !important
-		list-style-type: none !important
-		padding-left: 0 !important
-
-	.exercise-item-pdf
-		padding-bottom: 10px !important
-		margin-top: 8px !important
-
-	.item-title-pdf
-		padding: 13px !important
-		color: $white !important
-		font-size: 1.4em !important
-		margin-top: 0px !important
-	
-	.box-nums-pdf
-		list-style-type: none !important
-		color: #fff !important
-		
-		li
-			display: inline !important
-			float: left !important
-			padding: 10px !important
-			color: #fff !important
-			text-align: center !important
-			min-width: 60px !important
-			max-width: 50% !important
-		span
-			color: #fff !important
-
-	.item-image-pdf
-		float: left !important
-		margin-top: 10px !important
-		width: 430px !important
-		height: auto !important
-		padding-right: 0 !important
-
-	.item-description-pdf
-		white-space: pre-line
-		float: right
-		padding-left: 2px !important
-		font-size: 1.1em !important
 		margin-top: 5px !important
 		text-align: left !important
 

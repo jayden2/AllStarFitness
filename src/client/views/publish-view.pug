@@ -5,6 +5,8 @@ div(class="row publish-pdf")
 			img(src="assets/images/logo_white.png" class="workout-logo-pdf")
 		div(class="title-box-pdf")
 			h2(class="sub-header-pdf") {{ workout.first_name }} {{ workout.last_name }}
+		div(class="workout-box-pdf")
+				p(class="description-header-pdf") {{ workout.description }}
 		ul(ng-model="collection" class="exercise-list-pdf")
 			li(ng-repeat="item in collection" class="exercise-item-pdf")
 				div(class="row")
