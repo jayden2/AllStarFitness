@@ -1,5 +1,5 @@
-#All Star Fitness api
-created with NodeJS with Express
+#All Star Fitness
+created with NodeJS with Express, AngularJS, MySql, Cloudinary, Pug (Jade)
 
 #####Using Packages:
 - [bcrypt-nodejs](https://www.npmjs.com/package/bcrypt-nodejs)
